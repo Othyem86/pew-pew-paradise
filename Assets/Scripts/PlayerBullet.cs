@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     // Variabeldeklaration
-    public float speed = 8f;            // Kugelgeschwindigkeit
+    public float speed = 7.5f;            // Kugelgeschwindigkeit
     public Rigidbody2D theRB;           // Kollisionskörper für Kugel
 
     public GameObject impactEffect;     // Partikelefekt bei Kollisionen

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
+
     // Variabeldeklaration für den gesamten Class-Scope
     public float moveSpeed;         // Beweguntsgeschwindigkeit
     private Vector2 moveInput;      // Bewegungseingabe als Vektor
@@ -20,6 +23,13 @@ public class PlayerController : MonoBehaviour
 
     public float timeBetweenShots;  // Feuerrate
     private float shotCounter;      // Countdown bis zur nächsten Kugel
+
+
+    // Wie Start(), nur davor
+    public void Awake()
+    {
+        instance = this;
+    }
 
 
     // Start is called before the first frame update
