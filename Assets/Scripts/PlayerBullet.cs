@@ -10,6 +10,8 @@ public class PlayerBullet : MonoBehaviour
 
     public GameObject impactEffect;     // Partikelefekt bei Kollisionen
 
+    public int bulletDamage = 50;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,11 @@ public class PlayerBullet : MonoBehaviour
     {
         Destroy(gameObject);
         Instantiate(impactEffect, transform.position, transform.rotation);
+
+        if(other.tag == "Enemy")
+        {
+            other.GetComponent<EnemyController>().DamageEnemy(bulletDamage);
+        }  
     }
 
     // Kugelobjekt zerstören wenn es nicht mehr Sichtbar ist

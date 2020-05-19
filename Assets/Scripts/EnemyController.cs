@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
 
     public Animator anim;               // Animation
 
+    public int health = 150;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +25,7 @@ public class EnemyController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         // Wenn Abstand kleiner als minimale Distanz, dann wird der der Vektor3 zum Spieler generiert, sonst Nullvektor
         if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer)
         {
@@ -51,6 +53,17 @@ public class EnemyController : MonoBehaviour
         else
         {
             anim.SetBool("isMoving", false);
+        }
+    }
+
+    // 
+    public void DamageEnemy(int damage)
+    {
+        health -= damage;
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

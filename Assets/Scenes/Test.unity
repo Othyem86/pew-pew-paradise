@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 1218238645}
   m_Layer: 0
   m_Name: Enemy - Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -515,6 +515,7 @@ MonoBehaviour:
   theRB: {fileID: 1218238646}
   rangeToChasePlayer: 7
   anim: {fileID: 1218238645}
+  health: 150
 --- !u!1 &1290547201
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +778,7 @@ GameObject:
   - component: {fileID: 2010389800}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
