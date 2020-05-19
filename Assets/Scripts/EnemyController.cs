@@ -13,7 +13,10 @@ public class EnemyController : MonoBehaviour
 
     public Animator anim;               // Animation
 
-    public int health = 150;
+    public int health = 150;            // Hitpoints
+
+    public GameObject[] deathSplatters;        // Objekt für Todanimation
+    public GameObject hitEffect;
 
 
     // Start is called before the first frame update
@@ -56,14 +59,23 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // 
+
+    // Damage und Todanimation des Gegners
     public void DamageEnemy(int damage)
     {
         health -= damage;
 
-        if(health <= 0)
+        Instantiate(hitEffect, transform.position, transform.rotation);
+
+        if (health <= 0)
         {
             Destroy(gameObject);
+
+            int selectedSplatter = Random.Range(0, deathSplatters.Length);
+
+            int rotation = Random.Range(0, 360);
+
+            Instantiate(deathSplatters[selectedSplatter], transform.position, Quaternion.Euler(0f, 0f, rotation));
         }
     }
 }
