@@ -5,21 +5,27 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Variabeldeklaration für den gesamten Class-Scope
-    public float moveSpeed;
-    private Vector2 moveInput; // Eingabe als Vektor
+    public float moveSpeed;         // Beweguntsgeschwindigkeit
+    private Vector2 moveInput;      // Bewegungseingabe als Vektor
 
-    public Rigidbody2D theRB; // Kollisionskörper für Spieler
+    public Rigidbody2D theRB;       // Kollisionskörper für Spieler
 
-    public Transform gunArm;    
-    private Camera theCam;
+    public Transform gunArm;        // Koordinaten Waffe
+    private Camera theCam;          // Var der Kamera
 
-    public Animator anim;
+    public Animator anim;           // Animation
+
+    public GameObject bulletToFire; // Kugelobjekt
+    public Transform firePoint;     // Ort der Kugelerstellung
+
+    public float timeBetweenShots;  // Feuerrate
+    private float shotCounter;      // Countdown bis zur nächsten Kugel
 
 
     // Start is called before the first frame update
     void Start()
     {
-        // Cameraobjekt abspeichern, damit dies nicht jedes Frame im Gesampten Projekt gesucht wird
+        // Kameraobjekt abspeichern, damit dies nicht jedes Frame im Gesampten Projekt gesucht wird
         theCam = Camera.main;
     }
 
@@ -56,6 +62,26 @@ public class PlayerController : MonoBehaviour
         Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
         float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
         gunArm.rotation = Quaternion.Euler(0, 0, angle);
+
+
+        // Kugel einzeln per Mausdruck feuern - Instantiate (welches Prefab?, wo soll erstellt werden?, mit welcher Drehung?)
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+            shotCounter = timeBetweenShots;
+        }
+
+        // Kugel dauernd per gehaltenem Mausdruck feuern
+        if (Input.GetMouseButton(0))
+        {
+            shotCounter -= Time.deltaTime;
+            
+            if (shotCounter <= 0)
+            {
+                Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+                shotCounter = timeBetweenShots;
+            }
+        }
 
 
         // Animations-switch für Stillstand und Bewegung
