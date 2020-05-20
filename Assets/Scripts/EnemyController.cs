@@ -5,29 +5,29 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     // Variabeldeklaration für den gesamten Class-Scope
-    public float moveSpeed;                 // Beweguntsgeschwindigkeit
-    public Rigidbody2D theRB;               // Kollisionskörper für Spieler
+    public float moveSpeed;                 // REF Beweguntsgeschwindigkeit
+    public Rigidbody2D theRB;               // REF Kollisionskörper Spieler
 
-    public float rangeToChasePlayer;        // minimale Distanz für Verfolgung
+    public float rangeToChasePlayer;        // REF minimale Distanz für Verfolgung
     private Vector3 moveDirection;          // Bewegungsrichtung des Gegners
 
-    public Animator anim;                   // Animation
+    public Animator anim;                   // REF Animation
 
-    public int health = 150;                // Hitpoints
+    public int health = 150;                // REF Hitpoints
 
-    public GameObject[] deathSplatters;     // Objekt für Todanimation
-    public GameObject hitEffect;            // Treffereffekt
+    public GameObject[] deathSplatters;     // REF Todanimation
+    public GameObject hitEffect;            // REF Treffereffekt
 
-    public bool shouldShoot;
+    public bool shouldShoot;                // Ob es schiessen soll
 
-    public GameObject bullet;
-    public Transform firePoint;
-    public float fireRate;
+    public GameObject bullet;               // REF Kugel
+    public Transform firePoint;             // REF Kugelursprung
+    public float fireRate;                  // REF Schussfrequenz
     private float fireCounter;
+     
+    public float shootRange;                // REF Schussreichweite
 
-    public float shootRange;
-
-    public SpriteRenderer enemyBody;
+    public SpriteRenderer enemyBody;        // REF Renderer Körper Gegner
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // Schiessen nur wenn Körper des Gegners auf dem Bildschirm sichtbar ist
         if (enemyBody.isVisible)
         {
             // Wenn Abstand kleiner als minimale Distanz, dann wird der der Vektor3 zum Spieler generiert, sonst Nullvektor
@@ -61,6 +61,7 @@ public class EnemyController : MonoBehaviour
             theRB.velocity = moveDirection * moveSpeed;
 
 
+            // Soll nur schiessen wenn der Spieler in die Schussreichweite steht
             if (shouldShoot && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < shootRange)
             {
                 fireCounter -= Time.deltaTime;
@@ -72,6 +73,7 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+
 
         // Animations-switch für Stillstand und Bewegung
         if (moveDirection != Vector3.zero)
@@ -85,13 +87,14 @@ public class EnemyController : MonoBehaviour
     }
 
 
+
     // Schaden- und Todanimation des Gegners
     public void DamageEnemy(int damage)
     {
+        // Schaden vom HP abziehen und Shadenanimation generieren
         health -= damage;
-
-        //Shadenanimation generieren
         Instantiate(hitEffect, transform.position, transform.rotation);
+
 
         // Zerstörung des Gegners wenn Hitpoints Null sind und Reste generieren
         if (health <= 0)

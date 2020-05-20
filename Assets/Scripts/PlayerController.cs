@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Instanzierung der Klasse
     public static PlayerController instance;
 
 
     // Variabeldeklaration für den gesamten Class-Scope
-    public float moveSpeed;         // Beweguntsgeschwindigkeit
+    public float moveSpeed;         // REF Beweguntsgeschwindigkeit
     private Vector2 moveInput;      // Bewegungseingabe als Vektor
 
-    public Rigidbody2D theRB;       // Kollisionskörper für Spieler
+    public Rigidbody2D theRB;       // REF Kollisionskörper Spieler
 
-    public Transform gunArm;        // Koordinaten Waffe
+    public Transform gunArm;        // REF Koordinaten Waffe
     private Camera theCam;          // Var der Kamera
 
-    public Animator anim;           // Animation
+    public Animator anim;           // REF Animation
 
-    public GameObject bulletToFire; // Kugelobjekt
-    public Transform firePoint;     // Ort der Kugelerstellung
+    public GameObject bulletToFire; // REF Kugelobjekt
+    public Transform firePoint;     // REF Ort der Kugelerstellung
 
-    public float timeBetweenShots;  // Feuerrate
+    public float timeBetweenShots;  // REF Feuerrate
     private float shotCounter;      // Countdown bis zur nächsten Kugel
 
 

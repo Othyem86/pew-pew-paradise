@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
 {
+    // Instanzierung der Klasse
     public static PlayerHealthController instance;
 
-    public int currentHealth;
-    public int maxHealth;
+    public int currentHealth;       // REF aktuelle Hitpoints
+    public int maxHealth;           // REF maximale Hitpoints
 
+
+    // Wie Start(), nur davor
     private void Awake()
     {
         instance = this;
@@ -28,7 +31,7 @@ public class PlayerHealthController : MonoBehaviour
     }
 
 
-    // 
+    // Funktion Schadenanrichtung an Spieler und dessen Tod
     public void DamagePlayer()
     {
         currentHealth--;

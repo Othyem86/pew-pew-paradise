@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     // Variabeldeklaration
-    public float speed = 7.5f;            // Kugelgeschwindigkeit
-    public Rigidbody2D theRB;           // Kollisionskörper für Kugel
+    public float speed = 7.5f;          // REF Kugelgeschwindigkeit
+    public Rigidbody2D theRB;           // REF Kollisionskörper
 
-    public GameObject impactEffect;     // Partikelefekt bei Kollisionen
+    public GameObject impactEffect;     // REF Partikelefekt bei Kollisionen
 
-    public int bulletDamage = 50;
+    public int bulletDamage = 50;       // REF Schadenswert der Kugel
 
     // Start is called before the first frame update
     void Start()
