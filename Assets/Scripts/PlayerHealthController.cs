@@ -37,6 +37,12 @@ public class PlayerHealthController : MonoBehaviour
         if (invinceCount > 0)
         {
             invinceCount -= Time.deltaTime;
+            
+            // Wenn nicht mehr unverletzbar, dann Spielertransparenz ausschalten
+            if (invinceCount <= 0)
+            {
+                SetBodyAlpha(1f);
+            }
         }
     }
 
@@ -50,6 +56,9 @@ public class PlayerHealthController : MonoBehaviour
             // Nach schaden, startet den Unverletzbar-Countdown
             currentHealth--;
             invinceCount = damageInvinceLength;
+
+            // Schadeneffekt BodySprite - Transparenz einschalten
+            SetBodyAlpha(0.5f);
 
             // Check ob Spieler Tod ist
             if (currentHealth <= 0)
@@ -68,5 +77,16 @@ public class PlayerHealthController : MonoBehaviour
     {
         UIController.instance.healthSlider.value = currentHealth;
         UIController.instance.healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
+    }
+
+
+    // Funtkion Schadeneffekt BodySprite: Transparenz ein-/ausschalten
+    private void SetBodyAlpha(float alphaValue)
+    {
+        PlayerController.instance.bodySR.color = new Color(
+        PlayerController.instance.bodySR.color.r,
+        PlayerController.instance.bodySR.color.b,
+        PlayerController.instance.bodySR.color.g,
+                alphaValue); ;
     }
 }

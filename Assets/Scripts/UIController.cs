@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    // Instanzierung der Klasse
     public static UIController instance;
 
     public Slider healthSlider;         // REF HP-Slider

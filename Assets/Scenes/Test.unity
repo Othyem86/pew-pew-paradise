@@ -1725,6 +1725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 5
+  damageInvinceLength: 1
 --- !u!4 &1949196216
 Transform:
   m_ObjectHideFlags: 0
@@ -1797,6 +1798,7 @@ MonoBehaviour:
     type: 3}
   firePoint: {fileID: 600551490}
   timeBetweenShots: 0.3
+  bodySR: {fileID: 827607239}
 --- !u!50 &2010389798
 Rigidbody2D:
   serializedVersion: 4

@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public float timeBetweenShots;  // REF Feuerrate
     private float shotCounter;      // Countdown bis zur nächsten Kugel
 
+    public SpriteRenderer bodySR;   // Ref Body Sprite
 
     // Wie Start(), nur davor
     public void Awake()
