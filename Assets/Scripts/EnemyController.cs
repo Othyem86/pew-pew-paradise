@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     public GameObject bullet;               // REF Kugel
     public Transform firePoint;             // REF Kugelursprung
     public float fireRate;                  // REF Schussfrequenz
-    private float fireCounter;
+    private float fireCounter;              // Countdown
      
     public float shootRange;                // REF Schussreichweite
 
@@ -39,8 +39,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Schiessen nur wenn Körper des Gegners auf dem Bildschirm sichtbar ist
-        if (enemyBody.isVisible)
+        // Schiessen nur wenn Körper des Gegners auf dem Bildschirm sichtbar ist, bzw. in der Welt existiert
+        if (enemyBody.isVisible && PlayerController.instance.gameObject.activeInHierarchy)
         {
             // Wenn Abstand kleiner als minimale Distanz, dann wird der der Vektor3 zum Spieler generiert, sonst Nullvektor
             if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer)
@@ -72,6 +72,10 @@ public class EnemyController : MonoBehaviour
                     Instantiate(bullet, firePoint.position, firePoint.rotation);
                 }
             }
+        }
+        else
+        {
+            theRB.velocity = Vector3.zero;
         }
 
 

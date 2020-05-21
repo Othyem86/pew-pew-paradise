@@ -7,8 +7,10 @@ public class UIController : MonoBehaviour
 {
     public static UIController instance;
 
-    public Slider healthSlider;         // Referenz zu HP-Slider
-    public Text healthText;             // Text des HP-Sliders
+    public Slider healthSlider;         // REF HP-Slider
+    public Text healthText;             // REF Text des HP-Sliders
+
+    public GameObject deathScreen;      // REF Death Screen
 
 
     // Wie Start(), nur davor
