@@ -27,10 +27,10 @@ public class PlayerController : MonoBehaviour
     private float activeMoveSpeed;          // derzeitige Beweguntsgeschwindigkeit
     public float dashSpeed = 8f;            // REF Geschwindigkeit Dash
     public float dashLength = 0.5f;         // REF Dash-Distanz
-    public float dashCoolDown = 1f;         // REF Dash Cooldown
-    public float dashInvincibility = 0.5f;  // REF Dash Unverletzbarkeit
-    private float dashCounter;              // 
-    private float dashCoolDownCounter;      //
+    public float dashCoolDown = 1f;         // REF Dauer Dash Cooldown
+    public float dashInvincibility = 0.5f;  // REF Dauer Dash Unverletzbarkeit
+    private float dashCounter;              // Counter Dash Unverletzbarkeit
+    private float dashCoolDownCounter;      // Counter Dash Cooldown
 
 
     // Wie Start(), nur davor
@@ -109,6 +109,9 @@ public class PlayerController : MonoBehaviour
         {
             activeMoveSpeed = dashSpeed;
             dashCounter = dashLength;
+            anim.SetTrigger("dash");
+
+            PlayerHealthController.instance.MakeInvincible(dashInvincibility);
         }
 
 

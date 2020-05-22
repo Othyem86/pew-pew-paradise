@@ -89,4 +89,11 @@ public class PlayerHealthController : MonoBehaviour
         PlayerController.instance.bodySR.color.g,
                 alphaValue); ;
     }
+
+
+    public void MakeInvincible(float length)
+    {
+        invinceCount = length;
+        SetBodyAlpha(0.5f);
+    }
 }
