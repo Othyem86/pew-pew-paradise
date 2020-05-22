@@ -8,24 +8,30 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
 
-    // Variabeldeklaration für den gesamten Class-Scope
-    public float moveSpeed;         // REF Beweguntsgeschwindigkeit
-    private Vector2 moveInput;      // Bewegungseingabe als Vektor
+    // Variabeln Bewegungslogik
+    public float moveSpeed;                 // REF Beweguntsgeschwindigkeit
+    private Vector2 moveInput;              // Bewegungseingabe als Vektor
+    public Rigidbody2D theRB;               // REF Kollisionskörper Spieler
+    public Transform gunArm;                // REF Koordinaten Waffe
+    private Camera theCam;                  // Var der Kamera
+    public Animator anim;                   // REF Animation
 
-    public Rigidbody2D theRB;       // REF Kollisionskörper Spieler
+    // Variabeln Schusslogik
+    public GameObject bulletToFire;         // REF Kugelobjekt
+    public Transform firePoint;             // REF Ort der Kugelerstellung
+    public float timeBetweenShots;          // REF Feuerrate
+    private float shotCounter;              // Countdown bis zur nächsten Kugel
+    public SpriteRenderer bodySR;           // Ref Body Sprite
 
-    public Transform gunArm;        // REF Koordinaten Waffe
-    private Camera theCam;          // Var der Kamera
+    // Variablen Dash-Logik
+    private float activeMoveSpeed;          // derzeitige Beweguntsgeschwindigkeit
+    public float dashSpeed = 8f;            // REF Geschwindigkeit Dash
+    public float dashLength = 0.5f;         // REF Dash-Distanz
+    public float dashCoolDown = 1f;         // REF Dash Cooldown
+    public float dashInvincibility = 0.5f;  // REF Dash Unverletzbarkeit
+    private float dashCounter;              // 
+    private float dashCoolDownCounter;      //
 
-    public Animator anim;           // REF Animation
-
-    public GameObject bulletToFire; // REF Kugelobjekt
-    public Transform firePoint;     // REF Ort der Kugelerstellung
-
-    public float timeBetweenShots;  // REF Feuerrate
-    private float shotCounter;      // Countdown bis zur nächsten Kugel
-
-    public SpriteRenderer bodySR;   // Ref Body Sprite
 
     // Wie Start(), nur davor
     public void Awake()
@@ -39,6 +45,8 @@ public class PlayerController : MonoBehaviour
     {
         // Kameraobjekt abspeichern, damit dies nicht jedes Frame im Gesampten Projekt gesucht wird
         theCam = Camera.main;
+
+        activeMoveSpeed = moveSpeed;
     }
 
 
@@ -49,7 +57,7 @@ public class PlayerController : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
-        theRB.velocity = moveInput * moveSpeed;
+        theRB.velocity = moveInput * activeMoveSpeed;
 
 
         // Mausposition als Bildschirmkoordinate speichern; Globale Spielerposition in Bildschirmkoordinaten umwandeln
@@ -83,16 +91,43 @@ public class PlayerController : MonoBehaviour
             shotCounter = timeBetweenShots;
         }
 
+
         // Kugel dauernd per gehaltenem Mausdruck feuern
         if (Input.GetMouseButton(0))
         {
-            shotCounter -= Time.deltaTime;
-            
+            shotCounter -= Time.deltaTime;        
             if (shotCounter <= 0)
             {
                 Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
                 shotCounter = timeBetweenShots;
             }
+        }
+
+
+        // Dash-Logik beim Leertastendruck
+        if (Input.GetKeyDown(KeyCode.Space) && dashCoolDownCounter <= 0 && dashCounter <= 0)
+        {
+            activeMoveSpeed = dashSpeed;
+            dashCounter = dashLength;
+        }
+
+
+        // Counter bis zum jetztigen Dash-Ende
+        if (dashCounter > 0)
+        {
+            dashCounter -= Time.deltaTime;
+            if (dashCounter <= 0)
+            {
+                activeMoveSpeed = moveSpeed;
+                dashCoolDownCounter = dashCoolDown;
+            }
+        }
+
+
+        // Counter bis Dash wieder verfügbar ist
+        if (dashCoolDownCounter > 0)
+        {
+            dashCoolDownCounter -= Time.deltaTime;
         }
 
 

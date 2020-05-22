@@ -1471,9 +1471,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1157317689}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 5
+  m_WholeNumbers: 1
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1804,6 +1804,10 @@ MonoBehaviour:
   firePoint: {fileID: 600551490}
   timeBetweenShots: 0.3
   bodySR: {fileID: 827607239}
+  dashSpeed: 8
+  dashLength: 0.5
+  dashCoolDown: 1
+  dashInvincibility: 0.5
 --- !u!50 &2010389798
 Rigidbody2D:
   serializedVersion: 4
