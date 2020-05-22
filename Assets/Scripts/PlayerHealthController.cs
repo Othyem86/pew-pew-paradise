@@ -80,17 +80,20 @@ public class PlayerHealthController : MonoBehaviour
     }
 
 
-    // Funtkion Schadeneffekt BodySprite: Transparenz ein-/ausschalten
+    // Funktion Schadeneffekt BodySprite: Transparenz ein-/ausschalten
     private void SetBodyAlpha(float alphaValue)
     {
-        PlayerController.instance.bodySR.color = new Color(
-        PlayerController.instance.bodySR.color.r,
-        PlayerController.instance.bodySR.color.b,
-        PlayerController.instance.bodySR.color.g,
-                alphaValue); ;
+        PlayerController.instance.bodySR.color = new Color
+        (
+            PlayerController.instance.bodySR.color.r,
+            PlayerController.instance.bodySR.color.b,
+            PlayerController.instance.bodySR.color.g,
+            alphaValue
+        ); 
     }
 
 
+    // Funktion unverletzbar zu werden
     public void MakeInvincible(float length)
     {
         invinceCount = length;

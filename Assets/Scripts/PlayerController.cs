@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;             // REF Ort der Kugelerstellung
     public float timeBetweenShots;          // REF Feuerrate
     private float shotCounter;              // Countdown bis zur nächsten Kugel
-    public SpriteRenderer bodySR;           // Ref Body Sprite
+    public SpriteRenderer bodySR;           // REF Body Sprite
 
     // Variablen Dash-Logik
     private float activeMoveSpeed;          // derzeitige Beweguntsgeschwindigkeit
@@ -29,8 +29,9 @@ public class PlayerController : MonoBehaviour
     public float dashLength = 0.5f;         // REF Dash-Distanz
     public float dashCoolDown = 1f;         // REF Dauer Dash Cooldown
     public float dashInvincibility = 0.5f;  // REF Dauer Dash Unverletzbarkeit
-    private float dashCounter;              // Counter Dash Unverletzbarkeit
     private float dashCoolDownCounter;      // Counter Dash Cooldown
+    [HideInInspector]
+    public float dashCounter;              // Counter Dash Unverletzbarkeit
 
 
     // Wie Start(), nur davor
