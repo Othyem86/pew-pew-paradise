@@ -99,4 +99,17 @@ public class PlayerHealthController : MonoBehaviour
         invinceCount = length;
         SetBodyAlpha(0.5f);
     }
+
+
+    // Funktion zur Heilung des Spielers
+    public void HealPlayer(int healAmount)
+    {
+        currentHealth += healAmount;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        updateHealthUI();
+    }
 }
