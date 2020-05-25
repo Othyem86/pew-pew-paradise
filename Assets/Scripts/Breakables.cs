@@ -33,10 +33,12 @@ public class Breakables : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Originalobjekt zerstören und zwischen 1 und 6 Trümmer generieren
-        if (other.tag == "Player" && PlayerController.instance.dashCounter > 0)
+        if ( other.tag == "PlayerBullet" || other.tag == "Player" && PlayerController.instance.dashCounter > 0)
         {
+            // Objekt Zerstören
             Destroy(gameObject);
             int piecesToDrop = Random.Range(1, maxPieces);
+
 
             //SFX Spielen
             AudioManager.instance.PlaySFX(0);
