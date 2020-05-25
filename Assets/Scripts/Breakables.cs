@@ -38,6 +38,9 @@ public class Breakables : MonoBehaviour
             Destroy(gameObject);
             int piecesToDrop = Random.Range(1, maxPieces);
 
+            //SFX Spielen
+            AudioManager.instance.PlaySFX(0);
+
 
             // Trümmer zeigen
             for (int i = 0; i < piecesToDrop; i++)

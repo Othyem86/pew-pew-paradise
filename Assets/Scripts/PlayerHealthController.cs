@@ -8,9 +8,11 @@ public class PlayerHealthController : MonoBehaviour
     // Instanzierung der Klasse
     public static PlayerHealthController instance;
 
+    // Variabeln Hitpoints
     public int currentHealth;               // REF aktuelle Hitpoints
     public int maxHealth;                   // REF maximale Hitpoints
 
+    // Variabeln Unverletzbarkeit
     public float damageInvinceLength = 1f;  // REF Zeit unverletzbar
     private float invinceCount;             // Countdown
 
@@ -22,6 +24,7 @@ public class PlayerHealthController : MonoBehaviour
         instance = this;
     }
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,7 @@ public class PlayerHealthController : MonoBehaviour
         UIController.instance.healthSlider.maxValue = maxHealth;
         updateHealthUI();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -56,6 +60,7 @@ public class PlayerHealthController : MonoBehaviour
             // Nach schaden, startet den Unverletzbar-Countdown
             currentHealth--;
             invinceCount = damageInvinceLength;
+            AudioManager.instance.PlaySFX(11);
 
             // Schadeneffekt BodySprite - Transparenz einschalten
             SetBodyAlpha(0.5f);
@@ -65,6 +70,8 @@ public class PlayerHealthController : MonoBehaviour
             {
                 PlayerController.instance.gameObject.SetActive(false);
                 UIController.instance.deathScreen.SetActive(true);
+                AudioManager.instance.PlaySFX(9);
+                AudioManager.instance.PlayGameOver();
             }
 
             updateHealthUI();

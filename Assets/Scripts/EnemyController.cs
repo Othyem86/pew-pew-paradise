@@ -4,30 +4,27 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Variabeldeklaration für den gesamten Class-Scope
+    // Variabeln Bewegung
     public float moveSpeed;                 // REF Beweguntsgeschwindigkeit
     public Rigidbody2D theRB;               // REF Kollisionskörper Spieler
-
     public float rangeToChasePlayer;        // REF minimale Distanz für Verfolgung
     private Vector3 moveDirection;          // Bewegungsrichtung des Gegners
-
     public Animator anim;                   // REF Animation
 
+    // Variabeln Hitpoints
     public int health = 150;                // REF Hitpoints
-
     public GameObject[] deathSplatters;     // REF Todanimation
     public GameObject hitEffect;            // REF Treffereffekt
 
+    // Variabeln Schiessen
     public bool shouldShoot;                // Ob es schiessen soll
-
     public GameObject bullet;               // REF Kugel
     public Transform firePoint;             // REF Kugelursprung
     public float fireRate;                  // REF Schussfrequenz
     private float fireCounter;              // Countdown
-     
     public float shootRange;                // REF Schussreichweite
-
     public SpriteRenderer enemyBody;        // REF Renderer Körper Gegner
+
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +67,7 @@ public class EnemyController : MonoBehaviour
                 {
                     fireCounter = fireRate;
                     Instantiate(bullet, firePoint.position, firePoint.rotation);
+                    AudioManager.instance.PlaySFX(13);
                 }
             }
         }
@@ -97,6 +95,7 @@ public class EnemyController : MonoBehaviour
     {
         // Schaden vom HP abziehen und Shadenanimation generieren
         health -= damage;
+        AudioManager.instance.PlaySFX(2);
         Instantiate(hitEffect, transform.position, transform.rotation);
 
 
@@ -104,6 +103,7 @@ public class EnemyController : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            AudioManager.instance.PlaySFX(1);
 
             int selectedSplatter = Random.Range(0, deathSplatters.Length);
             int rotation = Random.Range(0, 360);
