@@ -105,6 +105,7 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
             AudioManager.instance.PlaySFX(1);
 
+            // Spur hinterlassen
             int selectedSplatter = Random.Range(0, deathSplatters.Length);
             int rotation = Random.Range(0, 360);
             Instantiate(deathSplatters[selectedSplatter], transform.position, Quaternion.Euler(0f, 0f, rotation));

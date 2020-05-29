@@ -23,6 +23,7 @@ public class BrokenPieces : MonoBehaviour
         moveDirection.y = Random.Range(-moveSpeed, moveSpeed);
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -45,6 +46,7 @@ public class BrokenPieces : MonoBehaviour
                 theSR.color.b,
                 Mathf.MoveTowards(theSR.color.a, 0f, fadeSpeed * Time.deltaTime)
             );
+
 
             // Wenn ausgeblendet, Bruchteilobjekte entfernen
             if (theSR.color.a == 0f)

@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public float dashInvincibility = 0.5f;  // REF Dauer Dash Unverletzbarkeit
     private float dashCoolDownCounter;      // Counter Dash Cooldown
     [HideInInspector]
-    public float dashCounter;              // Counter Dash Unverletzbarkeit
+    public float dashCounter;               // Counter Dash Unverletzbarkeit
 
 
     // Wie Start(), nur davor
@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         // Kameraobjekt abspeichern, damit dies nicht jedes Frame im Gesampten Projekt gesucht wird
         theCam = Camera.main;
 
+        // Normalgeschwindigkeit setzen
         activeMoveSpeed = moveSpeed;
     }
 
@@ -114,6 +115,7 @@ public class PlayerController : MonoBehaviour
             dashCounter = dashLength;
             anim.SetTrigger("dash");
 
+            // Unverletzbar machen und sound spielen
             PlayerHealthController.instance.MakeInvincible(dashInvincibility);
             AudioManager.instance.PlaySFX(8);
         }

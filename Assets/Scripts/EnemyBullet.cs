@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
+    // Variabeln Gegnerkugel
     public float speed;             // REF Geschwindigkeit Kugel
     private Vector3 direction;      // Flugrichtung Kugel
+
 
     // Start is called before the first frame update
     void Start()
@@ -13,6 +15,7 @@ public class EnemyBullet : MonoBehaviour
         direction = PlayerController.instance.transform.position - transform.position;
         direction.Normalize();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -34,7 +37,6 @@ public class EnemyBullet : MonoBehaviour
         Destroy(gameObject);
         AudioManager.instance.PlaySFX(4);
     }
-
 
 
     // Kugel ausserhalb des Bidlschirms zerstören
