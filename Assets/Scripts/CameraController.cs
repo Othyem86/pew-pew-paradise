@@ -8,8 +8,8 @@ public class CameraController : MonoBehaviour
     public static CameraController instance;
 
     // Variabeln Kamerasteuerung
-    public float moveSpeed;         // Geschwindigkeit der Kamera
-    public Transform target;        // Zielorientierung der Kamera
+    public float moveSpeed;         // REF Geschwindigkeit der Kamera
+    public Transform target;        // REF Zielorientierung der Kamera
 
 
     // Wie Start(), nur davor
