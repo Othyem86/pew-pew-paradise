@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public Transform gunArm;                // REF Koordinaten Waffe
     private Camera theCam;                  // Var der Kamera
     public Animator anim;                   // REF Animation
+    [HideInInspector] 
+    public bool canMove = true;             // REF ob sich Spieler bewegen darf
 
     // Variabeln Schusslogik
     public GameObject bulletToFire;         // REF Kugelobjekt
@@ -55,98 +57,108 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Bewegungseingabe (W,A,S,D) registreiren, speichern und als Einheitsvektor normalisieren
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
-        moveInput.Normalize();
-        theRB.velocity = moveInput * activeMoveSpeed;
-
-
-        // Mausposition als Bildschirmkoordinate speichern; Globale Spielerposition in Bildschirmkoordinaten umwandeln
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
-
-
-        // Spieler und Waffe link/rechts zur Mausposition spiegeln, mithilfe negativer Spiegelung des Sprites
-        if (mousePos.x < screenPoint.x)
+        // Nur wenn sich spieler bewegen darf
+        if (canMove)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-            gunArm.localScale = new Vector3(-1f, -1f, 1f);
-        }
-        else
-        {
-            transform.localScale = Vector3.one;
-            gunArm.localScale = Vector3.one;
-        }
+            // Bewegungseingabe (W,A,S,D) registreiren, speichern und als Einheitsvektor normalisieren
+            moveInput.x = Input.GetAxisRaw("Horizontal");
+            moveInput.y = Input.GetAxisRaw("Vertical");
+            moveInput.Normalize();
+            theRB.velocity = moveInput * activeMoveSpeed;
 
 
-        // Waffenrotation von Maus- und Spielerposition als Winkel ableiten und als Quaternionangabe übergeben
-        Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
-        float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-        gunArm.rotation = Quaternion.Euler(0, 0, angle);
+            // Mausposition als Bildschirmkoordinate speichern; Globale Spielerposition in Bildschirmkoordinaten umwandeln
+            Vector3 mousePos = Input.mousePosition;
+            Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
 
 
-        // Kugel einzeln per Mausdruck feuern - Instantiate (welches Prefab?, wo soll erstellt werden?, mit welcher Drehung?)
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-            shotCounter = timeBetweenShots;
-            AudioManager.instance.PlaySFX(12);
-        }
+            // Spieler und Waffe link/rechts zur Mausposition spiegeln, mithilfe negativer Spiegelung des Sprites
+            if (mousePos.x < screenPoint.x)
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+                gunArm.localScale = new Vector3(-1f, -1f, 1f);
+            }
+            else
+            {
+                transform.localScale = Vector3.one;
+                gunArm.localScale = Vector3.one;
+            }
 
 
-        // Kugel dauernd per gehaltenem Mausdruck feuern
-        if (Input.GetMouseButton(0))
-        {
-            shotCounter -= Time.deltaTime;        
-            if (shotCounter <= 0)
+            // Waffenrotation von Maus- und Spielerposition als Winkel ableiten und als Quaternionangabe übergeben
+            Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
+            float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+            gunArm.rotation = Quaternion.Euler(0, 0, angle);
+
+
+            // Kugel einzeln per Mausdruck feuern - Instantiate (welches Prefab?, wo soll erstellt werden?, mit welcher Drehung?)
+            if (Input.GetMouseButtonDown(0))
             {
                 Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-                AudioManager.instance.PlaySFX(12);
                 shotCounter = timeBetweenShots;
+                AudioManager.instance.PlaySFX(12);
             }
-        }
 
 
-        // Dash-Logik beim Leertastendruck
-        if (Input.GetKeyDown(KeyCode.Space) && dashCoolDownCounter <= 0 && dashCounter <= 0)
-        {
-            activeMoveSpeed = dashSpeed;
-            dashCounter = dashLength;
-            anim.SetTrigger("dash");
-
-            // Unverletzbar machen und sound spielen
-            PlayerHealthController.instance.MakeInvincible(dashInvincibility);
-            AudioManager.instance.PlaySFX(8);
-        }
-
-
-        // Counter bis zum jetztigen Dash-Ende
-        if (dashCounter > 0)
-        {
-            dashCounter -= Time.deltaTime;
-            if (dashCounter <= 0)
+            // Kugel dauernd per gehaltenem Mausdruck feuern
+            if (Input.GetMouseButton(0))
             {
-                activeMoveSpeed = moveSpeed;
-                dashCoolDownCounter = dashCoolDown;
+                shotCounter -= Time.deltaTime;
+                if (shotCounter <= 0)
+                {
+                    Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+                    AudioManager.instance.PlaySFX(12);
+                    shotCounter = timeBetweenShots;
+                }
             }
-        }
 
 
-        // Counter bis Dash wieder verfügbar ist
-        if (dashCoolDownCounter > 0)
-        {
-            dashCoolDownCounter -= Time.deltaTime;
-        }
+            // Dash-Logik beim Leertastendruck
+            if (Input.GetKeyDown(KeyCode.Space) && dashCoolDownCounter <= 0 && dashCounter <= 0)
+            {
+                activeMoveSpeed = dashSpeed;
+                dashCounter = dashLength;
+                anim.SetTrigger("dash");
+
+                // Unverletzbar machen und sound spielen
+                PlayerHealthController.instance.MakeInvincible(dashInvincibility);
+                AudioManager.instance.PlaySFX(8);
+            }
 
 
-        // Animations-switch für Stillstand und Bewegung
-        if (moveInput != Vector2.zero)
-        {
-            anim.SetBool("isMoving", true);
+            // Counter bis zum jetztigen Dash-Ende
+            if (dashCounter > 0)
+            {
+                dashCounter -= Time.deltaTime;
+                if (dashCounter <= 0)
+                {
+                    activeMoveSpeed = moveSpeed;
+                    dashCoolDownCounter = dashCoolDown;
+                }
+            }
+
+
+            // Counter bis Dash wieder verfügbar ist
+            if (dashCoolDownCounter > 0)
+            {
+                dashCoolDownCounter -= Time.deltaTime;
+            }
+
+
+            // Animations-switch für Stillstand und Bewegung
+            if (moveInput != Vector2.zero)
+            {
+                anim.SetBool("isMoving", true);
+            }
+            else
+            {
+                anim.SetBool("isMoving", false);
+            }
         }
         else
         {
+            // Spielergeschwindigkeit auf Null setzen
+            theRB.velocity = Vector2.zero;
             anim.SetBool("isMoving", false);
         }
     }

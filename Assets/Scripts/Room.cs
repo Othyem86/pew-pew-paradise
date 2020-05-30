@@ -23,7 +23,7 @@ public class Room : MonoBehaviour
     void Update()
     {
         // Überprüfen ob es noch Gegner im Raum gibt
-        if (roomActive && enemies.Count > 0 && openWhenEnemiesCleared)
+        if  (enemies.Count > 0 && roomActive && openWhenEnemiesCleared)
         {
             // Wenn Gegner zerstört wird, von liste entfernen
             for (int i = 0; i < enemies.Count; i++)
@@ -41,10 +41,10 @@ public class Room : MonoBehaviour
             {
                 if (closedWhenEntered)
                 {
+                    closedWhenEntered = false;
                     foreach (GameObject door in doors)
                     {
                         door.SetActive(false);
-                        closedWhenEntered = false;
                     }
                 }
             }
