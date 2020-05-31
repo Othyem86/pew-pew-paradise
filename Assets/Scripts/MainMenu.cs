@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     // Variabeln Menu
-    public string levelToLoad;      // Welche Szene geladen werden soll
+    public string levelToLoad;      // REF Welche Szene geladen werden soll
 
 
     // Start is called before the first frame update
