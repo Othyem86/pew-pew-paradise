@@ -371,10 +371,25 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 832518862487392243, guid: e7475af0b7f6be9418763be1427d65f6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2829977123135856751}
+    - target: {fileID: 832518862487392243, guid: e7475af0b7f6be9418763be1427d65f6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 832518862487392245, guid: e7475af0b7f6be9418763be1427d65f6,
         type: 3}
       propertyPath: m_Name
       value: Main Menu Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 832518862592564357, guid: e7475af0b7f6be9418763be1427d65f6,
+        type: 3}
+      propertyPath: m_Text
+      value: Menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7475af0b7f6be9418763be1427d65f6, type: 3}
@@ -17654,6 +17669,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: New Game Button
       objectReference: {fileID: 0}
+    - target: {fileID: 6239287444577307431, guid: aa40d192e9daa704fb8590ede8b8341d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2829977123135856751}
+    - target: {fileID: 6239287444577307431, guid: aa40d192e9daa704fb8590ede8b8341d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NewGame
+      objectReference: {fileID: 0}
     - target: {fileID: 6239287445049002449, guid: aa40d192e9daa704fb8590ede8b8341d,
         type: 3}
       propertyPath: m_Text
@@ -18336,6 +18361,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2829977122699107891, guid: 2e23a5445d1e46345b85167de1bcfc7a,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2829977122699107893, guid: 2e23a5445d1e46345b85167de1bcfc7a,
         type: 3}
       propertyPath: m_IsActive
@@ -18408,6 +18438,16 @@ PrefabInstance:
       value: 'You died!
 
         Try again?'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829977123452115264, guid: 2e23a5445d1e46345b85167de1bcfc7a,
+        type: 3}
+      propertyPath: mainMenuScene
+      value: Title Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829977123452115264, guid: 2e23a5445d1e46345b85167de1bcfc7a,
+        type: 3}
+      propertyPath: newGameScene
+      value: Test
       objectReference: {fileID: 0}
     - target: {fileID: 2829977123452115267, guid: 2e23a5445d1e46345b85167de1bcfc7a,
         type: 3}
@@ -18531,6 +18571,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e23a5445d1e46345b85167de1bcfc7a, type: 3}
+--- !u!114 &2829977123135856751 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2829977123452115264, guid: 2e23a5445d1e46345b85167de1bcfc7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2829977123135856750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe08aec258422b46b6703f94c9ac0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4030768188855327579
 PrefabInstance:
   m_ObjectHideFlags: 0

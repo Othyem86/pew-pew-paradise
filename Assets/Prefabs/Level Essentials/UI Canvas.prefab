@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2829977122699107890
 RectTransform:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -452,9 +452,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 2829977124819180463}
   healthText: {fileID: 2829977123830520049}
-  deathScreen: {fileID: 2829977122738514832}
   fadeScreen: {fileID: 2829977122699107891}
   fadeSpeed: 1.5
+  deathScreen: {fileID: 2829977122738514832}
+  newGameScene: 
+  mainMenuScene: 
 --- !u!1 &2829977123830520048
 GameObject:
   m_ObjectHideFlags: 0
