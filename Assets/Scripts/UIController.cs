@@ -20,9 +20,12 @@ public class UIController : MonoBehaviour
     private bool fadeOutBlack;          // REF ob Übergang aus Schwarz
 
     // Variabeln death screen
-    public GameObject deathScreen;      // REF Death Screen
+    public GameObject deathScreen;      // REF Death Screen Objekt
     public string newGameScene;         // REF Szene Nees Spiel
     public string mainMenuScene;        // REF Szene Hauptmenü
+
+    // Variabeln Pause Screen
+    public GameObject pauseMenu;        // REF Pause Screen Objekt
 
 
     // Wie Start(), nur davor
@@ -90,16 +93,25 @@ public class UIController : MonoBehaviour
     }
 
 
-    // Funktion neues Spiel
+    // Funktion neues Spiel und Zeitverlauf auf 100% setzen
     public void NewGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(newGameScene);
     }
 
 
-    // Funktion zurück zum Hauptmenü
-    public void MainMenu()
+    // Funktion zurück zum Hauptmenü und Zeitverlauf auf 100% setzen
+    public void MainMenu() 
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(mainMenuScene);
+    }
+
+
+    // Funktion Pause beenden
+    public void Resume()
+    {
+        LevelManager.instance.PauseUnpause();
     }
 }

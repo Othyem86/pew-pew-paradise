@@ -12,6 +12,9 @@ public class LevelManager : MonoBehaviour
     public float waitToLoad = 4f;       // REF Dauer bis nächste Szene
     public string nextLevel;            // REF nächste Szene
 
+    // Variabeln Spielpause
+    public bool ispaused;               // REF ob eine Pause besteht
+
 
     // Wie Start(), nur davor
     public void Awake()
@@ -23,14 +26,18 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Beim start des Levels, Zeitverlauf auf 100% setzen
+        Time.timeScale = 1;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseUnpause();
+        }
     }
 
 
@@ -43,5 +50,23 @@ public class LevelManager : MonoBehaviour
         UIController.instance.StartFadeToBlack();
         yield return new WaitForSeconds(waitToLoad);
         SceneManager.LoadScene(nextLevel);
+    }
+
+
+    // Funktion Spiel Pause
+    public void PauseUnpause()
+    {
+        if (!ispaused)
+        {
+            UIController.instance.pauseMenu.SetActive(true);
+            ispaused = true;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            UIController.instance.pauseMenu.SetActive(false);
+            ispaused = false;
+            Time.timeScale = 1;
+        }
     }
 }

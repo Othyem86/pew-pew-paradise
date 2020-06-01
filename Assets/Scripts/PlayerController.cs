@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Nur wenn sich spieler bewegen darf
-        if (canMove)
+        // Nur wenn sich spieler bewegen darf und keine Pause besteht
+        if (canMove && !LevelManager.instance.ispaused)
         {
             // Bewegungseingabe (W,A,S,D) registreiren, speichern und als Einheitsvektor normalisieren
             moveInput.x = Input.GetAxisRaw("Horizontal");
