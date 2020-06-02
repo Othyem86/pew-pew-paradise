@@ -152,8 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layoutRoom: {fileID: 1919034691639133825, guid: b8ad3d1627c58bc43aca1cb9a16e70f1,
     type: 3}
-  startColor: {r: 0, g: 0.9379053, b: 1, a: 1}
-  endColor: {r: 0.8962264, g: 0, b: 0, a: 1}
   distanceToEnd: 10
   generatorPoint: {fileID: 1841570327}
   selectedDirection: 0
@@ -162,6 +160,39 @@ MonoBehaviour:
   whatIsRoom:
     serializedVersion: 2
     m_Bits: 32768
+  startColor: {r: 0, g: 0.9379053, b: 1, a: 1}
+  endColor: {r: 0.8962264, g: 0, b: 0, a: 1}
+  rooms:
+    singleRight: {fileID: 7205630617135553045, guid: 23c2e9b2084735543a9df67b501ca8cc,
+      type: 3}
+    singleUp: {fileID: 5391547314677478615, guid: be06beb29e764e847a0a1df3cac00c77,
+      type: 3}
+    singleLeft: {fileID: 2186328273118386529, guid: dafd10b26b95f7a45a1b86b8f609b5fa,
+      type: 3}
+    singleDown: {fileID: 504263867720189494, guid: 1646a591f0ed6794c86c6c8f25f3545f,
+      type: 3}
+    doubleLeftRight: {fileID: 6795896633225389619, guid: d5adaa961f51d2c4ab5082aa248a9661,
+      type: 3}
+    doubleUpDown: {fileID: 8225492345756616800, guid: 8018b2c7f5a6de64281e20db59e510a6,
+      type: 3}
+    doubleUpRight: {fileID: 3621741313982853961, guid: 58531578053f77d4eb745f66acca42cc,
+      type: 3}
+    doubleDownRight: {fileID: 5726592919655738809, guid: 5942a33db5510994db0c9425b0021855,
+      type: 3}
+    doubleDownLeft: {fileID: 1183906431053925388, guid: a50135ecca4762643b42bcbd9ef36c0f,
+      type: 3}
+    doubleLeftUp: {fileID: 1004870463508329701, guid: 20d15d3463f4d3249b0243ca904e77c7,
+      type: 3}
+    tripleUpRightDown: {fileID: 2890872711298030547, guid: 212b6b421feaf1e4c89c220e047c728c,
+      type: 3}
+    tripleRightDownLeft: {fileID: 3228007426704450566, guid: 4c408188eef3de84796f001d1593d423,
+      type: 3}
+    tripleDownLeftUp: {fileID: 5274316493348146895, guid: e3defd07d33c35d4eb6ca13b31792e7a,
+      type: 3}
+    tripleLeftUpRight: {fileID: 2742355248183306895, guid: 09978613fc381844db3ef447ca78da84,
+      type: 3}
+    fourWay: {fileID: 6605679426355001300, guid: eee5afc95bbd08940bfca620f7696214,
+      type: 3}
 --- !u!4 &859291777
 Transform:
   m_ObjectHideFlags: 0
@@ -230,7 +261,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 100
+  orthographic size: 60
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
