@@ -91,24 +91,18 @@ public class PlayerController : MonoBehaviour
             gunArm.rotation = Quaternion.Euler(0, 0, angle);
 
 
-            // Kugel einzeln per Mausdruck feuern - Instantiate (welches Prefab?, wo soll erstellt werden?, mit welcher Drehung?)
-            if (Input.GetMouseButtonDown(0))
-            {
-                Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-                shotCounter = timeBetweenShots;
-                AudioManager.instance.PlaySFX(12);
-            }
-
-
-            // Kugel dauernd per gehaltenem Mausdruck feuern
-            if (Input.GetMouseButton(0))
+            // Kugel einzeln per Mausdruck oder dauernd per gehaltenem Mausdruck feuern
+            if (shotCounter > 0)
             {
                 shotCounter -= Time.deltaTime;
-                if (shotCounter <= 0)
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
                 {
                     Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-                    AudioManager.instance.PlaySFX(12);
                     shotCounter = timeBetweenShots;
+                    AudioManager.instance.PlaySFX(12);
                 }
             }
 

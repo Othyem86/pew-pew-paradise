@@ -17181,7 +17181,7 @@ MonoBehaviour:
   bulletToFire: {fileID: 3104123681623925868, guid: 184cfb1ff9b50ed4d9264199327fb44c,
     type: 3}
   firePoint: {fileID: 600551490}
-  timeBetweenShots: 0.3
+  timeBetweenShots: 0.7
   bodySR: {fileID: 827607239}
   dashSpeed: 8
   dashLength: 0.5
