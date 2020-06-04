@@ -147,15 +147,23 @@ public class LevelGenerator : MonoBehaviour
                 break;
 
             case 2:
-
+                if (roomAbove && roomBelow) { generatedOutlines.Add(Instantiate(rooms.doubleUpDown, roomPosition, transform.rotation)); }
+                if (roomLeft && roomRight) { generatedOutlines.Add(Instantiate(rooms.doubleLeftRight, roomPosition, transform.rotation)); }
+                if (roomAbove && roomRight) { generatedOutlines.Add(Instantiate(rooms.doubleUpRight, roomPosition, transform.rotation)); }
+                if (roomBelow && roomRight) { generatedOutlines.Add(Instantiate(rooms.doubleDownRight, roomPosition, transform.rotation)); }
+                if (roomBelow && roomLeft) { generatedOutlines.Add(Instantiate(rooms.doubleDownLeft, roomPosition, transform.rotation)); }
+                if (roomAbove && roomLeft) { generatedOutlines.Add(Instantiate(rooms.doubleLeftUp, roomPosition, transform.rotation)); }
                 break;
 
             case 3:
-
+                if (!roomLeft) { generatedOutlines.Add(Instantiate(rooms.tripleUpRightDown, roomPosition, transform.rotation)); }
+                if (!roomAbove) { generatedOutlines.Add(Instantiate(rooms.tripleRightDownLeft, roomPosition, transform.rotation)); }
+                if (!roomRight) { generatedOutlines.Add(Instantiate(rooms.tripleDownLeftUp, roomPosition, transform.rotation)); }
+                if (!roomBelow) { generatedOutlines.Add(Instantiate(rooms.tripleLeftUpRight, roomPosition, transform.rotation)); }
                 break;
 
             case 4:
-
+                generatedOutlines.Add(Instantiate(rooms.fourWay, roomPosition, transform.rotation));
                 break;
         }
   
