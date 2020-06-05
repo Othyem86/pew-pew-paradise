@@ -93,11 +93,13 @@ public class LevelGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
         // DEV Neue Raumkonfiguration generieren
         if (Input.GetKey(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+#endif
     }
 
 
