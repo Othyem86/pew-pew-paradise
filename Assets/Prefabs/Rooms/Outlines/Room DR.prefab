@@ -621,7 +621,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 232117031
-  m_SortingLayer: -1
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1046,7 +1046,7 @@ GameObject:
   - component: {fileID: 3328043191021587027}
   - component: {fileID: 5164367546548860922}
   m_Layer: 0
-  m_Name: Door Right
+  m_Name: Door Vertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1104,7 +1104,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 906909451
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 5321197001264935029, guid: 815f98a145a4ae14d897a7f431477ea9,
     type: 3}
@@ -1194,14 +1194,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c6a72585158264e9fc7a4493643ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closedWhenEntered: 1
-  openWhenEnemiesCleared: 1
+  closedWhenEntered: 0
+  roomActive: 0
   doors:
   - {fileID: 7867141940105772049}
-  - {fileID: 0}
   - {fileID: 4989615643037100497}
-  - {fileID: 0}
-  enemies: []
 --- !u!50 &7772308346182758878
 Rigidbody2D:
   serializedVersion: 4
@@ -1235,7 +1232,7 @@ GameObject:
   - component: {fileID: 3913194577355109136}
   - component: {fileID: 4086480026869861691}
   m_Layer: 0
-  m_Name: Door Top
+  m_Name: Door Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1249,7 +1246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7867141940105772049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.5, z: 0}
+  m_LocalPosition: {x: 0, y: -4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 939767543623728920}
@@ -1292,7 +1289,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 906909451
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 5041813583268518508, guid: 815f98a145a4ae14d897a7f431477ea9,
     type: 3}

@@ -23,6 +23,11 @@ public class LevelGenerator : MonoBehaviour
     private List<GameObject> generatedOutlines = new List<GameObject>();    // REF Liste aller generierten Raumkontouren
     public RoomPrefabs rooms;                                               // REF alle Raumkonturtypen
 
+    // Variabeln Raummitten
+    public RoomCenter centerStart;                                          // REF Raummitte Start
+    public RoomCenter centerEnd;                                            // REF Raummitte Ende
+    public RoomCenter[] potentialCenters;                                   // REF Liste potentieller Raummitten
+
 
     // Start is called before the first frame update
     void Start()
@@ -64,22 +69,24 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        
-        //
-        // Raumkonturen generieren
-        //
 
-        // Startraum Generieren
+        // Generiere Startraumkontour
         CreateRoomOutline(Vector3.zero);
 
-        // Räume generieren
+
+        // Generiere Zwischenraumkontouren
         foreach (GameObject room in layoutRoomObjects)
         {
             CreateRoomOutline(room.transform.position);
         }
 
-        // Endraum generieren
+
+        // Generiere Endraumkonturen
         CreateRoomOutline(endRoom.transform.position);
+
+
+        // Raumkontourliste durchgehen und Raummitten erzeugen
+        CreateRoomCenters();
     }
 
 
@@ -92,6 +99,12 @@ public class LevelGenerator : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+
+
+
+    //
+    //  FUNKTIONEN
+    //
 
 
     // Switchfunktion Verschiebung des Generationspunkts
@@ -119,7 +132,7 @@ public class LevelGenerator : MonoBehaviour
 
 
     // Funktion Raumkonturen generieren
-    public void CreateRoomOutline(Vector3 roomPosition)
+    private void CreateRoomOutline(Vector3 roomPosition)
     {
         // Überprüfen ob andere Räume abgrenzen
         bool roomAbove = Physics2D.OverlapCircle( roomPosition + new Vector3(0f, yOffset, 0f), 0.2f, whatIsRoom );
@@ -127,8 +140,10 @@ public class LevelGenerator : MonoBehaviour
         bool roomLeft = Physics2D.OverlapCircle( roomPosition + new Vector3(-xOffset, 0f, 0f), 0.2f, whatIsRoom );
         bool roomRight = Physics2D.OverlapCircle( roomPosition + new Vector3(xOffset, 0f, 0f), 0.2f, whatIsRoom );
 
+
         // Anzahl der Eingänge
         int directionCount = 0;
+
 
         // Eingänge zählen
         if (roomAbove)  { directionCount++; }
@@ -136,7 +151,8 @@ public class LevelGenerator : MonoBehaviour
         if (roomLeft)   { directionCount++; }
         if (roomRight)  { directionCount++; }
         
-        //
+
+        // Generiere Raumkontouren und addiere sie zu einer Raumkontourliste
         switch (directionCount)
         {
             case 1:
@@ -166,8 +182,31 @@ public class LevelGenerator : MonoBehaviour
                 generatedOutlines.Add(Instantiate(rooms.fourWay, roomPosition, transform.rotation));
                 break;
         }
-  
+    }
 
+
+    // Funktion Raummitten generieren
+    private void CreateRoomCenters()
+    {
+        foreach (GameObject outline in generatedOutlines)
+        {
+            if (outline.transform.position == Vector3.zero)
+            {
+                // Falls es die Startraumkoordinaten sind, Startraum erzeugen
+                Instantiate(centerStart, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
+            }
+            else if (outline.transform.position == endRoom.transform.position)
+            {
+                // Falls es die Endraumkoordinaten sind, Endraum erzeugen
+                Instantiate(centerEnd, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
+            }
+            else
+            {
+                // Sonst beliebige Raummitten der Zwischenräume erstellen
+                int randomRoomCenter = Random.Range(0, potentialCenters.Length);
+                Instantiate(potentialCenters[randomRoomCenter], outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
+            }
+        }
     }
 }
 

@@ -621,7 +621,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 232117031
-  m_SortingLayer: -1
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 5115036154294190704}
   - component: {fileID: 2203060491603363103}
   m_Layer: 0
-  m_Name: Door Right
+  m_Name: Door Vertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -854,7 +854,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 906909451
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 5321197001264935029, guid: 815f98a145a4ae14d897a7f431477ea9,
     type: 3}
@@ -944,14 +944,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c6a72585158264e9fc7a4493643ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closedWhenEntered: 1
-  openWhenEnemiesCleared: 1
+  closedWhenEntered: 0
+  roomActive: 0
   doors:
   - {fileID: 5591954172982320565}
-  - {fileID: 0}
   - {fileID: 2970861608118973364}
-  - {fileID: 0}
-  enemies: []
 --- !u!50 &8754098932009060670
 Rigidbody2D:
   serializedVersion: 4
@@ -1042,7 +1039,7 @@ GameObject:
   - component: {fileID: 7398178338713880341}
   - component: {fileID: 4974454791072079795}
   m_Layer: 0
-  m_Name: Door Top
+  m_Name: Door Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1099,7 +1096,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 906909451
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 5041813583268518508, guid: 815f98a145a4ae14d897a7f431477ea9,
     type: 3}
