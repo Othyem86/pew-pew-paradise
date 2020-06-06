@@ -7,9 +7,17 @@ public class EnemyController : MonoBehaviour
     // Variabeln Bewegung
     public float moveSpeed;                 // REF Beweguntsgeschwindigkeit
     public Rigidbody2D theRB;               // REF Kollisionskörper Spieler
-    public float rangeToChasePlayer;        // REF minimale Distanz für Verfolgung
     private Vector3 moveDirection;          // Bewegungsrichtung des Gegners
     public Animator anim;                   // REF Animation
+
+    // Variabeln Benehmen
+    public bool shouldChasePlayer;          // REF ob Gegner Spieler verfolgen soll
+    public bool shouldRunAway;              // REF ob Gegner vor Spieler fliehen soll
+
+    // Variabeln Distanz der Benehmen
+    public float rangeToChasePlayer;        // REF Verfolgungsradius
+    public float rangeToRunAway;            // REF Fluchtradius
+
 
     // Variabeln Hitpoints
     public int health = 150;                // REF Hitpoints
@@ -39,14 +47,20 @@ public class EnemyController : MonoBehaviour
         // Schiessen nur wenn Körper des Gegners auf dem Bildschirm sichtbar ist, bzw. in der Welt existiert
         if (enemyBody.isVisible && PlayerController.instance.gameObject.activeInHierarchy)
         {
-            // Wenn Abstand kleiner als minimale Distanz, dann wird der der Vektor3 zum Spieler generiert, sonst Nullvektor
-            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer)
+            moveDirection = Vector3.zero;
+
+
+            // Spieler Verfolgen wenn Spieler in Verfolgungsradius
+            if (shouldChasePlayer && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer)
             {
                 moveDirection = PlayerController.instance.transform.position - transform.position;
             }
-            else
+
+
+            // Fliehen wenn Spieler in Fluchtradius
+            if (shouldRunAway && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToRunAway)
             {
-                moveDirection = Vector3.zero;
+                moveDirection = transform.position - PlayerController.instance.transform.position;
             }
 
 
