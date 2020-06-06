@@ -108,7 +108,6 @@ public class LevelGenerator : MonoBehaviour
     //  FUNKTIONEN
     //
 
-
     // Switchfunktion Verschiebung des Generationspunkts
     public void MoveGenerationPoint()
     {
