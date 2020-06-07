@@ -52,6 +52,12 @@ public class EnemyController : MonoBehaviour
     public float shootRange;                // REF Schussreichweite
     public SpriteRenderer enemyBody;        // REF Renderer Körper Gegner
 
+    // Variabeln für Random Drops
+    [Header("Drops")]
+    public bool shouldDropItem;             // REF ob es ein Drop geben soll
+    public GameObject[] itemsToDrop;        // REF Array von Drops
+    public float itemDropPercent;           // REF Chancen ein Drop zu erstellen
+
 
     // Start is called before the first frame update
     void Start()
@@ -73,8 +79,7 @@ public class EnemyController : MonoBehaviour
             // Gegner bewegen
             moveDirection = Vector3.zero;
             EnemyShoot();
-            EnemyChase();
-            EnemyFlee();
+            EnemyMove();
 
             // Bewegungsrichtung normalisieren, Geschiwindigkeit Kollisionskörper berechnen
             moveDirection.Normalize();
@@ -113,60 +118,18 @@ public class EnemyController : MonoBehaviour
             int selectedSplatter = Random.Range(0, deathSplatters.Length);
             int rotation = Random.Range(0, 360);
             Instantiate(deathSplatters[selectedSplatter], transform.position, Quaternion.Euler(0f, 0f, rotation));
-        }
-    }
 
-
-
-    // Methode Verfolgen + Schweifen / Patroullieren
-    private void EnemyChase()
-    {
-        // Spieler Verfolgen wenn Spieler in Verfolgungsradius
-        if (shouldChasePlayer && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer)
-        {
-            moveDirection = PlayerController.instance.transform.position - transform.position;
-        }
-
-        // Schweifen wenn Spieler nicht im Verfolgungsradius
-        else if (shouldWander)
-        {
-            // Bewegen zwischen Pausen
-            if (wanderCounter > 0)
+            // Drop erstellen
+            if (shouldDropItem)
             {
-                wanderCounter -= Time.deltaTime;
-                moveDirection = wanderDirection;    
-            } 
-            else
-            {
-                pauseCounter = Random.Range(pauseLength * 0.75f, pauseLength * 1.25f);
-            }
+                // Zufallszahl zwischen 0-100 generieren
+                float dropChance = Random.Range(0f, 100f);
 
-            // Pausen zwischen Bewegungen
-            if (pauseCounter > 0)
-            {
-                pauseCounter -= Time.deltaTime;
-            }
-            else
-            {
-                wanderCounter = Random.Range(wanderLength * 0.75f, wanderLength * 1.25f);
-                wanderDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
-            }
-        }
-
-        // Patroullieren wenn Spieler nicht im Verfolgungsradius
-        else if (shouldPatrol)
-        {
-            moveDirection = patrolPoints[currentPatrolPoint].position - transform.position;
-
-            // Wenn Ziel erreich, nächstes Ziel wählen
-            if (Vector3.Distance(transform.position, patrolPoints[currentPatrolPoint].position) < 0.2f)
-            {
-                currentPatrolPoint++;
-
-                // Am ende der Zielliste, zum Angfang der Zielliste springen
-                if (currentPatrolPoint >= patrolPoints.Length)
+                // Falls der Zufallszahl kleiner ist als die Chancen zum Drop => Drop erstellen
+                if (dropChance < itemDropPercent)
                 {
-                    currentPatrolPoint = 0;
+                    int randomItem = Random.Range(0, itemsToDrop.Length);
+                    Instantiate(itemsToDrop[randomItem], transform.position, transform.rotation);
                 }
             }
         }
@@ -174,13 +137,75 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Metode Fliehen
-    private void EnemyFlee()
+    // Methode Verfolgen + Schweifen / Patroullieren
+    private void EnemyMove()
     {
-        // Fliehen wenn Spieler in Fluchtradius
-        if (shouldRunAway && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToRunAway)
+        // Spieler Verfolgen wenn Spieler in Verfolgungsradius
+        if (shouldChasePlayer && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer)
+        {
+            moveDirection = PlayerController.instance.transform.position - transform.position;
+        }
+        else if (shouldRunAway && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToRunAway)
         {
             moveDirection = transform.position - PlayerController.instance.transform.position;
+        }
+        else if (shouldWander)
+        {
+            EnemyWander();
+        }
+        else if (shouldPatrol)
+        {
+            EnemyPatroll();
+        }
+    }
+
+
+
+    // Methode Schweifen
+    private void EnemyWander()
+    {
+        // Bewegen zwischen Pausen
+        if (wanderCounter > 0)
+        {
+            wanderCounter -= Time.deltaTime;
+            moveDirection = wanderDirection;
+
+            if (wanderCounter <= 0)
+            {
+                pauseCounter = Random.Range(pauseLength * 0.75f, pauseLength * 1.25f);
+            }
+        }
+
+        // Pausen zwischen Bewegungen
+        if (pauseCounter > 0)
+        {
+            pauseCounter -= Time.deltaTime;
+
+            if (pauseCounter <= 0)
+            {
+                wanderCounter = Random.Range(wanderLength * 0.75f, wanderLength * 1.25f);
+                wanderDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
+            }
+        }
+    }
+
+
+
+    // Methode Patroullieren
+    private void EnemyPatroll()
+    {
+        moveDirection = patrolPoints[currentPatrolPoint].position - transform.position;
+
+        // Wenn Ziel erreich, nächstes Ziel wählen
+        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolPoint].position) < 0.2f)
+        {
+            currentPatrolPoint++;
+
+            // Am ende der Zielliste, zum Angfang der Zielliste springen
+            if (currentPatrolPoint >= patrolPoints.Length)
+            {
+                currentPatrolPoint = 0;
+            }
         }
     }
 

@@ -90,7 +90,7 @@ MonoBehaviour:
   moveSpeed: 3
   theRB: {fileID: 2105349181618454666}
   anim: {fileID: 2105349181618454665}
-  shouldChasePlayer: 0
+  shouldChasePlayer: 1
   rangeToChasePlayer: 7
   shouldRunAway: 0
   rangeToRunAway: 0
@@ -98,10 +98,7 @@ MonoBehaviour:
   wanderLength: 0
   pauseLength: 0
   shouldPatrol: 1
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  patrolPoints: []
   health: 150
   deathSplatters:
   - {fileID: 2244442839679255603, guid: 6d4e9e224e81b8242a32011fc0b8c2c3, type: 3}
@@ -116,6 +113,10 @@ MonoBehaviour:
   fireRate: 1
   shootRange: 10
   enemyBody: {fileID: 2105349181692962879}
+  shouldDropItem: 1
+  itemsToDrop:
+  - {fileID: 3725178589628516924, guid: 010a46de1f9ff9748bd95969bd969aec, type: 3}
+  itemDropPercent: 25
 --- !u!50 &2105349181618454666
 Rigidbody2D:
   serializedVersion: 4
