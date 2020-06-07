@@ -10,21 +10,26 @@ public class UIController : MonoBehaviour
     public static UIController instance;
 
     // Variabeln UI
+    [Header("UI Variables")]
     public Slider healthSlider;         // REF HP-Slider
     public Text healthText;             // REF Text des HP-Sliders
+    public Text coinText;               // REF Text des Geldzählers
 
     // Variabeln Szenenübergang
+    [Header("Scene Transition")]
     public Image fadeScreen;            // REF Übergangsbild
     public float fadeSpeed;             // REF Übergangsgeschwindigkeit
     private bool fadeToBlack;           // REF ob Übergang zu Schwarz
     private bool fadeOutBlack;          // REF ob Übergang aus Schwarz
 
     // Variabeln death screen
+    [Header("Death Screen")]
     public GameObject deathScreen;      // REF Death Screen Objekt
     public string newGameScene;         // REF Szene Nees Spiel
     public string mainMenuScene;        // REF Szene Hauptmenü
 
     // Variabeln Pause Screen
+    [Header("Pause Screen")]
     public GameObject pauseMenu;        // REF Pause Screen Objekt
 
 

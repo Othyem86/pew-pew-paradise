@@ -34,6 +34,9 @@ public class LevelManager : MonoBehaviour
     {
         // Beim start des Levels, Zeitverlauf auf 100% setzen
         Time.timeScale = 1;
+
+        // UI Update
+        UIController.instance.coinText.text = currentCoins.ToString();
     }
 
 
@@ -88,6 +91,9 @@ public class LevelManager : MonoBehaviour
     public void GetCoins(int amount)
     {
         currentCoins += amount;
+
+        // UI Update
+        UIController.instance.coinText.text = currentCoins.ToString();
     }
     
     
@@ -101,6 +107,9 @@ public class LevelManager : MonoBehaviour
         {
             currentCoins = 0;
         }
+
+        // UI Update
+        UIController.instance.coinText.text = currentCoins.ToString();
     }
 
 }
