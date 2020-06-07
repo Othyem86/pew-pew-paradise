@@ -9,11 +9,17 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
 
     // Variabeln Szenenübergang
+    [Header("Scene Transition")]
     public float waitToLoad = 4f;       // REF Dauer bis nächste Szene
     public string nextLevel;            // REF nächste Szene
 
     // Variabeln Spielpause
+    [Header("Pause / Unpause")]
     public bool ispaused;               // REF ob eine Pause besteht
+
+    // Variabeln Geldsystem
+    [Header("Money Tracker")]
+    public int currentCoins;            // REF aktuelle Geldfonds
 
 
     // Wie Start(), nur davor
@@ -41,7 +47,12 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    // Co-routine Funktion zur wechseln der Szene
+
+    //
+    //  METHODEN
+    //
+
+    // Metode Coroutine zur wechseln der Szene
     public IEnumerator LevelEnd()
     {
         // Spielerbewegung ausschalten und Zeit abwarten vor Szenenwechsel
@@ -53,7 +64,8 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    // Funktion Spiel Pause
+
+    // Methode Spiel Pause
     public void PauseUnpause()
     {
         if (!ispaused)
@@ -69,4 +81,26 @@ public class LevelManager : MonoBehaviour
             Time.timeScale = 1;
         }
     }
+
+
+
+    // Methode Geld einnehmen
+    public void GetCoins(int amount)
+    {
+        currentCoins += amount;
+    }
+    
+    
+
+    // Methode Geld ausgeben
+    public void SpendCoins(int amount)
+    {
+        currentCoins -= amount;
+
+        if (currentCoins < 0)
+        {
+            currentCoins = 0;
+        }
+    }
+
 }
