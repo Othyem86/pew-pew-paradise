@@ -103,7 +103,6 @@ public class EnemyController : MonoBehaviour
         AudioManager.instance.PlaySFX(2);
         Instantiate(hitEffect, transform.position, transform.rotation);
 
-
         // Zerstöre Gegners wenn Hitpoints Null sind und Gegnerreste generieren
         if (health <= 0)
         {
@@ -116,6 +115,7 @@ public class EnemyController : MonoBehaviour
             Instantiate(deathSplatters[selectedSplatter], transform.position, Quaternion.Euler(0f, 0f, rotation));
         }
     }
+
 
 
     // Methode Verfolgen + Schweifen / Patroullieren
@@ -141,7 +141,6 @@ public class EnemyController : MonoBehaviour
                 pauseCounter = Random.Range(pauseLength * 0.75f, pauseLength * 1.25f);
             }
 
-
             // Pausen zwischen Bewegungen
             if (pauseCounter > 0)
             {
@@ -154,7 +153,7 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // Patrouliieren wenn Spieler nicht im Verfolgungsradius
+        // Patroullieren wenn Spieler nicht im Verfolgungsradius
         else if (shouldPatrol)
         {
             moveDirection = patrolPoints[currentPatrolPoint].position - transform.position;
@@ -164,6 +163,7 @@ public class EnemyController : MonoBehaviour
             {
                 currentPatrolPoint++;
 
+                // Am ende der Zielliste, zum Angfang der Zielliste springen
                 if (currentPatrolPoint >= patrolPoints.Length)
                 {
                     currentPatrolPoint = 0;
@@ -171,6 +171,7 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
 
 
     // Metode Fliehen
@@ -182,6 +183,7 @@ public class EnemyController : MonoBehaviour
             moveDirection = transform.position - PlayerController.instance.transform.position;
         }
     }
+
 
 
     // Methode Schiessen
@@ -200,6 +202,7 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
 
 
     // Methode Gegner animieren
