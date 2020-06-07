@@ -23,21 +23,12 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    //
+    //  METHODEN
+    //
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-    // Spielendemusik spielen
+    // Methode Spielendemusik spielen
     public void PlayGameOver()
     {
         levelMusic.Stop();
@@ -45,7 +36,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    // Erfolgsmusik spielen
+    // Methode Erfolgsmusik spielen
     public void PlayLevelWin()
     {
         levelMusic.Stop();
@@ -54,7 +45,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    // Sound Effect spielen
+    // Methode Sound Effect spielen
     public void PlaySFX(int sfxToPlay)
     {
         sfx[sfxToPlay].Stop();
