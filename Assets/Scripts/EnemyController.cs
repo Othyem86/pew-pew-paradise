@@ -5,38 +5,50 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     // Variabeln Bewegung
+    [Header("Movement")]
     public float moveSpeed;                 // REF Beweguntsgeschwindigkeit
     public Rigidbody2D theRB;               // REF Kollisionskörper Spieler
     private Vector3 moveDirection;          // Bewegungsrichtung des Gegners
     public Animator anim;                   // REF Animation
 
     // Variabeln Verfolgen
+    [Header("Chase Player")]
     public bool shouldChasePlayer;          // REF ob Gegner Spieler verfolgen soll
     public float rangeToChasePlayer;        // REF Verfolgungsradius
 
     // Variabeln Fliehen
+    [Header("Run Away")]
     public bool shouldRunAway;              // REF ob Gegner vor Spieler fliehen soll
     public float rangeToRunAway;            // REF Fluchtradius
 
     // Variabeln Zufallbewegung
-    public bool shouldWander;               // REF ob Gegner sich zufällig bewegen soll
-    public float wanderLength;              // REF wie lange Gegner sich bewegen soll
+    [Header("Wander")]
+    public bool shouldWander;               // REF ob Gegner schwiefen soll
+    public float wanderLength;              // REF wie lange Gegner schweifen soll
     public float pauseLength;               // REF wie lange Gegner pausen soll
-    private float wanderCounter;            //  
-    private float pauseCounter;             // 
+    private float wanderCounter;            // Countdown bis zur nächsten Pause
+    private float pauseCounter;             // Countdown bis zur nächsten Bewegung
     private Vector3 wanderDirection;        // Bewegungsrichtung
 
+    // Variabeln Patroullieren
+    [Header("Patrolling")]
+    public bool shouldPatrol;               // REF ob Gegner patroullieren soll
+    public Transform[] patrolPoints;        // REF Array aller Patroullienpunkte
+    private int currentPatrolPoint;         // nächster Zielpunkt 
+
     // Variabeln Hitpoints
+    [Header("Hitpoints")]
     public int health = 150;                // REF Hitpoints
     public GameObject[] deathSplatters;     // REF Todanimation
     public GameObject hitEffect;            // REF Treffereffekt
 
     // Variabeln Schiessen
+    [Header("Shooting")]
     public bool shouldShoot;                // Ob es schiessen soll
     public GameObject bullet;               // REF Kugel
     public Transform firePoint;             // REF Kugelursprung
     public float fireRate;                  // REF Schussfrequenz
-    private float fireCounter;              // Countdown
+    private float fireCounter;              // Countdown bis zur nächsten Kugel
     public float shootRange;                // REF Schussreichweite
     public SpriteRenderer enemyBody;        // REF Renderer Körper Gegner
 
@@ -58,8 +70,8 @@ public class EnemyController : MonoBehaviour
         // Schiessen und Bewegen je nach Gegnertyp
         if (enemyBody.isVisible && PlayerController.instance.gameObject.activeInHierarchy)
         {
+            // Gegner bewegen
             moveDirection = Vector3.zero;
-
             EnemyShoot();
             EnemyChase();
             EnemyFlee();
@@ -80,10 +92,10 @@ public class EnemyController : MonoBehaviour
 
 
     //
-    //  FUNKTIONEN
+    //  METHODEN
     //
 
-    // Funktion Gegner Schaden
+    // Methode Gegner Schaden
     public void DamageEnemy(int damage)
     {
         // Schaden vom HP abziehen und Shadenanimation generieren
@@ -92,13 +104,13 @@ public class EnemyController : MonoBehaviour
         Instantiate(hitEffect, transform.position, transform.rotation);
 
 
-        // Zerstörung des Gegners wenn Hitpoints Null sind und Reste generieren
+        // Zerstöre Gegners wenn Hitpoints Null sind und Gegnerreste generieren
         if (health <= 0)
         {
             Destroy(gameObject);
             AudioManager.instance.PlaySFX(1);
 
-            // Spur hinterlassen
+            // Reste hinterlassen
             int selectedSplatter = Random.Range(0, deathSplatters.Length);
             int rotation = Random.Range(0, 360);
             Instantiate(deathSplatters[selectedSplatter], transform.position, Quaternion.Euler(0f, 0f, rotation));
@@ -106,7 +118,7 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    // Funktion Verfolgen
+    // Methode Verfolgen + Schweifen / Patroullieren
     private void EnemyChase()
     {
         // Spieler Verfolgen wenn Spieler in Verfolgungsradius
@@ -114,37 +126,54 @@ public class EnemyController : MonoBehaviour
         {
             moveDirection = PlayerController.instance.transform.position - transform.position;
         }
+
+        // Schweifen wenn Spieler nicht im Verfolgungsradius
         else if (shouldWander)
         {
+            // Bewegen zwischen Pausen
             if (wanderCounter > 0)
             {
                 wanderCounter -= Time.deltaTime;
-
-                moveDirection = wanderDirection;
-
-                if (wanderCounter <= 0)
-                {
-                    pauseCounter = Random.Range(pauseLength * 0.75f, pauseLength * 1.25f);
-                }
+                moveDirection = wanderDirection;    
+            } 
+            else
+            {
+                pauseCounter = Random.Range(pauseLength * 0.75f, pauseLength * 1.25f);
             }
-           
 
-            if (pauseCounter > 0) 
+
+            // Pausen zwischen Bewegungen
+            if (pauseCounter > 0)
             {
                 pauseCounter -= Time.deltaTime;
+            }
+            else
+            {
+                wanderCounter = Random.Range(wanderLength * 0.75f, wanderLength * 1.25f);
+                wanderDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
+            }
+        }
 
-                if (pauseCounter <= 0)
+        // Patrouliieren wenn Spieler nicht im Verfolgungsradius
+        else if (shouldPatrol)
+        {
+            moveDirection = patrolPoints[currentPatrolPoint].position - transform.position;
+
+            // Wenn Ziel erreich, nächstes Ziel wählen
+            if (Vector3.Distance(transform.position, patrolPoints[currentPatrolPoint].position) < 0.2f)
+            {
+                currentPatrolPoint++;
+
+                if (currentPatrolPoint >= patrolPoints.Length)
                 {
-                    wanderCounter = Random.Range(wanderLength * 0.75f, wanderLength * 1.25f);
-
-                    wanderDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
+                    currentPatrolPoint = 0;
                 }
             }
         }
     }
 
 
-    // Funktion Fliehen
+    // Metode Fliehen
     private void EnemyFlee()
     {
         // Fliehen wenn Spieler in Fluchtradius
@@ -155,10 +184,10 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    // Funktion Schiessen
+    // Methode Schiessen
     private void EnemyShoot()
     {
-        // Soll schiesse wenn Spieler in Reicheweite
+        // Schiessen wenn Spieler in Reicheweite
         if (shouldShoot && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < shootRange)
         {
             fireCounter -= Time.deltaTime;
@@ -173,7 +202,7 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    // Funktion Gegner animieren
+    // Methode Gegner animieren
     private void AnimateEnemy()
     {
         // Animations-switch für Stillstand und Bewegung
