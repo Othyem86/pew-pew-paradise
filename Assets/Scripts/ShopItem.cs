@@ -14,13 +14,8 @@ public class ShopItem : MonoBehaviour
     public bool isHealthUpgrade;        // REF Ob Kaufgegenstand Upgrade Hitpoints ist
     public bool isWeapon;               // REF Ob Kaufgegenstand Waffe ist
     public int itemCost;                // REF Preis des Kaufgegenstands
+    public int upgradeHealthAmount;     // REF Wieviel die Hitpoints erweitert
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -29,6 +24,10 @@ public class ShopItem : MonoBehaviour
     }
 
 
+
+    //
+    //  METHODEN
+    //
 
     // Methode Kauftext deaktivieren wenn Spieler reingeht
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,6 +38,7 @@ public class ShopItem : MonoBehaviour
             inBuyZone = true;
         }
     }
+
 
 
     // Methode Kauftext deaktivieren wenn Spieler rausgeht
@@ -52,7 +52,8 @@ public class ShopItem : MonoBehaviour
     }
 
 
-    // Methode Heilen kaufen
+
+    // Methode Gegenstand kaufen
     private void BuyItem()
     {
         if (inBuyZone)
@@ -63,10 +64,26 @@ public class ShopItem : MonoBehaviour
                 {
                     LevelManager.instance.SpendCoins(itemCost);
 
+                    // Spieler heilen
                     if (isHealthRestore)
                     {
                         PlayerHealthController.instance.HealPlayer(PlayerHealthController.instance.maxHealth);
                     }
+
+                    // Spieler Hitpoints erweitern
+                    if (isHealthUpgrade)
+                    {
+                        PlayerHealthController.instance.IncreaseMaxHealth(upgradeHealthAmount);
+                    }
+
+                    // Kaufgegenstand deaktivieren
+                    gameObject.SetActive(false);
+                    inBuyZone = false;
+                    AudioManager.instance.PlaySFX(18);
+                }
+                else
+                {
+                    AudioManager.instance.PlaySFX(19);
                 }
             }
         }

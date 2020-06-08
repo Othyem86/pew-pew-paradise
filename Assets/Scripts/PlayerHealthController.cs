@@ -17,7 +17,6 @@ public class PlayerHealthController : MonoBehaviour
     private float invinceCount;             // Countdown
 
 
-
     // Wie Start(), nur davor
     private void Awake()
     {
@@ -38,11 +37,22 @@ public class PlayerHealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MakePlayerInvincible();
+    }
+
+
+
+    //
+    //  METHODEN
+    //
+
+    // Methode Spieler unverletzbar und transparent machen
+    private void MakePlayerInvincible()
+    {
         if (invinceCount > 0)
         {
             invinceCount -= Time.deltaTime;
-            
-            // Wenn nicht mehr unverletzbar, dann Spielertransparenz ausschalten
+
             if (invinceCount <= 0)
             {
                 SetBodyAlpha(1f);
@@ -51,7 +61,8 @@ public class PlayerHealthController : MonoBehaviour
     }
 
 
-    // Funktion Schadenanrichtung an Spieler und dessen Tod
+
+    // Methode Spieler schaden/töten
     public void DamagePlayer()
     {
         // Schadenanrichtung wenn NICHT Unverletzbar
@@ -79,12 +90,14 @@ public class PlayerHealthController : MonoBehaviour
     }
 
 
-    // Funktion zur Aktualisierung des Hitpoint-UIs 
+
+    // Methode aktualisiere UI-Hitpoints
     private void updateHealthUI()
     {
         UIController.instance.healthSlider.value = currentHealth;
         UIController.instance.healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
+
 
 
     // Funktion Schadeneffekt BodySprite: Transparenz ein-/ausschalten
@@ -100,6 +113,7 @@ public class PlayerHealthController : MonoBehaviour
     }
 
 
+
     // Funktion unverletzbar zu werden
     public void MakeInvincible(float length)
     {
@@ -108,15 +122,28 @@ public class PlayerHealthController : MonoBehaviour
     }
 
 
-    // Funktion zur Heilung des Spielers
+
+    // Methode Spieler Heilen
     public void HealPlayer(int healAmount)
     {
         currentHealth += healAmount;
+
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
         }
 
+        updateHealthUI();
+    }
+
+
+
+    // Methode Hitpoints erweitern
+    public void IncreaseMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        currentHealth = maxHealth;
+        UIController.instance.healthSlider.maxValue = maxHealth;
         updateHealthUI();
     }
 }
