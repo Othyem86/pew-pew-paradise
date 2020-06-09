@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class LevelGenerator : MonoBehaviour
 {
-    // Variabeln Raumgenerierung
-    public GameObject layoutRoom;                                           // REF Raumobjekt
+    // Variabeln Levelparameter
+    [Header("Level Parameters")]
+    public bool includeShop;                                                // REF Ob es einen Shop haben soll
+    public int minDistanceToShop;                                           // REF Mindestanzahl Räume bis Shopraum
+    public int maxDistanceToShop;                                           // REF Mindestanzahl Räume bis Shopraum
     public int distanceToEnd;                                               // REF Anzahl der Räume bis Ausgangraum
+
+    // Variabeln Raumgenerierung
+    [Header("Room Generation")]
+    public GameObject layoutRoom;                                           // REF Raumobjekt
     public Transform generatorPoint;                                        // REF Referenzpunkt für die Raumgenerierung
     public enum Direction { up, right, down, left };                        // REF Mögliche Richtungen Generationspunkt
     public Direction selectedDirection;                                     // REF Ausgewählte Richtung Generationspunkt
@@ -16,15 +23,20 @@ public class LevelGenerator : MonoBehaviour
     public LayerMask whatIsRoom;                                            // REF Layer der iteriert werden soll
 
     // Variabeln Raumverfolgung
+    [Header("Room Colors")]
     public Color startColor;                                                // REF Startraumfarbe
     public Color endColor;                                                  // REF Endraumfarbe
+    public Color shopColor;                                                 // REF Shopfarbe
     private GameObject endRoom;                                             // REF Raumobjekt Levelende
+    private GameObject shopRoom;                                            // REF Raumobjekt Shop
     private List<GameObject> layoutRoomObjects = new List<GameObject>();    // REF Liste aller generierten Raum-mockups
     private List<GameObject> generatedOutlines = new List<GameObject>();    // REF Liste aller generierten Raumkontouren
     public RoomPrefabs rooms;                                               // REF alle Raumkonturtypen
 
     // Variabeln Raummitten
+    [Header("Room Centers")]
     public RoomCenter centerStart;                                          // REF Raummitte Start
+    public RoomCenter centerShop;                                           // REF Raummitte Shop
     public RoomCenter centerEnd;                                            // REF Raummitte Ende
     public RoomCenter[] potentialCenters;                                   // REF Liste potentieller Raummitten
 
@@ -42,7 +54,7 @@ public class LevelGenerator : MonoBehaviour
         MoveGenerationPoint();
 
 
-        // Gewünschte Anzahl der Räume generieren
+        // Layout - Gewünschte Anzahl der Räume generieren
         for (int i = 0; i < distanceToEnd; i++)
         {
             GameObject newRoom = Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation);
@@ -69,6 +81,15 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
+        // Shoplayout generieren
+        if (includeShop)
+        {
+            int shopSelector = Random.Range(minDistanceToShop, maxDistanceToShop + 1);
+            shopRoom = layoutRoomObjects[shopSelector];
+            layoutRoomObjects.RemoveAt(shopSelector);
+            shopRoom.GetComponent<SpriteRenderer>().color = shopColor;
+        }
+
 
         // Generiere Startraumkontour
         CreateRoomOutline(Vector3.zero);
@@ -83,6 +104,13 @@ public class LevelGenerator : MonoBehaviour
 
         // Generiere Endraumkonturen
         CreateRoomOutline(endRoom.transform.position);
+
+
+        // Generiere Shopraumkontour
+        if (includeShop)
+        {
+            CreateRoomOutline(shopRoom.transform.position);
+        }
 
 
         // Raumkontourliste durchgehen und Raummitten erzeugen
@@ -200,6 +228,11 @@ public class LevelGenerator : MonoBehaviour
             {
                 // Falls es die Endraumkoordinaten sind, Endraum erzeugen
                 Instantiate(centerEnd, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
+            }
+            else if (outline.transform.position == shopRoom.transform.position)
+            {
+                // Falls es die Endraumkoordinaten sind, Shopraum erzeugen
+                Instantiate(centerShop, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
             }
             else
             {
