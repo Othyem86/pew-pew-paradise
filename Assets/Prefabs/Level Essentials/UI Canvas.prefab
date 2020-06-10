@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 1451722936}
   - component: {fileID: 1451722935}
   m_Layer: 5
-  m_Name: Map
+  m_Name: Minimap Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -799,6 +799,7 @@ MonoBehaviour:
   newGameScene: LevelTest
   mainMenuScene: Title Menu
   pauseMenu: {fileID: 112681910}
+  mapDisplay: {fileID: 1451722933}
 --- !u!1 &2829977123830520048
 GameObject:
   m_ObjectHideFlags: 0

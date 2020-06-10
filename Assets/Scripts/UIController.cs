@@ -28,9 +28,10 @@ public class UIController : MonoBehaviour
     public string newGameScene;         // REF Szene Nees Spiel
     public string mainMenuScene;        // REF Szene Hauptmenü
 
-    // Variabeln Pause Screen
-    [Header("Pause Screen")]
+    // Variabeln Pause Screen und Minimap
+    [Header("Screens")]
     public GameObject pauseMenu;        // REF Pause Screen Objekt
+    public GameObject mapDisplay;       // REF Minimap Objekt
 
 
     // Wie Start(), nur davor

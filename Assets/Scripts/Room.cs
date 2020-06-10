@@ -8,6 +8,7 @@ public class Room : MonoBehaviour
     public bool closedWhenEntered;                              // REF ob Raum sich beim Eingang schliessen soll
     [HideInInspector]
     public bool roomActive;                                     // REF ob der Raum aktiv ist
+    public GameObject mapHider;                                 // REF Maske Raum für Karte
     public GameObject[] doors;                                  // REF Türliste
 
 
@@ -54,6 +55,9 @@ public class Room : MonoBehaviour
             }
 
             roomActive = true;
+
+            // Maske deaktivieren
+            mapHider.SetActive(false);
         }
     }
 
