@@ -10,26 +10,19 @@ public class PlayerController : MonoBehaviour
 
     // Variabeln Bewegungslogik
     [Header("Movement")]
+    public bool canMove = true;             // REF ob sich Spieler bewegen darf
     public float moveSpeed;                 // REF Beweguntsgeschwindigkeit
+    private float activeMoveSpeed;          // derzeitige Beweguntsgeschwindigkeit
     private Vector2 moveInput;              // Bewegungseingabe als Vektor
     public Rigidbody2D theRB;               // REF Kollisionskörper Spieler
     public Transform gunArm;                // REF Koordinaten Waffe
     private Camera theCam;                  // Var der Kamera
     public Animator anim;                   // REF Animation
     [HideInInspector] 
-    public bool canMove = true;             // REF ob sich Spieler bewegen darf
-
-    // Variabeln Schusslogik
-    [Header("Shooting")]
-    public GameObject bulletToFire;         // REF Kugelobjekt
-    public Transform firePoint;             // REF Ort der Kugelerstellung
-    public float timeBetweenShots;          // REF Feuerrate
-    private float shotCounter;              // Countdown bis zur nächsten Kugel
     public SpriteRenderer bodySR;           // REF Body Sprite
 
     // Variablen Dash-Logik
-    [Header("Dash")]
-    private float activeMoveSpeed;          // derzeitige Beweguntsgeschwindigkeit
+    [Header("Dashing")]
     public float dashSpeed = 8f;            // REF Geschwindigkeit Dash
     public float dashLength = 0.5f;         // REF Dash-Distanz
     public float dashCoolDown = 1f;         // REF Dauer Dash Cooldown
@@ -65,7 +58,6 @@ public class PlayerController : MonoBehaviour
         {
             MovePlayer();
             PlayerAim();
-            PlayerShoot();
             PlayerDash();
             AnimatePlayer();
         }
@@ -126,27 +118,6 @@ public class PlayerController : MonoBehaviour
         Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
         float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
         gunArm.rotation = Quaternion.Euler(0, 0, angle);
-    }
-
-
-
-    // Methode Spieler schiessen
-    private void PlayerShoot()
-    {
-        // Kugel einzeln per Mausdruck oder dauernd per gehaltenem Mausdruck feuern
-        if (shotCounter > 0)
-        {
-            shotCounter -= Time.deltaTime;
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
-            {
-                Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-                shotCounter = timeBetweenShots;
-                AudioManager.instance.PlaySFX(12);
-            }
-        }
     }
 
 
