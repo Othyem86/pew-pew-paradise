@@ -32,6 +32,8 @@ public class UIController : MonoBehaviour
     [Header("Screens")]
     public GameObject pauseMenu;        // REF Pause Screen Objekt
     public GameObject mapDisplay;       // REF Minimap Objekt
+    public GameObject bigMapText;       // REF Text Karte Objekt
+    public GameObject miniMapText;      // REF Text Minimap Objekt
 
 
     // Wie Start(), nur davor

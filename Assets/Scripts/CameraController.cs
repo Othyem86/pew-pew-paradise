@@ -39,14 +39,7 @@ public class CameraController : MonoBehaviour
     {
         MoveCameraToTarget();
         ToggleBigMap();
-
-
-        // Minimap per Tastendruck aktivieren
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            miniMapActive = !miniMapActive;
-            UIController.instance.mapDisplay.SetActive(miniMapActive);
-        }
+        ToggleMiniMap();
     }
 
 
@@ -100,7 +93,7 @@ public class CameraController : MonoBehaviour
     // Methode Minimap per Tastendruck schalten
     private void ToggleMiniMap()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && !bigMapActive)
         {
             miniMapActive = !miniMapActive;
             UIController.instance.mapDisplay.SetActive(miniMapActive);
@@ -125,6 +118,11 @@ public class CameraController : MonoBehaviour
 
             // Minimap immer deaktivieren
             UIController.instance.mapDisplay.SetActive(false);
+
+            // Kartentexte schalten
+            UIController.instance.miniMapText.SetActive(false);
+            UIController.instance.bigMapText.SetActive(true);
+
         }
     }
 
@@ -149,6 +147,10 @@ public class CameraController : MonoBehaviour
             {
                 UIController.instance.mapDisplay.SetActive(true);
             }
+
+            // Kartentexte schalten
+            UIController.instance.bigMapText.SetActive(false);
+            UIController.instance.miniMapText.SetActive(true);
         }
     }
 }
