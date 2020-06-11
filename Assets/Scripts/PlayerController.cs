@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour
 
         // Standardgeschwindigkeit setzen
         activeMoveSpeed = moveSpeed;
+
+        // Waffeninformation in UI setzen
+        UpdateGunUI();
     }
 
 
@@ -143,7 +146,6 @@ public class PlayerController : MonoBehaviour
             AudioManager.instance.PlaySFX(8);
         }
 
-
         // Counter bis zum Dash-Ende
         if (dashCounter > 0)
         {
@@ -154,7 +156,6 @@ public class PlayerController : MonoBehaviour
                 dashCoolDownCounter = dashCoolDown;
             }
         }
-
 
         // Counter bis Dash wieder verfügbar ist
         if (dashCoolDownCounter > 0)
@@ -201,6 +202,17 @@ public class PlayerController : MonoBehaviour
 
             // Waffe aktivieren
             availableGuns[currentGun].gameObject.SetActive(true);
+
+            UpdateGunUI();
         }
+    }
+
+
+
+    // Methode Waffe in UI aktualisieren
+    private void UpdateGunUI()
+    {
+        UIController.instance.currentGun.sprite = availableGuns[currentGun].gunUI;
+        UIController.instance.currentGunText.text = availableGuns[currentGun].weaponName;
     }
 }

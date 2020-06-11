@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474633705656753656}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.1717916, y: -0.32449532, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -100,6 +100,8 @@ MonoBehaviour:
     type: 3}
   firePoint: {fileID: 7403889150667649628}
   timeBetweenShots: 1
+  weaponName: Revolver
+  gunUI: {fileID: -3940896912681915257, guid: f72804754a2106a4884d758772ef2a02, type: 3}
 --- !u!1 &8546206218880273187
 GameObject:
   m_ObjectHideFlags: 0

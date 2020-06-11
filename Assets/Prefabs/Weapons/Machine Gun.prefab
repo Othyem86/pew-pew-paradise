@@ -55,7 +55,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8767544224991165923}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.4215121, y: -0.38344005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -130,3 +130,5 @@ MonoBehaviour:
     type: 3}
   firePoint: {fileID: 2380822369030689351}
   timeBetweenShots: 0.2
+  weaponName: Maschienengewehr
+  gunUI: {fileID: -2172343002418747524, guid: f72804754a2106a4884d758772ef2a02, type: 3}

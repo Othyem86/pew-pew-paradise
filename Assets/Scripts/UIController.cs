@@ -10,10 +10,12 @@ public class UIController : MonoBehaviour
     public static UIController instance;
 
     // Variabeln UI
-    [Header("UI Variables")]
+    [Header("HUD Parameters")]
     public Slider healthSlider;         // REF HP-Slider
     public Text healthText;             // REF Text des HP-Sliders
     public Text coinText;               // REF Text des Geldzählers
+    public Image currentGun;            // REF Sprite aktuelle Waffe für UI
+    public Text currentGunText;         // REF Text aktuelle Waffe für UI
 
     // Variabeln Szenenübergang
     [Header("Scene Transition")]

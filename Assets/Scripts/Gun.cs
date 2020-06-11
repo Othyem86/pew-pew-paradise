@@ -11,6 +11,11 @@ public class Gun : MonoBehaviour
     public float timeBetweenShots;          // REF Feuerrate
     private float shotCounter;              // Countdown bis zur nächsten Kugel
 
+    // Variabeln Waffentyp
+    [Header("Weapon Type")]
+    public string weaponName;               // REF Name der Waffe
+    public Sprite gunUI;                    // REF Bild der Waffe für UI
+
 
     // Start is called before the first frame update
     void Start()
