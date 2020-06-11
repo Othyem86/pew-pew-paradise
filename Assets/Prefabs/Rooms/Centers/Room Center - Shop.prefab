@@ -1984,7 +1984,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'HP Heilen
 
-    - 5 Gold -'
+    - 5 Bits -'
 --- !u!1 &7247982362343542073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,7 +2370,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'HP erweitern
 
-    - 15 Gold -'
+    - 15 Bits -'
 --- !u!1 &7247982363275611308
 GameObject:
   m_ObjectHideFlags: 0

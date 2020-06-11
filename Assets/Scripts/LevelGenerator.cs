@@ -7,10 +7,13 @@ public class LevelGenerator : MonoBehaviour
 {
     // Variabeln Levelparameter
     [Header("Level Parameters")]
+    public int distanceToEnd;                                               // REF Anzahl der Räume bis Ausgangraum
+    public bool includeGunRoom;                                             // REF Ob es einen Waffenraum haben soll
+    public int minDistanceToGunRoom;                                        // REF Mindestanzahl Räume bis Waffenraum
+    public int maxDistanceToGunRoom;                                        // REF Mindestanzahl Räume bis Waffenraum
     public bool includeShop;                                                // REF Ob es einen Shop haben soll
     public int minDistanceToShop;                                           // REF Mindestanzahl Räume bis Shopraum
     public int maxDistanceToShop;                                           // REF Mindestanzahl Räume bis Shopraum
-    public int distanceToEnd;                                               // REF Anzahl der Räume bis Ausgangraum
 
     // Variabeln Raumgenerierung
     [Header("Room Generation")]
@@ -27,8 +30,10 @@ public class LevelGenerator : MonoBehaviour
     public Color startColor;                                                // REF Startraumfarbe
     public Color endColor;                                                  // REF Endraumfarbe
     public Color shopColor;                                                 // REF Shopfarbe
+    public Color gunRoomColor;                                              // REF Waffenraumfarbe
     private GameObject endRoom;                                             // REF Raumobjekt Levelende
     private GameObject shopRoom;                                            // REF Raumobjekt Shop
+    private GameObject gunRoom;                                             // REF Raumobjekt Waffenraum
     private List<GameObject> layoutRoomObjects = new List<GameObject>();    // REF Liste aller generierten Raum-mockups
     private List<GameObject> generatedOutlines = new List<GameObject>();    // REF Liste aller generierten Raumkontouren
     public RoomPrefabs rooms;                                               // REF alle Raumkonturtypen
@@ -36,6 +41,7 @@ public class LevelGenerator : MonoBehaviour
     // Variabeln Raummitten
     [Header("Room Centers")]
     public RoomCenter centerStart;                                          // REF Raummitte Start
+    public RoomCenter centerGunRoom;                                        // REF Raummitte Waffenraum
     public RoomCenter centerShop;                                           // REF Raummitte Shop
     public RoomCenter centerEnd;                                            // REF Raummitte Ende
     public RoomCenter[] potentialCenters;                                   // REF Liste potentieller Raummitten
@@ -54,6 +60,7 @@ public class LevelGenerator : MonoBehaviour
         MoveGenerationPoint();
 
 
+
         // Layout - Gewünschte Anzahl der Räume generieren
         for (int i = 0; i < distanceToEnd; i++)
         {
@@ -70,9 +77,11 @@ public class LevelGenerator : MonoBehaviour
                 endRoom = newRoom;
             }
 
+
             // beliebige Richtung auswählen, dorthin gehen, Raum generieren
             selectedDirection = (Direction)Random.Range(0, 4);
             MoveGenerationPoint();
+
 
             // Falls es an der Position einen Raum gibt, in ausgewählte Richtung weitergehen
             while (Physics2D.OverlapCircle(generatorPoint.position, 0.2f, whatIsRoom))
@@ -80,6 +89,8 @@ public class LevelGenerator : MonoBehaviour
                 MoveGenerationPoint();
             }
         }
+
+
 
         // Shoplayout generieren
         if (includeShop)
@@ -89,11 +100,22 @@ public class LevelGenerator : MonoBehaviour
             layoutRoomObjects.RemoveAt(shopSelector);
             shopRoom.GetComponent<SpriteRenderer>().color = shopColor;
         }
+        
+        
+        
+        // Shoplayout generieren
+        if (includeGunRoom)
+        {
+            int gunRoomSelector = Random.Range(minDistanceToGunRoom, maxDistanceToGunRoom + 1);
+            gunRoom = layoutRoomObjects[gunRoomSelector];
+            layoutRoomObjects.RemoveAt(gunRoomSelector);
+            gunRoom.GetComponent<SpriteRenderer>().color = gunRoomColor;
+        }
+
 
 
         // Generiere Startraumkontour
         CreateRoomOutline(Vector3.zero);
-
 
         // Generiere Zwischenraumkontouren
         foreach (GameObject room in layoutRoomObjects)
@@ -101,16 +123,21 @@ public class LevelGenerator : MonoBehaviour
             CreateRoomOutline(room.transform.position);
         }
 
-
         // Generiere Endraumkonturen
         CreateRoomOutline(endRoom.transform.position);
-
 
         // Generiere Shopraumkontour
         if (includeShop)
         {
             CreateRoomOutline(shopRoom.transform.position);
         }
+
+        // Generiere Shopraumkontour
+        if (includeGunRoom)
+        {
+            CreateRoomOutline(gunRoom.transform.position);
+        }
+
 
 
         // Raumkontourliste durchgehen und Raummitten erzeugen
@@ -133,7 +160,7 @@ public class LevelGenerator : MonoBehaviour
 
 
     //
-    //  FUNKTIONEN
+    //  METHODEN
     //
 
     // Switchfunktion Verschiebung des Generationspunkts
@@ -233,6 +260,11 @@ public class LevelGenerator : MonoBehaviour
             {
                 // Falls es die Endraumkoordinaten sind, Shopraum erzeugen
                 Instantiate(centerShop, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
+            }
+            else if (outline.transform.position == gunRoom.transform.position)
+            {
+                // Falls es die Endraumkoordinaten sind, Shopraum erzeugen
+                Instantiate(centerGunRoom, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
             }
             else
             {

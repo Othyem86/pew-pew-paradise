@@ -14,9 +14,9 @@ public class GunChest : MonoBehaviour
     [Header("Drops")]
     public Transform spawnPoint;                    // REF Erstellpunkt des Drops
     public GunPickup[] potentialGunDrops;           // REF Liste aller möglichen Drops
-    public float scaleSpeed = 3f;                  // REF Geschwindigkeit Animation
+    public float scaleSpeed = 3f;                   // REF Geschwindigkeit Animation
     private bool canOpen;                           // Ob Spieler die Truhe öffnen kann
-    private bool isOpen;                    // Ob Spieler die Truhe geöffnet hat
+    private bool isOpen;                            // Ob Spieler die Truhe geöffnet hat
 
 
     // Update is called once per frame

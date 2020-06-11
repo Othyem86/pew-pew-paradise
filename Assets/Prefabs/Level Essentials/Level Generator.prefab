@@ -74,10 +74,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e758364de85364248ac64aa30ec5079d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToEnd: 11
+  includeGunRoom: 1
+  minDistanceToGunRoom: 7
+  maxDistanceToGunRoom: 9
   includeShop: 1
   minDistanceToShop: 3
-  maxDistanceToShop: 7
-  distanceToEnd: 10
+  maxDistanceToShop: 6
   layoutRoom: {fileID: 1919034691639133825, guid: b8ad3d1627c58bc43aca1cb9a16e70f1,
     type: 3}
   generatorPoint: {fileID: 2835945768316007112}
@@ -90,6 +93,7 @@ MonoBehaviour:
   startColor: {r: 0, g: 0.9379053, b: 1, a: 1}
   endColor: {r: 0.8962264, g: 0, b: 0, a: 1}
   shopColor: {r: 1, g: 0.9271912, b: 0, a: 1}
+  gunRoomColor: {r: 0, g: 1, b: 0.63982916, a: 1}
   rooms:
     singleRight: {fileID: 7205630617135553045, guid: 23c2e9b2084735543a9df67b501ca8cc,
       type: 3}
@@ -122,6 +126,8 @@ MonoBehaviour:
     fourWay: {fileID: 6605679426355001300, guid: eee5afc95bbd08940bfca620f7696214,
       type: 3}
   centerStart: {fileID: 1727840252393576077, guid: e5234405083106949ab04a9e7df36ccd,
+    type: 3}
+  centerGunRoom: {fileID: 1451829637251075784, guid: 5ce7bfc059f9e864f9acd295ca63ff8c,
     type: 3}
   centerShop: {fileID: 3809552146253022354, guid: f370087b7c0335246b4f4fbc1219c147,
     type: 3}
