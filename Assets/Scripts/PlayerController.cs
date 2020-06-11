@@ -10,26 +10,31 @@ public class PlayerController : MonoBehaviour
 
     // Variabeln Bewegungslogik
     [Header("Movement")]
-    public bool canMove = true;             // REF ob sich Spieler bewegen darf
-    public float moveSpeed;                 // REF Beweguntsgeschwindigkeit
-    private float activeMoveSpeed;          // derzeitige Beweguntsgeschwindigkeit
-    private Vector2 moveInput;              // Bewegungseingabe als Vektor
-    public Rigidbody2D theRB;               // REF Kollisionskörper Spieler
-    public Transform gunArm;                // REF Koordinaten Waffe
-    private Camera theCam;                  // Var der Kamera
-    public Animator anim;                   // REF Animation
+    public bool canMove = true;                         // REF ob sich Spieler bewegen darf
+    public float moveSpeed;                             // REF Beweguntsgeschwindigkeit
+    private float activeMoveSpeed;                      // derzeitige Beweguntsgeschwindigkeit
+    private Vector2 moveInput;                          // Bewegungseingabe als Vektor
+    public Rigidbody2D theRB;                           // REF Kollisionskörper Spieler
+    public Transform gunArm;                            // REF Koordinaten Waffe
+    private Camera theCam;                              // Var der Kamera
+    public Animator anim;                               // REF Animation
     [HideInInspector] 
-    public SpriteRenderer bodySR;           // REF Body Sprite
+    public SpriteRenderer bodySR;                       // REF Body Sprite
 
     // Variablen Dash-Logik
     [Header("Dashing")]
-    public float dashSpeed = 8f;            // REF Geschwindigkeit Dash
-    public float dashLength = 0.5f;         // REF Dash-Distanz
-    public float dashCoolDown = 1f;         // REF Dauer Dash Cooldown
-    public float dashInvincibility = 0.5f;  // REF Dauer Dash Unverletzbarkeit
-    private float dashCoolDownCounter;      // Counter Dash Cooldown
+    public float dashSpeed = 8f;                        // REF Geschwindigkeit Dash
+    public float dashLength = 0.5f;                     // REF Dash-Distanz
+    public float dashCoolDown = 1f;                     // REF Dauer Dash Cooldown
+    public float dashInvincibility = 0.5f;              // REF Dauer Dash Unverletzbarkeit
+    private float dashCoolDownCounter;                  // Counter Dash Cooldown
     [HideInInspector]
-    public float dashCounter;               // Counter Dash Unverletzbarkeit
+    public float dashCounter;                           // Counter Dash Unverletzbarkeit
+
+    // Variablen Waffen
+    [Header("Weapons")]
+    public List<Gun> availableGuns = new List<Gun>();   // REF Liste aller verfügbaren Waffen
+    private int currentGun;                             // Listenindex der aktuellen Waffe
 
 
     // Wie Start(), nur davor
@@ -60,6 +65,7 @@ public class PlayerController : MonoBehaviour
             PlayerAim();
             PlayerDash();
             AnimatePlayer();
+            SwitchWeapon();
         }
         else
         {
@@ -170,6 +176,31 @@ public class PlayerController : MonoBehaviour
         else
         {
             anim.SetBool("isMoving", false);
+        }
+    }
+
+
+
+    // Methode Waffen austauschen
+    public void SwitchWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && availableGuns.Count > 0)
+        {
+            currentGun++;
+
+            if (currentGun >= availableGuns.Count)
+            {
+                currentGun = 0;
+            }
+
+            // Alle Waffen in der Liste deaktivieren
+            foreach (Gun theGun in availableGuns)
+            {
+                theGun.gameObject.SetActive(false);
+            }
+
+            // Waffe aktivieren
+            availableGuns[currentGun].gameObject.SetActive(true);
         }
     }
 }
