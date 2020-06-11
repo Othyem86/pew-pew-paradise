@@ -15,6 +15,8 @@ public class Gun : MonoBehaviour
     [Header("Weapon Type")]
     public string weaponName;               // REF Name der Waffe
     public Sprite gunUI;                    // REF Bild der Waffe für UI
+    public int itemCost;                    // REF Preis der Waffe im Shop
+    public Sprite gunShopSprite;            //
 
 
     // Start is called before the first frame update
