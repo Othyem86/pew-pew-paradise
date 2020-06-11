@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private float activeMoveSpeed;                      // derzeitige Beweguntsgeschwindigkeit
     private Vector2 moveInput;                          // Bewegungseingabe als Vektor
     public Rigidbody2D theRB;                           // REF Kollisionskörper Spieler
-    public Transform gunArm;                            // REF Koordinaten Waffe
+    public Transform gunArm;                            // REF Koordinaten Waffenarm
     private Camera theCam;                              // Var der Kamera
     public Animator anim;                               // REF Animation
     [HideInInspector] 
@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
     // Variablen Waffen
     [Header("Weapons")]
     public List<Gun> availableGuns = new List<Gun>();   // REF Liste aller verfügbaren Waffen
-    private int currentGun;                             // Listenindex der aktuellen Waffe
+    [HideInInspector]
+    public int currentGun;                             // Listenindex der aktuellen Waffe
 
 
     // Wie Start(), nur davor
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
             PlayerAim();
             PlayerDash();
             AnimatePlayer();
-            SwitchWeapon();
+            SelectNextWeapon();
         }
         else
         {
@@ -183,7 +184,7 @@ public class PlayerController : MonoBehaviour
 
 
     // Methode Waffen austauschen
-    public void SwitchWeapon()
+    public void SelectNextWeapon()
     {
         if (Input.GetKeyDown(KeyCode.F) && availableGuns.Count > 0)
         {
@@ -194,17 +195,24 @@ public class PlayerController : MonoBehaviour
                 currentGun = 0;
             }
 
-            // Alle Waffen in der Liste deaktivieren
-            foreach (Gun theGun in availableGuns)
-            {
-                theGun.gameObject.SetActive(false);
-            }
-
-            // Waffe aktivieren
-            availableGuns[currentGun].gameObject.SetActive(true);
-
+            ActivateGun();
             UpdateGunUI();
         }
+    }
+
+
+
+    // Methode nächste Waffe auswählen
+    public void ActivateGun()
+    {
+        // Alle Waffen in der Liste deaktivieren
+        foreach (Gun theGun in availableGuns)
+        {
+            theGun.gameObject.SetActive(false);
+        }
+
+        // Waffe aktivieren
+        availableGuns[currentGun].gameObject.SetActive(true);
     }
 
 
