@@ -32,6 +32,9 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Geldfonds beim Start lt. CharacterTracker setzen
+        currentCoins = CharacterTracker.instance.currentCoins;
+
         // Beim start des Levels, Zeitverlauf auf 100% setzen
         Time.timeScale = 1;
 
@@ -63,6 +66,13 @@ public class LevelManager : MonoBehaviour
         PlayerController.instance.canMove = false;
         UIController.instance.StartFadeToBlack();
         yield return new WaitForSeconds(waitToLoad);
+
+        // Aktuelle Hitpoins, maximale Hitpoints und Geldfonds speichern
+        CharacterTracker.instance.currentCoins = currentCoins;
+        CharacterTracker.instance.currentHealth = PlayerHealthController.instance.currentHealth;
+        CharacterTracker.instance.maxHealth = PlayerHealthController.instance.maxHealth;
+
+        // Szene wechesln
         SceneManager.LoadScene(nextLevel);
     }
 

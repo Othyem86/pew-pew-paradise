@@ -95,7 +95,7 @@ public class LevelGenerator : MonoBehaviour
         // Shoplayout generieren
         if (includeShop)
         {
-            int shopSelector = Random.Range(minDistanceToShop, maxDistanceToShop + 1);
+            int shopSelector = Random.Range(minDistanceToShop, maxDistanceToShop);
             shopRoom = layoutRoomObjects[shopSelector];
             layoutRoomObjects.RemoveAt(shopSelector);
             shopRoom.GetComponent<SpriteRenderer>().color = shopColor;
@@ -106,7 +106,7 @@ public class LevelGenerator : MonoBehaviour
         // Shoplayout generieren
         if (includeGunRoom)
         {
-            int gunRoomSelector = Random.Range(minDistanceToGunRoom, maxDistanceToGunRoom + 1);
+            int gunRoomSelector = Random.Range(minDistanceToGunRoom, maxDistanceToGunRoom);
             gunRoom = layoutRoomObjects[gunRoomSelector];
             layoutRoomObjects.RemoveAt(gunRoomSelector);
             gunRoom.GetComponent<SpriteRenderer>().color = gunRoomColor;
