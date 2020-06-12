@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;                          // Bewegungseingabe als Vektor
     public Rigidbody2D theRB;                           // REF Kollisionskörper Spieler
     public Transform gunArm;                            // REF Koordinaten Waffenarm
-    private Camera theCam;                              // Var der Kamera
     public Animator anim;                               // REF Animation
     [HideInInspector] 
     public SpriteRenderer bodySR;                       // REF Body Sprite
@@ -42,15 +41,15 @@ public class PlayerController : MonoBehaviour
     public void Awake()
     {
         instance = this;
+
+        // Spielerobjekt beim Laden eienr neuen Szene nicht zerstören
+        DontDestroyOnLoad(gameObject);
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        // Kameraobjekt abspeichern, damit dies nicht jedes Frame im Gesampten Projekt gesucht wird
-        theCam = Camera.main;
-
         // Standardgeschwindigkeit setzen
         activeMoveSpeed = moveSpeed;
 
@@ -110,7 +109,7 @@ public class PlayerController : MonoBehaviour
     {
         // Mausposition als Bildschirmkoordinate speichern; Globale Spielerposition in Bildschirmkoordinaten umwandeln
         Vector3 mousePos = Input.mousePosition;
-        Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
+        Vector3 screenPoint = CameraController.instance.mainCamera.WorldToScreenPoint(transform.localPosition);
 
         // Spieler und Waffe link/rechts zur Mausposition spiegeln, mithilfe negativer Spiegelung des Sprites
         if (mousePos.x < screenPoint.x)
@@ -196,7 +195,6 @@ public class PlayerController : MonoBehaviour
             }
 
             ActivateGun();
-            UpdateGunUI();
         }
     }
 
@@ -213,12 +211,14 @@ public class PlayerController : MonoBehaviour
 
         // Waffe aktivieren
         availableGuns[currentGun].gameObject.SetActive(true);
+
+        UpdateGunUI();
     }
 
 
 
     // Methode Waffe in UI aktualisieren
-    private void UpdateGunUI()
+    public void UpdateGunUI()
     {
         UIController.instance.currentGun.sprite = availableGuns[currentGun].gunUI;
         UIController.instance.currentGunText.text = availableGuns[currentGun].weaponName;

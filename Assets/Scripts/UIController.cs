@@ -48,8 +48,9 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Am anfang Übergang von Schwarz
+        PlayerController.instance.UpdateGunUI();
 
+        // Am anfang Übergang von Schwarz
         fadeOutBlack = true;
         fadeToBlack = false;
     }

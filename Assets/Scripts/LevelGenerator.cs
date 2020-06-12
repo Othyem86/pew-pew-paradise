@@ -103,7 +103,7 @@ public class LevelGenerator : MonoBehaviour
         
         
         
-        // Shoplayout generieren
+        // Waffenraumlayout generieren
         if (includeGunRoom)
         {
             int gunRoomSelector = Random.Range(minDistanceToGunRoom, maxDistanceToGunRoom);

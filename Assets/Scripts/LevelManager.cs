@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     [Header("Scene Transition")]
     public float waitToLoad = 4f;       // REF Dauer bis nächste Szene
     public string nextLevel;            // REF nächste Szene
+    public Transform startPoint;        // REF Startpunkt des Spielers
 
     // Variabeln Spielpause
     [Header("Pause / Unpause")]
@@ -32,6 +33,10 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Spieler zur Startposition verlegen
+        PlayerController.instance.transform.position = startPoint.position;
+        PlayerController.instance.canMove = true;
+
         // Geldfonds beim Start lt. CharacterTracker setzen
         currentCoins = CharacterTracker.instance.currentCoins;
 
