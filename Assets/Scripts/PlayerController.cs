@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         instance = this;
 
-        // Spielerobjekt beim Laden eienr neuen Szene nicht zerstören
+        // Spielerobjekt beim Laden einer neuen Szene nicht zerstören
         DontDestroyOnLoad(gameObject);
     }
 
