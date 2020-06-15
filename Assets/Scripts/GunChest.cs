@@ -58,7 +58,7 @@ public class GunChest : MonoBehaviour
 
 
 
-    // Method Spieler neben Waffentruhe
+    // Methode Spieler neben Waffentruhe
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player" && !isOpen)

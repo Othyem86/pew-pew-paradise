@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CharacterSelector : MonoBehaviour
 {
-    private bool canSelect;
-    public GameObject message;
-    public PlayerController playerToSpawn;
+    // Variaben Charakterwahl
+    private bool canSelect;                             // Ob man es auswählen kann
+    public GameObject message;                          // REF Auswahlnachricht
+    public PlayerController playerToSpawn;              // REF Charakter der geladen werden soll
 
     // Start is called before the first frame update
     void Start()
@@ -17,19 +18,42 @@ public class CharacterSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SwitchCharacter();
+    }
+
+
+
+    //
+    // METHODEN
+    //
+
+    // Methode Charakter wechseln
+    private void SwitchCharacter()
+    {
         if (canSelect && Input.GetKeyDown(KeyCode.E))
         {
+            // Spielerposition speichern und Spielerobjekt zerstören
             Vector3 playerPositon = PlayerController.instance.transform.position;
             Destroy(PlayerController.instance.gameObject);
 
+            // Neuer Spieler instantieren und der Controlelrinstanz gleichsetzen
             PlayerController newPlayer = Instantiate(playerToSpawn, playerPositon, playerToSpawn.transform.rotation);
             PlayerController.instance = newPlayer;
 
+            // Kamera auf neuen Spieler fixieren, Charakterselector deaktivieren
             gameObject.SetActive(false);
             CameraController.instance.target = newPlayer.transform;
+
+            // Neuer Charakterselector als aktiv bezeichnen, alter Charakterselektor wieder aktivieren
+            CharSelectManager.instance.activePlayer = newPlayer;
+            CharSelectManager.instance.activeCharSelect.gameObject.SetActive(true);
+            CharSelectManager.instance.activeCharSelect = this;
         }
     }
 
+
+
+    // Methode Spieler neben gewünschten Charakter
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -39,6 +63,9 @@ public class CharacterSelector : MonoBehaviour
         }
     }
 
+
+
+    // Methode Spieler nicht neben gewünschten Charakter
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
