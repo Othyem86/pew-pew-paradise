@@ -8,11 +8,29 @@ public class CharacterSelector : MonoBehaviour
     private bool canSelect;                             // Ob man es auswählen kann
     public GameObject message;                          // REF Auswahlnachricht
     public PlayerController playerToSpawn;              // REF Charakter der geladen werden soll
+    public bool shouldUnlock;                           // REF Ob Charakter befreibar ist
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (shouldUnlock)
+        {
+            if (PlayerPrefs.HasKey(playerToSpawn.name))
+            {
+                if (PlayerPrefs.GetInt(playerToSpawn.name) == 1)
+                {
+                    gameObject.SetActive(true);
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
 
     // Update is called once per frame

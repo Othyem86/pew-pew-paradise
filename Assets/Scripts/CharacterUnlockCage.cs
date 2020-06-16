@@ -29,6 +29,8 @@ public class CharacterUnlockCage : MonoBehaviour
     {
         if (canUnlock && Input.GetKeyDown(KeyCode.E))
         {
+            PlayerPrefs.SetInt(playerToUnlock.playerToSpawn.name, 1);
+
             Instantiate(playerToUnlock, transform.position, transform.rotation);
 
             gameObject.SetActive(false);
@@ -37,6 +39,7 @@ public class CharacterUnlockCage : MonoBehaviour
 
 
 
+    // Methode Spieler neben Käfig
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -47,6 +50,8 @@ public class CharacterUnlockCage : MonoBehaviour
     }
 
 
+
+    // Methode Spieler nicht neben Käfig
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")

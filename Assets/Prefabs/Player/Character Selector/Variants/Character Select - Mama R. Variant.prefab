@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1204048282711061303, guid: fccfbd10dcefe0e47832c9abe609d7f2,
         type: 3}
       propertyPath: m_Text
-      value: '''Bernie'''
+      value: '''Mama R.'''
       objectReference: {fileID: 0}
     - target: {fileID: 1204048283064735242, guid: fccfbd10dcefe0e47832c9abe609d7f2,
         type: 3}
@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 1204048283064735243, guid: fccfbd10dcefe0e47832c9abe609d7f2,
         type: 3}
       propertyPath: m_Name
-      value: Character Select - Mama R. Variant
+      value: Character Select - Mama R.
       objectReference: {fileID: 0}
     - target: {fileID: 1204048283064735243, guid: fccfbd10dcefe0e47832c9abe609d7f2,
         type: 3}
@@ -99,5 +99,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5606420527177554766, guid: 869d2a6c19620004d9940ede1288cc1c,
         type: 3}
+    - target: {fileID: 8872639683216502012, guid: fccfbd10dcefe0e47832c9abe609d7f2,
+        type: 3}
+      propertyPath: shouldUnlock
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fccfbd10dcefe0e47832c9abe609d7f2, type: 3}
