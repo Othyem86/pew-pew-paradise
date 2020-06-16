@@ -292,6 +292,12 @@ PrefabInstance:
       propertyPath: distanceToEnd
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: centerEnd
+      value: 
+      objectReference: {fileID: 6464066783928739858, guid: d4175056f8b17684388b93dbf511f344,
+        type: 3}
     - target: {fileID: 2835945769013121184, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
         type: 3}
       propertyPath: m_Name
