@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2086414459
   m_SortingLayer: 6
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -1620803097451951628, guid: f9fa167fb3d117b4ca8e67a307b6742d,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5723970626199589031}
   - component: {fileID: 5723970626199589033}
   m_Layer: 8
-  m_Name: Player
+  m_Name: Player - Emilinator
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   dashCounter: 0
   availableGuns:
   - {fileID: 6945951432355226886}
+  currentGun: 0
 --- !u!58 &5723970626199589030
 CircleCollider2D:
   m_ObjectHideFlags: 0
