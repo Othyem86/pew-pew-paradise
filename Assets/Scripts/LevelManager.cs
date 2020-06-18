@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
 
     // Variabeln Szenenübergang
     [Header("Scene Transition")]
-    public float waitToLoad = 4f;       // REF Dauer bis nächste Szene
+    public float waitToLoad = 3f;       // REF Dauer bis nächste Szene
     public string nextLevel;            // REF nächste Szene
     public Transform startPoint;        // REF Startpunkt des Spielers
 
