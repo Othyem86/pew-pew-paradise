@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
 {
-    // Instanzierung der Klasse
+    // Instancing the class
     public static PlayerHealthController instance;
 
-    // Variabeln Hitpoints
-    public int currentHealth;               // REF aktuelle Hitpoints
-    public int maxHealth;                   // REF maximale Hitpoints
+    // Variables Hitpoints
+    public int currentHealth;                   // REF current hitpoints
+    public int maxHealth;                       // REF maximum hitpoints
 
     // Variabeln Unverletzbarkeit
-    public float damageInvinceLength = 1f;  // REF Zeit unverletzbar
-    private float invinceCount;             // Countdown
+    public float damageInvinceDuration = 1f;    // REF duration of invincibility
+    private float invinceCount;                 // counter until invincibility's end
 
 
-    // Wie Start(), nur davor
+    // Before Start()
     private void Awake()
     {
         instance = this;
@@ -26,8 +26,8 @@ public class PlayerHealthController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
-        // Aktuelle und maximale Hitpoints beim Start lt. CharacterTracker setzen
+    {
+        // Set player hitpoints according to CharacterTracker's values
         maxHealth = CharacterTracker.instance.maxHealth;
         currentHealth = CharacterTracker.instance.currentHealth;
 
@@ -45,10 +45,10 @@ public class PlayerHealthController : MonoBehaviour
 
 
     //
-    //  METHODEN
+    //  METHODS
     //
 
-    // Methode Spieler unverletzbar und transparent machen
+    // Method make player invincible and transparent
     private void MakePlayerInvincible()
     {
         if (invinceCount > 0)
@@ -64,21 +64,21 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Methode Spieler schaden/töten
+    // Method damage and kill player
     public void DamagePlayer()
     {
-        // Schadenanrichtung wenn NICHT Unverletzbar
+        // Inflict damage if not invincible
         if (invinceCount <= 0)
         {      
-            // Nach schaden, startet den Unverletzbar-Countdown
+            // After inflicted damage, start invincibility counter
             currentHealth--;
-            invinceCount = damageInvinceLength;
+            invinceCount = damageInvinceDuration;
             AudioManager.instance.PlaySFX(11);
 
-            // Schadeneffekt BodySprite - Transparenz einschalten
+            // Make player body sprite transparent
             SetBodyAlpha(0.5f);
 
-            // Check ob Spieler Tod ist
+            // Check if player should die
             if (currentHealth <= 0)
             {
                 PlayerController.instance.gameObject.SetActive(false);
@@ -93,7 +93,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Methode aktualisiere UI-Hitpoints
+    // Method update hitpoints in the UI
     private void updateHealthUI()
     {
         UIController.instance.healthSlider.value = currentHealth;
@@ -102,7 +102,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Funktion Schadeneffekt BodySprite: Transparenz ein-/ausschalten
+    // Method toggle player body sprite transparency
     private void SetBodyAlpha(float alphaValue)
     {
         PlayerController.instance.bodySR.color = new Color
@@ -116,7 +116,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Funktion unverletzbar zu werden
+    // Method make player invincible
     public void MakeInvincible(float length)
     {
         invinceCount = length;
@@ -125,7 +125,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Methode Spieler Heilen
+    // Method heal player
     public void HealPlayer(int healAmount)
     {
         currentHealth += healAmount;
@@ -140,7 +140,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Methode Hitpoints erweitern
+    // Method extend player maximum hitpoints
     public void IncreaseMaxHealth(int amount)
     {
         maxHealth += amount;

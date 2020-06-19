@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CharacterSelector : MonoBehaviour
 {
-    // Variaben Charakterwahl
-    private bool canSelect;                             // Ob man es auswählen kann
-    public GameObject message;                          // REF Auswahlnachricht
-    public PlayerController playerToSpawn;              // REF Charakter der geladen werden soll
-    public bool shouldUnlock;                           // REF Ob Charakter befreibar ist
+    // Variables choose characters
+    private bool canSelect;                             // if character is selectable
+    public GameObject message;                          // REF choose character message
+    public PlayerController playerToSpawn;              // REF character object that should pe spawned
+    public bool shouldUnlock;                           // REF if the character is unlockable
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,28 +43,28 @@ public class CharacterSelector : MonoBehaviour
 
 
     //
-    // METHODEN
+    // METHODS
     //
 
-    // Methode Charakter wechseln
+    // Method change character
     private void SwitchCharacter()
     {
         if (canSelect && Input.GetKeyDown(KeyCode.E))
         {
-            // Spielerposition speichern und Spielerobjekt zerstören
+            // Save player positon and destroy the active player object
             Vector3 playerPositon = PlayerController.instance.transform.position;
             Destroy(PlayerController.instance.gameObject);
 
-            // Neuer Spieler instantieren und der Controlelrinstanz gleichsetzen
+            // Instantiate new player and assign the PlayerController instance to it
             PlayerController newPlayer = Instantiate(playerToSpawn, playerPositon, playerToSpawn.transform.rotation);
             PlayerController.instance = newPlayer;
 
-            // Kamera auf neuen Spieler fixieren, Charakterselector deaktivieren
+            // Fix camera on the newly created player and deactivate selected selectable character
             gameObject.SetActive(false);
             CameraController.instance.target = newPlayer.transform;
 
-            // Neuer Charakterselector als aktiv bezeichnen, alter Charakterselektor wieder aktivieren
-            CharSelectManager.instance.activePlayer = newPlayer;
+            // set new character as active, reactivate previous selectable character
+            CharSelectManager.instance.activePlayer = newPlayer;                    // TO DO: scrap functionality
             CharSelectManager.instance.activeCharSelect.gameObject.SetActive(true);
             CharSelectManager.instance.activeCharSelect = this;
         }
@@ -71,7 +72,7 @@ public class CharacterSelector : MonoBehaviour
 
 
 
-    // Methode Spieler neben gewünschten Charakter
+    // Method if player near selectable character
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -83,7 +84,7 @@ public class CharacterSelector : MonoBehaviour
 
 
 
-    // Methode Spieler nicht neben gewünschten Charakter
+    // Method player not near selectable character
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")

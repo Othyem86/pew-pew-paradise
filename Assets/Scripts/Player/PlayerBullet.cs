@@ -4,29 +4,27 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    // Variabeln Spielerkugel
-    public float speed = 7.5f;          // REF Kugelgeschwindigkeit
-    public Rigidbody2D theRB;           // REF Kollisionskörper
-    public GameObject impactEffect;     // REF Partikelefekt bei Kollisionen
-    public int bulletDamage = 50;       // REF Schadenswert der Kugel
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    // Variables player bullet
+    public float speed = 7.5f;          // REF bullet speed
+    public Rigidbody2D theRB;           // REF bullet rigid body
+    public GameObject impactEffect;     // REF partikle effect for the bullet collision
+    public int bulletDamage = 50;       // REF damage amount of a bullet hit
 
 
     // Update is called once per frame
     void Update()
     {
-        // Nach rechts, relativ zur eigenen Orientierung bewegen
+        // move bullet to the right, relative to it's current orientation
         theRB.velocity = transform.right * speed;
     }
 
 
-    // Kugelobjekt zerstören wenn es kollidiert und Partikelsystem initialisieren
+
+    //
+    //  METHODS
+    //
+
+    // Destroy bullet on collision and generate particle effect
     private void OnTriggerEnter2D(Collider2D other)
     {
         Destroy(gameObject);
@@ -46,7 +44,8 @@ public class PlayerBullet : MonoBehaviour
     }
 
 
-    // Kugelobjekt zerstören wenn es nicht mehr Sichtbar ist
+
+    // Destroy the bulllet when it's no longer visible on the screen
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

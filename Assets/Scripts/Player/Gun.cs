@@ -4,26 +4,19 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    // Variabeln Schusslogik
+    // Variabels shooting
     [Header("Shooting")]
-    public GameObject bulletToFire;         // REF Kugelobjekt
-    public Transform firePoint;             // REF Ort der Kugelerstellung
-    public float timeBetweenShots;          // REF Feuerrate
-    private float shotCounter;              // Countdown bis zur nächsten Kugel
+    public GameObject bulletToFire;         // REF bullet game object
+    public Transform firePoint;             // REF origin point of the bullet
+    public float timeBetweenShots;          // REF rate of fire
+    private float shotCounter;              // Countdown until the next bullet
 
-    // Variabeln Waffentyp
+    // Variabels weapon type
     [Header("Weapon Type")]
-    public string weaponName;               // REF Name der Waffe
-    public Sprite gunUI;                    // REF Bild der Waffe für UI
-    public int itemCost;                    // REF Preis der Waffe im Shop
-    public Sprite gunShopSprite;            //
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string weaponName;               // REF weapon name
+    public Sprite gunUI;                    // REF gun sprite on the UI
+    public int itemCost;                    // REF cost of the item in the shop
+    public Sprite gunShopSprite;            // REF gun sprite on the shop floor
 
 
     // Update is called once per frame
@@ -38,13 +31,13 @@ public class Gun : MonoBehaviour
 
 
     //
-    // METHODEN
+    // METHODS
     //
 
     // Methode schiessen
     private void GunShoot()
     {
-        // Kugel einzeln per Mausdruck oder dauernd per gehaltenem Mausdruck feuern
+        // Shoot bullets each mouse click, or continue shooting them if mouse button is held down
         if (shotCounter > 0)
         {
             shotCounter -= Time.deltaTime;

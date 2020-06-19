@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed = 8f;                        // REF dash speed
     public float dashLength = 0.5f;                     // REF dash distance
     public float dashCoolDown = 1f;                     // REF dash cooldown
-    public float dashInvincibility = 0.5f;              // REF length dash invincibility
+    public float dashInvincDuration = 0.5f;             // REF duration dash invincibility
     private float dashCoolDownCounter;                  // counter until next dash is available
     [HideInInspector]
     public float dashCounter;                           // counter until dash invincibility ends
@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("dash");
 
             // Make invincible and play sound
-            PlayerHealthController.instance.MakeInvincible(dashInvincibility);
+            PlayerHealthController.instance.MakeInvincible(dashInvincDuration);
             AudioManager.instance.PlaySFX(8);
         }
 
