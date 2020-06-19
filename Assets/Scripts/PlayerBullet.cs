@@ -36,7 +36,13 @@ public class PlayerBullet : MonoBehaviour
         if(other.tag == "Enemy")
         {
             other.GetComponent<EnemyController>().DamageEnemy(bulletDamage);
-        }  
+        }
+
+        if (other.tag == "Boss")
+        {
+            BossController.instance.TakeDamage(bulletDamage);
+            Instantiate(BossController.instance.hitEffect, transform.position, transform.rotation);
+        }
     }
 
 

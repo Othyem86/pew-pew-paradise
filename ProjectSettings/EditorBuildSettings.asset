@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 2.unity
     guid: 3b18aa210c2b395418b6328695dc7004
   - enabled: 1
-    path: Assets/Scenes/Level 3.unity
-    guid: d1e7ca77b7508c6439fafbbd88c7e356
+    path: Assets/Scenes/Boss Battle.unity
+    guid: 5390c959af0045d469b12a17683baba0
   - enabled: 1
     path: Assets/Scenes/Victory.unity
     guid: 1183245fa66d5254a873a5ca0f70fbf2

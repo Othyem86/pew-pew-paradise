@@ -5,41 +5,35 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Variabeln Menu
+    // Variabels Menu
     public string levelToLoad;                          // REF Scene to load
 
-    public GameObject deletePanel;                      // REF Delete Saved Game Panel
+    public GameObject deletePanel;                      // REF 'Delete Saved Game'-Panel
     public CharacterSelector[] charactersToDelete;      // REF Array of all unlockable Characters
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    //
+    //  METHODS
+    //
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-    // Funktion Start Knopf
+    // Method start game
     public void StartGame()
     {
         SceneManager.LoadScene(levelToLoad);
     }
 
 
-    // Funktion Programm beenden
+
+    // Method end program
     public void ExitGame()
     {
         Application.Quit();
     }
 
 
+
+    // Method prompt player if he is sure
     public void DeleteSave()
     {
         deletePanel.SetActive(true);
@@ -47,6 +41,7 @@ public class MainMenu : MonoBehaviour
 
 
 
+    // Method cancel delete command
     public void CancelDelete()
     {
         deletePanel.SetActive(false);
@@ -54,6 +49,7 @@ public class MainMenu : MonoBehaviour
 
 
 
+    // Method delete character unlocks in PlayerPrefs
     public void ConfirmDelete()
     {
         foreach(CharacterSelector theCharacter in charactersToDelete)

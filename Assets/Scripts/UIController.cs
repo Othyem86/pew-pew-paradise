@@ -6,39 +6,43 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    // Instanzierung der Klasse
+    // Instancing the class
     public static UIController instance;
 
-    // Variabeln UI
+    // Variabels UI
     [Header("HUD Parameters")]
     public Slider healthSlider;         // REF HP-Slider
-    public Text healthText;             // REF Text des HP-Sliders
-    public Text coinText;               // REF Text des Geldzählers
-    public Image currentGun;            // REF Sprite aktuelle Waffe für UI
-    public Text currentGunText;         // REF Text aktuelle Waffe für UI
+    public Text healthText;             // REF Text HP-Sliders
+    public Text coinText;               // REF Text des currency counter
+    public Image currentGun;            // REF UI-sprite of active weapon
+    public Text currentGunText;         // REF UI-text of active weapon
 
-    // Variabeln Szenenübergang
+    // Variabels scene transition
     [Header("Scene Transition")]
     public Image fadeScreen;            // REF Übergangsbild
     public float fadeSpeed;             // REF Übergangsgeschwindigkeit
     private bool fadeToBlack;           // REF ob Übergang zu Schwarz
     private bool fadeOutBlack;          // REF ob Übergang aus Schwarz
 
-    // Variabeln death screen
+    // Variabels death screen
     [Header("Death Screen")]
     public GameObject deathScreen;      // REF Death Screen Objekt
     public string newGameScene;         // REF Szene Nees Spiel
     public string mainMenuScene;        // REF Szene Hauptmenü
 
-    // Variabeln Pause Screen und Minimap
+    // Variabels pause screen und minimap
     [Header("Screens")]
     public GameObject pauseMenu;        // REF Pause Screen Objekt
     public GameObject mapDisplay;       // REF Minimap Objekt
     public GameObject bigMapText;       // REF Text Karte Objekt
     public GameObject miniMapText;      // REF Text Minimap Objekt
 
+    // Variables boss
+    [Header("Boss UI")]
+    public Slider bossHealthBar;        // REF Boss Health Slider
 
-    // Wie Start(), nur davor
+
+    // Before Start()
     private void Awake()
     {
         instance = this;
