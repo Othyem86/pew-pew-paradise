@@ -5,44 +5,44 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Instanzierung der Klasse
+    // Instancing the class
     public static PlayerController instance;
 
-    // Variabeln Bewegungslogik
+    // Variabels movement
     [Header("Movement")]
-    public bool canMove = true;                         // REF ob sich Spieler bewegen darf
-    public float moveSpeed;                             // REF Beweguntsgeschwindigkeit
-    private float activeMoveSpeed;                      // derzeitige Beweguntsgeschwindigkeit
-    private Vector2 moveInput;                          // Bewegungseingabe als Vektor
-    public Rigidbody2D theRB;                           // REF Kollisionskörper Spieler
-    public Transform gunArm;                            // REF Koordinaten Waffenarm
-    public Animator anim;                               // REF Animation
+    public bool canMove = true;                         // REF if player can move
+    public float moveSpeed;                             // REF player move speed
+    private float activeMoveSpeed;                      // momentary player move speed
+    private Vector2 moveInput;                          // movement direction input
+    public Rigidbody2D theRB;                           // REF player rigid body
+    public Transform gunArm;                            // REF coordinates gun arm
+    public Animator anim;                               // REF animation
     [HideInInspector] 
     public SpriteRenderer bodySR;                       // REF Body Sprite
 
-    // Variablen Dash-Logik
+    // Variabels dashing
     [Header("Dashing")]
-    public float dashSpeed = 8f;                        // REF Geschwindigkeit Dash
-    public float dashLength = 0.5f;                     // REF Dash-Distanz
-    public float dashCoolDown = 1f;                     // REF Dauer Dash Cooldown
-    public float dashInvincibility = 0.5f;              // REF Dauer Dash Unverletzbarkeit
-    private float dashCoolDownCounter;                  // Counter Dash Cooldown
+    public float dashSpeed = 8f;                        // REF dash speed
+    public float dashLength = 0.5f;                     // REF dash distance
+    public float dashCoolDown = 1f;                     // REF dash cooldown
+    public float dashInvincibility = 0.5f;              // REF length dash invincibility
+    private float dashCoolDownCounter;                  // counter until next dash is available
     [HideInInspector]
-    public float dashCounter;                           // Counter Dash Unverletzbarkeit
+    public float dashCounter;                           // counter until dash invincibility ends
 
-    // Variablen Waffen
+    // Variabels weapons
     [Header("Weapons")]
-    public List<Gun> availableGuns = new List<Gun>();   // REF Liste aller verfügbaren Waffen
+    public List<Gun> availableGuns = new List<Gun>();   // REF list of all available weapons
     [HideInInspector]
-    public int currentGun;                             // Listenindex der aktuellen Waffe
+    public int currentGun;                              // index of the current active weapon
 
 
-    // Wie Start(), nur davor
+    // before Start()
     public void Awake()
     {
         instance = this;
 
-        // Spielerobjekt beim Laden einer neuen Szene nicht zerstören
+        // don't destroy player object on scene transition
         DontDestroyOnLoad(gameObject);
     }
 
@@ -50,10 +50,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Standardgeschwindigkeit setzen
+        // set standard movement speed
         activeMoveSpeed = moveSpeed;
 
-        // Waffeninformation in UI setzen
         UpdateGunUI();
     }
 
@@ -61,7 +60,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Nur wenn sich spieler bewegen darf und keine Pause besteht
         if (canMove && !LevelManager.instance.ispaused)
         {
             MovePlayer();
@@ -79,13 +77,13 @@ public class PlayerController : MonoBehaviour
 
 
     //
-    //  METHODEN
+    //  METHODS
     //
 
-    // Metode Spieler bewegen
+    // Method move player
     private void MovePlayer()
     {
-        // Bewegungseingabe (W,A,S,D) registreiren, speichern und als Einheitsvektor normalisieren
+        // Get user input and normalize the vectors
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
@@ -94,24 +92,24 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // Methode Spieler stoppen
+    // Method stop player
     private void StopPlayer()
     {
-        // Spielergeschwindigkeit auf Null setzen
+        // set player speed to zero
         theRB.velocity = Vector2.zero;
         anim.SetBool("isMoving", false);
     }
 
 
 
-    // Methode Spieler zielen
+    // Method player mouse-aim
     private void PlayerAim()
     {
-        // Mausposition als Bildschirmkoordinate speichern; Globale Spielerposition in Bildschirmkoordinaten umwandeln
+        // Get mouse screen coordinates, trasnform global player position as screen coordinates
         Vector3 mousePos = Input.mousePosition;
         Vector3 screenPoint = CameraController.instance.mainCamera.WorldToScreenPoint(transform.localPosition);
 
-        // Spieler und Waffe link/rechts zur Mausposition spiegeln, mithilfe negativer Spiegelung des Sprites
+        // Mirror player and weapon left/right, towars mouse position
         if (mousePos.x < screenPoint.x)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
@@ -123,30 +121,34 @@ public class PlayerController : MonoBehaviour
             gunArm.localScale = Vector3.one;
         }
 
-        // Waffenrotation von Maus- und Spielerposition als Winkel ableiten und als Quaternionangabe übergeben
+        // Get weapon vector direction from screen mouse position and screen player position 
         Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
+
+        // Transform weapon vector direction in euler angles
         float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+
+        // Transfrom euler angle to quaternion and set it as the gun arm's rotation
         gunArm.rotation = Quaternion.Euler(0, 0, angle);
     }
 
 
 
-    // Methode Spieler dashen
+    // Method player dash
     private void PlayerDash()
     {
-        // Dash beim Leertastendruck
+        // Dash on spacebar
         if (Input.GetKeyDown(KeyCode.Space) && dashCoolDownCounter <= 0 && dashCounter <= 0)
         {
             activeMoveSpeed = dashSpeed;
             dashCounter = dashLength;
             anim.SetTrigger("dash");
 
-            // Unverletzbar machen und sound spielen
+            // Make invincible and play sound
             PlayerHealthController.instance.MakeInvincible(dashInvincibility);
             AudioManager.instance.PlaySFX(8);
         }
 
-        // Counter bis zum Dash-Ende
+        // Count until dash end
         if (dashCounter > 0)
         {
             dashCounter -= Time.deltaTime;
@@ -157,7 +159,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Counter bis Dash wieder verfügbar ist
+        // Count until dash is available again
         if (dashCoolDownCounter > 0)
         {
             dashCoolDownCounter -= Time.deltaTime;
@@ -166,10 +168,10 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // Methode Spieler Animieren
+    // Method animate player
     private void AnimatePlayer()
     {
-        // Animations-switch für Stillstand und Bewegung
+        // Switch animation according to player movement
         if (moveInput != Vector2.zero)
         {
             anim.SetBool("isMoving", true);
@@ -182,7 +184,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // Methode Waffen austauschen
+    // Method switch to next weapon
     public void SelectNextWeapon()
     {
         if (Input.GetKeyDown(KeyCode.F) && availableGuns.Count > 0)
@@ -200,7 +202,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // Methode nächste Waffe auswählen
+    // Methode activate weapon
     public void ActivateGun()
     {
         // Alle Waffen in der Liste deaktivieren
@@ -209,7 +211,7 @@ public class PlayerController : MonoBehaviour
             theGun.gameObject.SetActive(false);
         }
 
-        // Waffe aktivieren
+        // Actovate weapon
         availableGuns[currentGun].gameObject.SetActive(true);
 
         UpdateGunUI();
@@ -217,7 +219,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // Methode Waffe in UI aktualisieren
+    // Method update the gun in the UI
     public void UpdateGunUI()
     {
         UIController.instance.currentGun.sprite = availableGuns[currentGun].gunUI;

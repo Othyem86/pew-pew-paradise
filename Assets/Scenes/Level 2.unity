@@ -315,7 +315,7 @@ PrefabInstance:
     - target: {fileID: 1247999351701918129, guid: aa95190790d574442ab1fab83efe3f2f,
         type: 3}
       propertyPath: nextLevel
-      value: Level 3
+      value: Boss Battle
       objectReference: {fileID: 0}
     - target: {fileID: 1247999351701918131, guid: aa95190790d574442ab1fab83efe3f2f,
         type: 3}
@@ -616,6 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 30
   target: {fileID: 0}
+  isBossRoom: 0
   mainCamera: {fileID: 1591062460}
   bigMapCamera: {fileID: 1439788788}
 --- !u!1 &1661965948
