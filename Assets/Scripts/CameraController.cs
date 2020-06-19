@@ -4,26 +4,37 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Instanzierung der Klasse
+    // Instantiating the class
     public static CameraController instance;
 
-    // Variabeln Kamerasteuerung
+    // Variabels camera controls
     [Header("Camera Movement")]
     public float moveSpeed;         // REF Geschwindigkeit der Kamera
     public Transform target;        // REF Zielorientierung der Kamera
+    public bool isBossRoom;         // if level is a boss room
 
-    // Variabeln Karte
+    // Variabels map
     [Header("Map Camera")]
-    public Camera mainCamera;       // REF Hauptkamera
-    public Camera bigMapCamera;     // REF Kartenkamera
-    private bool bigMapActive;      // Ob Kartenkamera aktiv ist
-    private bool miniMapActive;     // Ob Minimap aktiv sein soll
+    public Camera mainCamera;       // REF main camera
+    public Camera bigMapCamera;     // REF map camera
+    private bool bigMapActive;      // if map camera is active
+    private bool miniMapActive;     // if minimap is active
 
 
-    // Wie Start(), nur davor
+
+
     public void Awake()
     {
         instance = this;
+    }
+
+
+    private void Start()
+    {
+        if (isBossRoom)
+        {
+            target = PlayerController.instance.transform;
+        }
     }
 
 
@@ -38,10 +49,10 @@ public class CameraController : MonoBehaviour
 
 
     //
-    //  METHODEN
+    //  METHODS
     //
 
-    // Methode Kameraziel ändern
+    // Method change camera target
     public void ChangeCameraTarget(Transform newTarget)
     {
         target = newTarget;
@@ -49,7 +60,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    // Methode Kamera zum Ziel bewegen
+    // Method move camera to target
     private void MoveCameraToTarget()
     {
         if (target != null)
@@ -65,11 +76,23 @@ public class CameraController : MonoBehaviour
 
 
 
-    // Methode Große Karte per Tastendruck schalten
+    // Method toggle minimap
+    private void ToggleMiniMap()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab) && !bigMapActive && !isBossRoom)
+        {
+            miniMapActive = !miniMapActive;
+            UIController.instance.mapDisplay.SetActive(miniMapActive);
+        }
+    }
+
+
+
+    // Method toggle big map camera
     private void ToggleBigMap()
     {
         // Große Karte per Tastendruck aktivieren
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M) && !isBossRoom)
         {
             if (bigMapActive)
             {
@@ -84,19 +107,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    // Methode Minimap per Tastendruck schalten
-    private void ToggleMiniMap()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab) && !bigMapActive)
-        {
-            miniMapActive = !miniMapActive;
-            UIController.instance.mapDisplay.SetActive(miniMapActive);
-        }
-    }
-
-
-
-    // Methode große Karte aktivieren
+    // Method activate big map
     public void ActivateBigMap()
     {
         if (!LevelManager.instance.ispaused)
@@ -106,14 +117,14 @@ public class CameraController : MonoBehaviour
             bigMapCamera.enabled = true;
             mainCamera.enabled = false;
 
-            // Spiel pausieren und Minimap deaktivieren
+            // pause game and deactivat minimap
             PlayerController.instance.canMove = false;
             Time.timeScale = 0f;
 
-            // Minimap immer deaktivieren
+            // always deactivate minimap
             UIController.instance.mapDisplay.SetActive(false);
 
-            // Kartentexte schalten
+            // toggle map text
             UIController.instance.miniMapText.SetActive(false);
             UIController.instance.bigMapText.SetActive(true);
 
@@ -122,7 +133,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    // Methode große Karte deaktivieren
+    // Method deactivate big map
     public void DeactivateBigMap()
     {
         if (!LevelManager.instance.ispaused)

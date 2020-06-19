@@ -16,6 +16,7 @@ public class VictoryScreen : MonoBehaviour
     {
         // Zeitverlauf auf 100% setzen
         Time.timeScale = 1;
+        Destroy(PlayerController.instance.gameObject);
     }
 
     // Update is called once per frame
