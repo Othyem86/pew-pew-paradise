@@ -63,8 +63,8 @@ public class CharacterSelector : MonoBehaviour
             gameObject.SetActive(false);
             CameraController.instance.target = newPlayer.transform;
 
-            // set new character as active, reactivate previous selectable character
-            CharSelectManager.instance.activePlayer = newPlayer;                    // TO DO: scrap functionality
+            // Set new character as active, reactivate previous selectable character
+            CharSelectManager.instance.activePlayer = newPlayer;                        // TO DO: check if functionality can be scrapped
             CharSelectManager.instance.activeCharSelect.gameObject.SetActive(true);
             CharSelectManager.instance.activeCharSelect = this;
         }

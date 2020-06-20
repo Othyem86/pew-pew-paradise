@@ -4,65 +4,65 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Variabeln Bewegung
+    // Variables movement
     [Header("Movement")]
-    public float moveSpeed;                 // REF Beweguntsgeschwindigkeit
-    public Rigidbody2D theRB;               // REF Kollisionskörper Spieler
-    private Vector3 moveDirection;          // Bewegungsrichtung des Gegners
-    public Animator anim;                   // REF Animation
+    public float moveSpeed;                 // REF enemy move speed
+    public Rigidbody2D theRB;               // REF enemy rigidbody
+    private Vector3 moveDirection;          // Enemy direction vector
+    public Animator anim;                   // REF enemy animation
 
-    // Variabeln Verfolgen
+    // Variables chase player
     [Header("Chase Player")]
-    public bool shouldChasePlayer;          // REF ob Gegner Spieler verfolgen soll
-    public float rangeToChasePlayer;        // REF Verfolgungsradius
+    public bool shouldChasePlayer;          // REF if enemy should chase player
+    public float rangeToChasePlayer;        // REF chase range
 
-    // Variabeln Fliehen
+    // Variables flee from player
     [Header("Run Away")]
-    public bool shouldRunAway;              // REF ob Gegner vor Spieler fliehen soll
-    public float rangeToRunAway;            // REF Fluchtradius
+    public bool shouldRunAway;              // REF if enemy should run away from player
+    public float rangeToRunAway;            // REF run away range
 
-    // Variabeln Zufallbewegung
+    // Variables Roaming
     [Header("Wander")]
-    public bool shouldWander;               // REF ob Gegner schwiefen soll
-    public float wanderLength;              // REF wie lange Gegner schweifen soll
-    public float pauseLength;               // REF wie lange Gegner pausen soll
-    private float wanderCounter;            // Countdown bis zur nächsten Pause
-    private float pauseCounter;             // Countdown bis zur nächsten Bewegung
-    private Vector3 wanderDirection;        // Bewegungsrichtung
+    public bool shouldWander;               // REF if enemy should roam randomly
+    public float wanderLength;              // REF duration of roam movement
+    public float pauseLength;               // REF duration of pause between movements
+    private float wanderCounter;            // Countdown until next movement pause
+    private float pauseCounter;             // Countdown until next movement
+    private Vector3 wanderDirection;        // Roaming direction vector
 
-    // Variabeln Patroullieren
+    // Variables patrolling
     [Header("Patrolling")]
-    public bool shouldPatrol;               // REF ob Gegner patroullieren soll
-    public Transform[] patrolPoints;        // REF Array aller Patroullienpunkte
-    private int currentPatrolPoint;         // nächster Zielpunkt 
+    public bool shouldPatrol;               // REF if enemy should patrol
+    public Transform[] patrolPoints;        // REF array of all patrol waypoints
+    private int currentPatrolPoint;         // next waypoint 
 
-    // Variabeln Hitpoints
+    // Variables enemy hitpoints
     [Header("Hitpoints")]
     public int health = 150;                // REF Hitpoints
-    public GameObject[] deathSplatters;     // REF Todanimation
-    public GameObject hitEffect;            // REF Treffereffekt
+    public GameObject[] deathSplatters;     // REF array of all possible death splatters
+    public GameObject hitEffect;            // REF hit particle effect
 
-    // Variabeln Schiessen
+    // Variables enemy shooting
     [Header("Shooting")]
-    public bool shouldShoot;                // Ob es schiessen soll
-    public GameObject bullet;               // REF Kugel
-    public Transform firePoint;             // REF Kugelursprung
-    public float fireRate;                  // REF Schussfrequenz
-    private float fireCounter;              // Countdown bis zur nächsten Kugel
-    public float shootRange;                // REF Schussreichweite
-    public SpriteRenderer enemyBody;        // REF Renderer Körper Gegner
+    public bool shouldShoot;                // Ob if enemy should shoot
+    public GameObject bullet;               // REF bullet
+    public Transform firePoint;             // REF bullet origin
+    public float fireRate;                  // REF rate of fire
+    private float fireCounter;              // Countdown until the next bullet
+    public float shootRange;                // REF range of shooting
+    public SpriteRenderer enemyBody;        // REF enemy's sprite renderer
 
-    // Variabeln für Random Drops
+    // Variables enemy random drops
     [Header("Drops")]
-    public bool shouldDropItem;             // REF ob es ein Drop geben soll
-    public GameObject[] itemsToDrop;        // REF Array von Drops
-    public float itemDropPercent;           // REF Chancen ein Drop zu erstellen
+    public bool shouldDropItem;             // REF if it should drop
+    public GameObject[] itemsToDrop;        // REF Array of possible drops
+    public float itemDropPercent;           // REF chances of a drop occurring
 
 
     // Start is called before the first frame update
     void Start()
     {
-        // Am Start des Raumes, Zufällige Pausenzeit generieren
+        // Random wandar pause at the start of the scene
         if (shouldWander)
         {
             pauseCounter = Random.Range(pauseLength * 0.75f, pauseLength * 1.25f);
@@ -73,15 +73,15 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Schiessen und Bewegen je nach Gegnertyp
+        // Move and shoot, according to enemy settings
         if (enemyBody.isVisible && PlayerController.instance.gameObject.activeInHierarchy)
         {
-            // Gegner bewegen
+            // Move enemy
             moveDirection = Vector3.zero;
             EnemyShoot();
             EnemyMove();
 
-            // Bewegungsrichtung normalisieren, Geschiwindigkeit Kollisionskörper berechnen
+            // Normalize enemy speed
             moveDirection.Normalize();
             theRB.velocity = moveDirection * moveSpeed;
         }
@@ -90,42 +90,40 @@ public class EnemyController : MonoBehaviour
             theRB.velocity = Vector3.zero;
         }
 
-        // Gegner animieren
+        // Enemy animation
         AnimateEnemy();
     }
 
 
 
     //
-    //  METHODEN
+    //  METHODs
     //
 
-    // Methode Gegner Schaden
+    // Method damage enemy
     public void DamageEnemy(int damage)
     {
-        // Schaden vom HP abziehen und Shadenanimation generieren
+        // Subtract damage from hitpoints and generate damage animation
         health -= damage;
         AudioManager.instance.PlaySFX(2);
         Instantiate(hitEffect, transform.position, transform.rotation);
 
-        // Zerstöre Gegners wenn Hitpoints Null sind und Gegnerreste generieren
+        // Destroy enemy if out of hitpoints and generate death splatter
         if (health <= 0)
         {
             Destroy(gameObject);
             AudioManager.instance.PlaySFX(1);
 
-            // Reste hinterlassen
+            // Generate random splatter
             int selectedSplatter = Random.Range(0, deathSplatters.Length);
             int rotation = Random.Range(0, 360);
             Instantiate(deathSplatters[selectedSplatter], transform.position, Quaternion.Euler(0f, 0f, rotation));
 
-            // Drop erstellen
+            // Generate item drop according to drop chance
             if (shouldDropItem)
             {
-                // Zufallszahl zwischen 0-100 generieren
                 float dropChance = Random.Range(0f, 100f);
 
-                // Falls der Zufallszahl kleiner ist als die Chancen zum Drop => Drop erstellen
                 if (dropChance < itemDropPercent)
                 {
                     int randomItem = Random.Range(0, itemsToDrop.Length);
@@ -137,10 +135,9 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Methode Verfolgen + Schweifen / Patroullieren
+    // Method Enemy chase, roam and patrol
     private void EnemyMove()
     {
-        // Spieler Verfolgen wenn Spieler in Verfolgungsradius
         if (shouldChasePlayer && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer)
         {
             moveDirection = PlayerController.instance.transform.position - transform.position;
@@ -155,16 +152,16 @@ public class EnemyController : MonoBehaviour
         }
         else if (shouldPatrol)
         {
-            EnemyPatroll();
+            EnemyPatrol();
         }
     }
 
 
 
-    // Methode Schweifen
+    // Method enemy roam
     private void EnemyWander()
     {
-        // Bewegen zwischen Pausen
+        // Move between pausing
         if (wanderCounter > 0)
         {
             wanderCounter -= Time.deltaTime;
@@ -176,7 +173,7 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // Pausen zwischen Bewegungen
+        // Pause between moving
         if (pauseCounter > 0)
         {
             pauseCounter -= Time.deltaTime;
@@ -191,17 +188,17 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Methode Patroullieren
-    private void EnemyPatroll()
+    // Method patrol
+    private void EnemyPatrol()
     {
         moveDirection = patrolPoints[currentPatrolPoint].position - transform.position;
 
-        // Wenn Ziel erreich, nächstes Ziel wählen
+        // When at current waypoint, go to next waypoint
         if (Vector3.Distance(transform.position, patrolPoints[currentPatrolPoint].position) < 0.2f)
         {
             currentPatrolPoint++;
 
-            // Am ende der Zielliste, zum Angfang der Zielliste springen
+            // At the end of the waypoint list, go to start of the waypoint list
             if (currentPatrolPoint >= patrolPoints.Length)
             {
                 currentPatrolPoint = 0;
@@ -211,10 +208,10 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Methode Schiessen
+    // Method shoot
     private void EnemyShoot()
     {
-        // Schiessen wenn Spieler in Reicheweite
+        // Shoot player if player in range
         if (shouldShoot && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < shootRange)
         {
             fireCounter -= Time.deltaTime;
@@ -230,10 +227,10 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Methode Gegner animieren
+    // Method enemy animation
     private void AnimateEnemy()
     {
-        // Animations-switch für Stillstand und Bewegung
+        // Animation-switch for moving and standing still
         if (moveDirection != Vector3.zero)
         {
             anim.SetBool("isMoving", true);
