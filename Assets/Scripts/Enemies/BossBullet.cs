@@ -5,8 +5,8 @@ using UnityEngine;
 public class BossBullet : MonoBehaviour
 {
     // Variabels boss bullet
-    public float speed;             // REF bullet speed
-    private Vector3 direction;      // bullet direction
+    public float speed;             // REF boss bullet speed
+    private Vector3 direction;      // boss bullet direction
 
 
     // Start is called before the first frame update
@@ -29,10 +29,14 @@ public class BossBullet : MonoBehaviour
     }
 
 
-    // Funktion der Ereignisse Kollision Kugel bei Trigger
+
+    //
+    //  METHODS
+    //
+
+    // Method enemy bullet collision events
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Nur beim Spieler die Kalkulation ausführen
         if (other.tag == "Player")
         {
             PlayerHealthController.instance.DamagePlayer();
@@ -43,7 +47,8 @@ public class BossBullet : MonoBehaviour
     }
 
 
-    // Kugel ausserhalb des Bidlschirms zerstören
+
+    // Method destroy enemy bullet when not visible on screen
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

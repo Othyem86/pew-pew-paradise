@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class CharacterUnlockCage : MonoBehaviour
 {
-    // Variabeln Käfig entriegeln
-    private bool canUnlock;                                 // Ob Käfig entriegelt werden kann
-    public GameObject message;                              // REF Nachricht Käfig
+    // Variables unlock cage
+    private bool canUnlock;                                 // if cage can be unlocked
+    public GameObject message;                              // REF cage unlock message
 
     // Variabeln Charakter auswählen
-    public CharacterSelector[] characterSelectors;          // REF Liste der möglichen Charaktere
-    private CharacterSelector playerToUnlock;               // Ausgewählter Charakter
-    public SpriteRenderer cagedSR;                          // REF SpriteRenderer des ausgewählten Charakters
+    public CharacterSelector[] characterSelectors;          // REF array of all possible unlockable characters
+    private CharacterSelector playerToUnlock;               // character to be randomly chosen
+    public SpriteRenderer cagedSR;                          // REF SpriteRenderer of the character to be randomly chosen
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        // Generate a ranom character to unlock
         playerToUnlock = characterSelectors[Random.Range(0, characterSelectors.Length)];
         cagedSR.sprite = playerToUnlock.playerToSpawn.bodySR.sprite;
     }
@@ -26,6 +27,18 @@ public class CharacterUnlockCage : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        UnlockCage();
+    }
+
+
+
+    //
+    //  METHODS
+    //
+
+    // Method unlock cage
+    private void UnlockCage()
     {
         if (canUnlock && Input.GetKeyDown(KeyCode.E))
         {
@@ -37,9 +50,7 @@ public class CharacterUnlockCage : MonoBehaviour
         }
     }
 
-
-
-    // Methode Spieler neben Käfig
+    // Method player near cage
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -51,7 +62,7 @@ public class CharacterUnlockCage : MonoBehaviour
 
 
 
-    // Methode Spieler nicht neben Käfig
+    // Method player not near cage
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")

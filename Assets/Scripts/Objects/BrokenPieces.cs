@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class BrokenPieces : MonoBehaviour
 {
-    // Variabeln für die Bewegung der Bruchteile
-    public float moveSpeed = 3f;                // REF Bewegungsgeschwindigkeit
+    // Variables broken pieces movement
+    public float moveSpeed = 3f;                // REF movement speed pieces
     private Vector3 moveDirection;              // Richtung der Bewegung
-    public float deceleration = 5f;             // REF Entschleunigungsfaktor
-    
-    // Variabeln Entfernen der Bruchteile
-    public float lifeTime = 3f;                 // REF Lebensdauer Bruchteile
-    public SpriteRenderer theSR;                // REF Bruchteil Sprite
-    public float fadeSpeed = 2.5f;              // REF Geschwindigkeit bis zur Ausblendung
+    public float deceleration = 5f;             // REF deceleration of pieces movement
+
+    // Variables remove broken pieces
+    public float lifeTime = 3f;                 // REF lifetime broken pieces
+    public SpriteRenderer theSR;                // REF sprite renderer broken pieces
+    public float fadeSpeed = 2.5f;              // REF how fast pieces disappear
 
 
     // Start is called before the first frame update
     void Start()
     {
-        // Bewegungsgeschwindigkeit und -richtung beliebig generieren
+        // Generate random speed and directon for the broken pieces
         moveDirection.x = Random.Range(-moveSpeed, moveSpeed);
         moveDirection.y = Random.Range(-moveSpeed, moveSpeed);
     }
@@ -27,18 +27,34 @@ public class BrokenPieces : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Position jedes Frame aktualisieren
+        MoveBrokenPieces();
+        FadeOutBrokenPieces();
+    }
+
+
+
+    //
+    //  METHODS
+    //
+
+    // Method move broken pieces
+    private void MoveBrokenPieces()
+    {
         transform.position += moveDirection * Time.deltaTime;
 
-        // Lineare Interpolation zur Entschleunigung
+        // Linear interpolation for deceleration
         moveDirection = Vector3.Lerp(moveDirection, Vector3.zero, deceleration * Time.deltaTime);
+    }
 
 
-        // Bruchteile nach Zeitablauf entfernen
+
+    // Method remove pieces after lifetime comes to an end
+    private void FadeOutBrokenPieces()
+    {
         lifeTime -= Time.deltaTime;
         if (lifeTime <= 0)
         {
-            // Bruchteile langsam ausblenden
+            // Fade away pieces
             theSR.color = new Color
             (
                 theSR.color.r,
@@ -47,12 +63,11 @@ public class BrokenPieces : MonoBehaviour
                 Mathf.MoveTowards(theSR.color.a, 0f, fadeSpeed * Time.deltaTime)
             );
 
-
-            // Wenn ausgeblendet, Bruchteilobjekte entfernen
+            // Destroy pieces once they faded away
             if (theSR.color.a == 0f)
             {
                 Destroy(gameObject);
-            }         
+            }
         }
     }
 }

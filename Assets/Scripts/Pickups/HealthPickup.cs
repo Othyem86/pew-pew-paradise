@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class HealthPickup : MonoBehaviour
 {
-    // Variabeln Heilpaket
-    public int healAmount = 1;                  // REF Wert der Heilung
-    public float waitToBeCollected = 0.5f;      // REF Zeit bis es aktiviert werden kann
+    // Variables health pack
+    public int healAmount = 1;                  // REF healing abount
+    public float waitToBeCollected = 0.5f;      // Delay duration until it can be picked up
 
 
     // Update is called once per frame
     void Update()
-    {   
-        // Abwarten je nach waitToBeCollected bis der Heilpaket aktiviert werden kann
-        if(waitToBeCollected > 0)
+    {
+        // Wait a while before health pack is collectible by player
+        if (waitToBeCollected > 0)
         {
             waitToBeCollected -= Time.deltaTime;
         }
@@ -21,7 +21,7 @@ public class HealthPickup : MonoBehaviour
 
 
 
-    // Spieler um healAmount heilen wenn er mit dem Objekt kollidiert
+    // Heal player when he collides with health pack
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player" && waitToBeCollected <= 0)

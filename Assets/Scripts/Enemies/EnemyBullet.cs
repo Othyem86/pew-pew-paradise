@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    // Variabeln Gegnerkugel
-    public float speed;             // REF Geschwindigkeit Kugel
-    private Vector3 direction;      // Flugrichtung Kugel
+    // Variables enemy bullet
+    public float speed;             // REF enemy bullet speed
+    private Vector3 direction;      // bullet direction vector
 
 
     // Start is called before the first frame update
@@ -25,10 +25,14 @@ public class EnemyBullet : MonoBehaviour
     }
 
 
-    // Funktion der Ereignisse Kollision Kugel bei Trigger
+
+    //
+    //  METHODS
+    //
+
+    // Method enemy bullet collision events
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Nur beim Spieler die Kalkulation ausführen
         if (other.tag == "Player")
         {
             PlayerHealthController.instance.DamagePlayer();
@@ -39,7 +43,8 @@ public class EnemyBullet : MonoBehaviour
     }
 
 
-    // Kugel ausserhalb des Bidlschirms zerstören
+
+    // Method destroy enemy bullet when not visible on screen
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

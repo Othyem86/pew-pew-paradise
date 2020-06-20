@@ -5,28 +5,47 @@ using UnityEngine.UI;
 
 public class ShopItem : MonoBehaviour
 {
-    // Variabeln Shop
-    public GameObject buyMessage;       // REF Kauftext
-    private bool inBuyZone;             // Ob Spieler in Kauffläche steht
+    // Variables Shop
+    public GameObject buyMessage;       // REF buy message
+    private bool inBuyZone;             // if player is in the buy area
 
-    // Variabeln Kaufgegenstand
+    // Variables Buy health related items
     [Header("Item parameters")]
-    public bool isHealthRestore;        // REF Ob Kaufgegenstand Heilen ist
-    public bool isHealthUpgrade;        // REF Ob Kaufgegenstand Upgrade Hitpoints ist
-    public bool isWeapon;               // REF Ob Kaufgegenstand Waffe ist
-    public int itemCost;                // REF Preis des Kaufgegenstands
-    public int upgradeHealthAmount;     // REF Wieviel die Hitpoints erweitert
+    public bool isHealthRestore;        // REF if shop item is a healing item
+    public bool isHealthUpgrade;        // REF if shop item is a extend health item
+    public bool isWeapon;               // REF if shop item is a weapon item
+    public int itemCost;                // REF price of item
+    public int upgradeHealthAmount;     // REF extend health value
 
-    // Variabeln Waffenkauf
+    // Variables Buy Weapon
     [Header("Weapons to buy")]
-    public Gun[] potentialGuns;         // REF Lise der zu verkaufende Waffen
-    private Gun theGun;                 // die einzelne Waffe die verkauft wird
-    public SpriteRenderer gunSprite;    // Sprite der einzelnen Waffe die verkauft wird
-    public Text infoText;               // Preisinformatien der Waffe die verkauft wird
+    public Gun[] potentialGuns;         // REF array of all possible weapons items on sale
+    private Gun theGun;                 // the randomly generated weapon item on sale
+    public SpriteRenderer gunSprite;    // Sprite of weapon item on sale
+    public Text infoText;               // price info of weapon item on sale
 
 
     // Start is called before the first frame update
     void Start()
+    {
+        DisplayRandomWeapon();
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        BuyItem();
+    }
+
+
+
+    //
+    //  METHODS
+    //
+
+    // Method display random weapon
+    private void DisplayRandomWeapon()
     {
         if (isWeapon)
         {
@@ -40,19 +59,8 @@ public class ShopItem : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    void Update()
-    {
-        BuyItem();
-    }
 
-
-
-    //
-    //  METHODEN
-    //
-
-    // Methode Kauftext deaktivieren wenn Spieler reingeht
+    // Method activate buy message when player leaves buy area
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -64,7 +72,7 @@ public class ShopItem : MonoBehaviour
 
 
 
-    // Methode Kauftext deaktivieren wenn Spieler rausgeht
+    // Method activate buy message when player leaves buy area
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -76,7 +84,7 @@ public class ShopItem : MonoBehaviour
 
 
 
-    // Methode Gegenstand kaufen
+    // Method buy item
     private void BuyItem()
     {
         if (inBuyZone)
@@ -87,35 +95,35 @@ public class ShopItem : MonoBehaviour
                 {
                     LevelManager.instance.SpendCoins(itemCost);
 
-                    // Spieler heilen
+                    // Heal player
                     if (isHealthRestore)
                     {
                         PlayerHealthController.instance.HealPlayer(PlayerHealthController.instance.maxHealth);
                     }
 
-                    // Spieler Hitpoints erweitern
+                    // Extend player health
                     if (isHealthUpgrade)
                     {
                         PlayerHealthController.instance.IncreaseMaxHealth(upgradeHealthAmount);
                     }
 
-                    // Waffe kaufen
+                    // Buy weapon
                     if (isWeapon)
                     {
-                        // Neue Waffe als Kind der Waffenhand instantieren
+                        // Instantiate new weapon as child of gunArm game object
                         Gun gunClone = Instantiate(theGun);
                         gunClone.transform.parent = PlayerController.instance.gunArm;
                         gunClone.transform.position = PlayerController.instance.gunArm.position;
                         gunClone.transform.localRotation = Quaternion.Euler(Vector3.zero);
                         gunClone.transform.localScale = Vector3.one;
 
-                        // Neue Waffe zur Spielerwaffenliste hinzufügen und zu ihr wechseln
+                        // Add new weapon to player's available weapons array, and set it as active weapon
                         PlayerController.instance.availableGuns.Add(gunClone);
                         PlayerController.instance.currentGun = PlayerController.instance.availableGuns.Count - 1;
                         PlayerController.instance.ActivateGun();
                     }
 
-                    // Kaufgegenstand deaktivieren
+                    // Deactivate bought object
                     gameObject.SetActive(false);
                     inBuyZone = false;
                     AudioManager.instance.PlaySFX(18);

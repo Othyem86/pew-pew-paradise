@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Instanzierung der Klasse
+    // Instancing the class
     public static AudioManager instance;
 
-    // Variabeln Music
-    public AudioSource levelMusic;              // REF Levelmusik
-    public AudioSource gameOverMusic;           // REF Spielendemusik
-    public AudioSource victoryMusic;            // REF Erfolgsmusik
+    // Variables Music
+    public AudioSource levelMusic;              // REF level music
+    public AudioSource gameOverMusic;           // REF game over muisc
+    public AudioSource victoryMusic;            // REF victory music
 
-    // Variabeln Sound Effects
-    public AudioSource[] sfx;
+    // Variables Sound Effects
+    public AudioSource[] sfx;                   // REF array of all sound effects
 
 
-    // Wie Start(), nur davor
+    // Before Start()
     private void Awake()
     {
         instance = this;
@@ -25,10 +25,10 @@ public class AudioManager : MonoBehaviour
 
 
     //
-    //  METHODEN
+    //  METHODS
     //
 
-    // Methode Spielendemusik spielen
+    // Method play game over music
     public void PlayGameOver()
     {
         levelMusic.Stop();
@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    // Methode Erfolgsmusik spielen
+    // Method play victory music
     public void PlayLevelWin()
     {
         levelMusic.Stop();
@@ -45,7 +45,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    // Methode Sound Effect spielen
+    // Method play sound effect
     public void PlaySFX(int sfxToPlay)
     {
         sfx[sfxToPlay].Stop();

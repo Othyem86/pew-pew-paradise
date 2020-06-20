@@ -5,36 +5,36 @@ using UnityEngine;
 
 public class Breakables : MonoBehaviour
 {
-    // Variabeln für Trümmer
+    // Variables broken pieces
     [Header("Broken Pieces")]
-    public GameObject[] brokenPieces;           // REF Array der Bruchteile
-    public int maxPieces = 5;                   // REF Maximale Anzahl der Bruchteile
+    public GameObject[] brokenPieces;           // REF array of broken pieces
+    public int maxPieces = 5;                   // REF maximum number of pieces
 
     // Variabeln für Random Drops
     [Header("Drops")]
-    public bool shouldDropItem;                 // REF ob es ein Drop geben soll
-    public GameObject[] itemsToDrop;            // REF Array von Drops
-    public float itemDropPercent;               // REF Chancen ein Drop zu erstellen
+    public bool shouldDropItem;                 // REF if should generate a drop
+    public GameObject[] itemsToDrop;            // REF array of possilbe drops
+    public float itemDropPercent;               // REF drop chance
 
 
 
     //
-    //  METHODEN
+    //  METHODS
     //
     
-    // Methode Kollision Box mit Spieler
+    // Methode collision with player or player bullet
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Originalobjekt zerstören und zwischen 1 und 6 Trümmer generieren
-        if ( other.tag == "PlayerBullet" || other.tag == "Player" && PlayerController.instance.dashCounter > 0)
+        // Destroy original object, generate between 1 and 6 broken pieces
+        if (other.tag == "PlayerBullet" || other.tag == "Player" && PlayerController.instance.dashCounter > 0)
         {
-            // Objekt Zerstören
+            // Destroy object
             Destroy(gameObject);
             int piecesToDrop = Random.Range(1, maxPieces);
             AudioManager.instance.PlaySFX(0);
 
 
-            // Trümmer erzeugen
+            // Generate broken pieces
             for (int i = 0; i < piecesToDrop; i++)
             {
                 int randomPiece = Random.Range(0, brokenPieces.Length);
@@ -42,13 +42,11 @@ public class Breakables : MonoBehaviour
             }
 
 
-            // Drop erstellen
+            // Generate item drop according to drop chance
             if (shouldDropItem)
             {
-                // Zufallszahl zwischen 0-100 generieren
                 float dropChance = Random.Range(0f, 100f);
 
-                // Falls der Zufallszahl kleiner ist als die Chancen zum Drop => Drop erstellen
                 if (dropChance < itemDropPercent)
                 {
                     int randomItem = Random.Range(0, itemsToDrop.Length);

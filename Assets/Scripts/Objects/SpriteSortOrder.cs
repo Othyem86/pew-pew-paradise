@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class SpriteSortOrder : MonoBehaviour
 {
-    private SpriteRenderer theSR;       // Sprite Renderer Element
+    // Variables layer sorting
+    private SpriteRenderer theSR;       // Sprite renderer element
 
 
     // Start is called before the first frame update
     void Start()
     {
-        // theSR als den SpriteRendere des jeweiligen Objekts setzen
+        // Set variable as the target object's sprite renderer component
         theSR = GetComponent<SpriteRenderer>();
 
-        // Automatische Layersortierung der Objekte je nach Position auf de y-Achse
+        // Automatic layer-sorting according to the object's y-axis postion
         theSR.sortingOrder = Mathf.RoundToInt(transform.position.y * -10);
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
