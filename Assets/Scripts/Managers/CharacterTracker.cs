@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CharacterTracker : MonoBehaviour
 {
-    // Instanzierung der Klasse
+    // Instancing the class
     public static CharacterTracker instance;
 
-    // Variabeln Spielerparameter die zu verfolgen sind
-    public int currentHealth;                   // REF aktuelle Hitpoints
-    public int maxHealth;                       // REF aktuelle maximale Hitpoints
-    public int currentCoins;                    // REF aktuelle Geldsaldo
+    // Variables tracked paramenters 
+    public int currentHealth;                   // REF current hitpoints
+    public int maxHealth;                       // REF current maximum hitpoints
+    public int currentCoins;                    // REF current currency amount
 
 
-    // Wie Start(), nur davor
+    // Before Start()
     public void Awake()
     {
         instance = this;

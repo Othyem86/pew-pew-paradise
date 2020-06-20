@@ -5,25 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    // Instanzierung der Klasse
+    // Instancing the class
     public static LevelManager instance;
 
-    // Variabeln Szenenübergang
+    // Variables scene transition
     [Header("Scene Transition")]
-    public float waitToLoad = 3f;       // REF Dauer bis nächste Szene
-    public string nextLevel;            // REF nächste Szene
-    public Transform startPoint;        // REF Startpunkt des Spielers
+    public float waitToLoad = 3f;       // REF duration until next scene
+    public string nextLevel;            // REF next scene
+    public Transform startPoint;        // REF player starting point
 
-    // Variabeln Spielpause
+    // Variables Spielpause
     [Header("Pause / Unpause")]
-    public bool ispaused;               // REF ob eine Pause besteht
+    public bool ispaused;               // REF if the game is paused
 
-    // Variabeln Geldsystem
+    // Variables currency system
     [Header("Money Tracker")]
-    public int currentCoins;            // REF aktuelle Geldfonds
+    public int currentCoins;            // REF current currency amount
 
 
-    // Wie Start(), nur davor
+    // Before Start()
     public void Awake()
     {
         instance = this;
@@ -33,14 +33,14 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Spieler zur Startposition verlegen
+        // move player to starting point
         PlayerController.instance.transform.position = startPoint.position;
         PlayerController.instance.canMove = true;
 
-        // Geldfonds beim Start lt. CharacterTracker setzen
+        // set currency amount according to values in character tracker
         currentCoins = CharacterTracker.instance.currentCoins;
 
-        // Beim start des Levels, Zeitverlauf auf 100% setzen
+        // set game speed to 1
         Time.timeScale = 1;
 
         // UI Update
@@ -60,30 +60,30 @@ public class LevelManager : MonoBehaviour
 
 
     //
-    //  METHODEN
+    //  METHODS
     //
 
-    // Metode Coroutine zur wechseln der Szene
+    // Method Coroutine for changing the scene
     public IEnumerator LevelEnd()
     {
-        // Spielerbewegung ausschalten und Zeit abwarten vor Szenenwechsel
+        // turn off player movement before scene change
         AudioManager.instance.PlayLevelWin();
         PlayerController.instance.canMove = false;
         UIController.instance.StartFadeToBlack();
         yield return new WaitForSeconds(waitToLoad);
 
-        // Aktuelle Hitpoins, maximale Hitpoints und Geldfonds speichern
+        // save current hitpoints, max hitpoints and currency amount
         CharacterTracker.instance.currentCoins = currentCoins;
         CharacterTracker.instance.currentHealth = PlayerHealthController.instance.currentHealth;
         CharacterTracker.instance.maxHealth = PlayerHealthController.instance.maxHealth;
 
-        // Szene wechesln
+        // change scene
         SceneManager.LoadScene(nextLevel);
     }
 
 
 
-    // Methode Spiel Pause
+    // Method pause game
     public void PauseUnpause()
     {
         if (!ispaused)
@@ -102,7 +102,7 @@ public class LevelManager : MonoBehaviour
 
 
 
-    // Methode Geld einnehmen
+    // Method get coins
     public void GetCoins(int amount)
     {
         currentCoins += amount;
@@ -113,7 +113,7 @@ public class LevelManager : MonoBehaviour
     
     
 
-    // Methode Geld ausgeben
+    // Method spend coins
     public void SpendCoins(int amount)
     {
         currentCoins -= amount;

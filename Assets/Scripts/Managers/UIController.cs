@@ -9,37 +9,37 @@ public class UIController : MonoBehaviour
     // Instancing the class
     public static UIController instance;
 
-    // Variabels UI
+    // Variables UI
     [Header("HUD Parameters")]
-    public Slider healthSlider;         // REF HP-Slider
-    public Text healthText;             // REF Text HP-Sliders
-    public Text coinText;               // REF Text des currency counter
+    public Slider healthSlider;         // REF hitpoint slider
+    public Text healthText;             // REF text HP-Sliders
+    public Text coinText;               // REF text currency counter
     public Image currentGun;            // REF UI-sprite of active weapon
     public Text currentGunText;         // REF UI-text of active weapon
 
-    // Variabels scene transition
+    // Variables scene transition
     [Header("Scene Transition")]
-    public Image fadeScreen;            // REF Übergangsbild
-    public float fadeSpeed;             // REF Übergangsgeschwindigkeit
-    private bool fadeToBlack;           // REF ob Übergang zu Schwarz
-    private bool fadeOutBlack;          // REF ob Übergang aus Schwarz
+    public Image fadeScreen;            // REF image of the fade in/out effect
+    public float fadeSpeed;             // REF speed fade in/out
+    private bool fadeToBlack;           // REF if fade to black
+    private bool fadeOutBlack;          // REF if fade out black
 
-    // Variabels death screen
+    // Variables death screen
     [Header("Death Screen")]
-    public GameObject deathScreen;      // REF Death Screen Objekt
-    public string newGameScene;         // REF Szene Nees Spiel
-    public string mainMenuScene;        // REF Szene Hauptmenü
+    public GameObject deathScreen;      // REF death screen object
+    public string newGameScene;         // REF scene new game
+    public string mainMenuScene;        // REF scene main menu
 
-    // Variabels pause screen und minimap
+    // Variables pause screen and minimap
     [Header("Screens")]
-    public GameObject pauseMenu;        // REF Pause Screen Objekt
-    public GameObject mapDisplay;       // REF Minimap Objekt
-    public GameObject bigMapText;       // REF Text Karte Objekt
-    public GameObject miniMapText;      // REF Text Minimap Objekt
+    public GameObject pauseMenu;        // REF pause screen object
+    public GameObject mapDisplay;       // REF minimap object
+    public GameObject bigMapText;       // REF big map text object
+    public GameObject miniMapText;      // REF minimap text object
 
     // Variables boss
     [Header("Boss UI")]
-    public Slider bossHealthBar;        // REF Boss Health Slider
+    public Slider bossHealthBar;        // REF boss health slider
 
 
     // Before Start()
@@ -54,7 +54,7 @@ public class UIController : MonoBehaviour
     {
         PlayerController.instance.UpdateGunUI();
 
-        // Am anfang Übergang von Schwarz
+        // fade out black
         fadeOutBlack = true;
         fadeToBlack = false;
     }
@@ -63,7 +63,7 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Übergang aus Schwarz
+        // Fade out black
         if (fadeOutBlack)
         {
             FadeScreen(0f);
@@ -74,7 +74,7 @@ public class UIController : MonoBehaviour
         }
 
 
-        // Übergang zu Schwarz
+        // Fade to black
         if (fadeToBlack)
         {
             FadeScreen(1f);
@@ -86,7 +86,12 @@ public class UIController : MonoBehaviour
     }
 
 
-    // Funktion Start Übergang zu Schwarz
+
+    //
+    // METHODS
+    //
+
+    // Method start fade to black
     public void StartFadeToBlack()
     {
         fadeToBlack = true;
@@ -94,7 +99,8 @@ public class UIController : MonoBehaviour
     }
 
 
-    // Funktion Übergang Tansparenz
+
+    // Method fade in/out fadescreen
     private void FadeScreen(float alpha)
     {
         fadeScreen.color = new Color
@@ -108,7 +114,8 @@ public class UIController : MonoBehaviour
     }
 
 
-    // Funktion neues Spiel und Zeitverlauf auf 100% setzen
+
+    // Method new game and set game speed to 1
     public void NewGame()
     {
         Time.timeScale = 1;
@@ -117,7 +124,8 @@ public class UIController : MonoBehaviour
     }
 
 
-    // Funktion zurück zum Hauptmenü und Zeitverlauf auf 100% setzen
+
+    // Method to main menu and set game speed to 1
     public void MainMenu() 
     {
         Time.timeScale = 1;
@@ -126,7 +134,8 @@ public class UIController : MonoBehaviour
     }
 
 
-    // Funktion Pause beenden
+
+    // Method end pause
     public void Resume()
     {
         LevelManager.instance.PauseUnpause();

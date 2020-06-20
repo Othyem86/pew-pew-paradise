@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class VictoryScreen : MonoBehaviour
 {
-    // Variablen Gewonnen Bildschirm
-    public float waitForAnyKey = 2f;    // REF Wartezeit
-    public GameObject anyKeyText;       // REF Text beliebiger Tastendruck
-    public string mainMenuScene;        // REF Szene Hauptmenü
+    // Variables victory screen
+    public float waitForAnyKey = 2f;    // REF wait duration
+    public GameObject anyKeyText;       // REF text 'press any key'
+    public string mainMenuScene;        // REF main menu scene
 
 
     // Start is called before the first frame update
     void Start()
     {
-        // Zeitverlauf auf 100% setzen
+        // set game speed to 1
         Time.timeScale = 1;
         Destroy(PlayerController.instance.gameObject);
     }
@@ -22,7 +22,7 @@ public class VictoryScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Wenn Countdown nicht null, Countdown starten oder fortsetzen
+        // if countdown not zero, start or resume it
         if (waitForAnyKey > 0)
         {
             waitForAnyKey -= Time.deltaTime;
@@ -33,7 +33,7 @@ public class VictoryScreen : MonoBehaviour
         }
         else 
         {
-            // Bei jedem Tastendruck zu Hauptmenüszene gehen
+            // return to main menu scene if any key is pressed
             if (Input.anyKeyDown)
             {
                 SceneManager.LoadScene(mainMenuScene);

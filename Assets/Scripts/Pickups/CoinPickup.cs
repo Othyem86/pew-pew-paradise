@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CoinPickup : MonoBehaviour
 {
-    // Variables ccurrency value
+    // Variables currency value
     [Header("Coin Value")]
     public int coinValue = 1;           // Currency value
     public float waitToBeCollected;     // Delay duration until it can be picked up

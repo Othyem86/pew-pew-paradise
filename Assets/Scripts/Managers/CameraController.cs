@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Instantiating the class
+    // Instancing the class
     public static CameraController instance;
 
-    // Variabels camera controls
+    // Variables camera controls
     [Header("Camera Movement")]
     public float moveSpeed;         // REF Geschwindigkeit der Kamera
     public Transform target;        // REF Zielorientierung der Kamera
     public bool isBossRoom;         // if level is a boss room
 
-    // Variabels map
+    // Variables map
     [Header("Map Camera")]
     public Camera mainCamera;       // REF main camera
     public Camera bigMapCamera;     // REF map camera
     private bool bigMapActive;      // if map camera is active
     private bool miniMapActive;     // if minimap is active
-
-
 
 
     public void Awake()
@@ -91,7 +89,6 @@ public class CameraController : MonoBehaviour
     // Method toggle big map camera
     private void ToggleBigMap()
     {
-        // Große Karte per Tastendruck aktivieren
         if (Input.GetKeyDown(KeyCode.M) && !isBossRoom)
         {
             if (bigMapActive)

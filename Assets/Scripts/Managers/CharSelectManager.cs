@@ -4,30 +4,16 @@ using UnityEngine;
 
 public class CharSelectManager : MonoBehaviour
 {
-    // Instanzierung der Klasse
+    // Instancing the class
     public static CharSelectManager instance;
 
-    // Variabeln Charaktermanager
-    public PlayerController activePlayer;               // REF der aktive Spielercharakter
-    public CharacterSelector activeCharSelect;          // REF der aktive Charakterwähler
+    // Variables charactermanager
+    public PlayerController activePlayer;               // REF the active player controller
+    public CharacterSelector activeCharSelect;          // REF the active character selector
 
 
     private void Awake()
     {
         instance = this;
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

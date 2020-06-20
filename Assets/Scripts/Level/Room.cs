@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    // Variabeln Raumsteuerung
-    public bool closedWhenEntered;                              // REF ob Raum sich beim Eingang schliessen soll
+    // Variable room control
+    public bool closedWhenEntered;                              // REF if room should close doors on player enter
     [HideInInspector]
-    public bool roomActive;                                     // REF ob der Raum aktiv ist
-    public GameObject mapHider;                                 // REF Maske Raum für Karte
-    public GameObject[] doors;                                  // REF Türliste
+    public bool roomActive;                                     // REF if room is active
+    public GameObject mapHider;                                 // REF mask for big map and minimap
+    public GameObject[] doors;                                  // REF array of all room doors
 
 
 
@@ -17,7 +17,7 @@ public class Room : MonoBehaviour
     //  METHODEN
     //
 
-    // Funktion Raumtüren deaktivieren wenn keine Gegner
+    // Method deactivate all doors
     public void OpenDoors()
     {
         closedWhenEntered = false;
@@ -29,14 +29,14 @@ public class Room : MonoBehaviour
     }
 
 
-    //  Funktion Raum aktivieren, Kamera dorthin bewegen, wenn Spieler im Raum eintritt
+    // Method activate room, move camera to active room
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             CameraController.instance.ChangeCameraTarget(transform);
 
-            // Raumtüren aktivieren bei Kameraeintritt
+            // activate room doors on player enter
             if (closedWhenEntered)
             {
                 foreach (GameObject door in doors)
@@ -47,13 +47,13 @@ public class Room : MonoBehaviour
 
             roomActive = true;
 
-            // Maske deaktivieren
+            // deactivate room mask
             mapHider.SetActive(false);
         }
     }
 
 
-    // Funktion Raum deaktivieren bei Spieleraustritt
+    // Method deactivate room on player exit
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
