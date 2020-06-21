@@ -9,7 +9,7 @@ public class Room : MonoBehaviour
     [HideInInspector]
     public bool roomActive;                                     // REF if room is active
     public GameObject mapHider;                                 // REF mask for big map and minimap
-    public GameObject[] doors;                                  // REF array of all room doors
+    public List<GameObject> doors;                              // REF array of all room doors
 
 
 

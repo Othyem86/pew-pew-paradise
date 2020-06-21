@@ -5,143 +5,54 @@ using UnityEngine.SceneManagement;
 
 public class LevelGenerator : MonoBehaviour
 {
-    // Variables Levelparameter
+    // Variables level paramenters
     [Header("Level Parameters")]
-    public int distanceToEnd;                                               // REF Anzahl der Räume bis Ausgangraum
-    public bool includeGunRoom;                                             // REF Ob es einen Waffenraum haben soll
-    public int minDistanceToGunRoom;                                        // REF Mindestanzahl Räume bis Waffenraum
-    public int maxDistanceToGunRoom;                                        // REF Mindestanzahl Räume bis Waffenraum
-    public bool includeShop;                                                // REF Ob es einen Shop haben soll
-    public int minDistanceToShop;                                           // REF Mindestanzahl Räume bis Shopraum
-    public int maxDistanceToShop;                                           // REF Mindestanzahl Räume bis Shopraum
+    public int distanceToEnd;                                               // REF number of rooms until exit room
+    public bool includeGunRoom;                                             // REF if level should have a gun room
+    public int minDistanceToGunRoom;                                        // REF maximal number of rooms until gun room
+    public int maxDistanceToGunRoom;                                        // REF minimal number of rooms until gun room
+    public bool includeShop;                                                // REF if level should have a shop room
+    public int minDistanceToShop;                                           // REF maximal number of rooms until shop room
+    public int maxDistanceToShop;                                           // REF minimal number of rooms until shop room
 
-    // Variables Raumgenerierung
+    // Variables room generation
     [Header("Room Generation")]
-    public GameObject layoutRoom;                                           // REF Raumobjekt
-    public GameObject parentRoom;                                           //
-    public Transform generatorPoint;                                        // REF Referenzpunkt für die Raumgenerierung
-    public enum Direction { up, right, down, left };                        // REF Mögliche Richtungen Generationspunkt
-    public Direction selectedDirection;                                     // REF Ausgewählte Richtung Generationspunkt
-    public float xOffset = 18f;                                             // REF Bewegung Generationspunk x-Achse
-    public float yOffset = 10f;                                             // REF Bewegung Generationspunk y-Achse
-    public LayerMask whatIsRoom;                                            // REF Layer der iteriert werden soll
+    public GameObject layoutRoom;                                           // REF room stamp for first layout generation
+    public GameObject parentRoom;                                           // REF parent room for room walls, room centers and doors
+    public Transform generatorPoint;                                        // REF generator point for first layout generation
+    public enum Direction { up, right, down, left };                        // REF possible movement directions of generator point
+    public Direction selectedDirection;                                     // REF chosed movement direction of generator point
+    public float xOffset = 18f;                                             // REF movement length of generator point on the x-axis
+    public float yOffset = 10f;                                             // REF movement length of generator point on the y-axis
+    public LayerMask whatIsRoom;                                            // REF Layer of generator point collision check
 
-    // Variables Raumverfolgung
+    // Variables room tracking
     [Header("Room Colors")]
-    public Color startColor;                                                // REF Startraumfarbe
-    public Color endColor;                                                  // REF Endraumfarbe
-    public Color shopColor;                                                 // REF Shopfarbe
-    public Color gunRoomColor;                                              // REF Waffenraumfarbe
-    private GameObject endRoom;                                             // REF Raumobjekt Levelende
-    private GameObject shopRoom;                                            // REF Raumobjekt Shop
-    private GameObject gunRoom;                                             // REF Raumobjekt Waffenraum
-    private List<GameObject> layoutRoomObjects = new List<GameObject>();    // REF Liste aller generierten Raum-mockups
-    private List<GameObject> generatedOutlines = new List<GameObject>();    // REF Liste aller generierten Raumkontouren
-    public RoomWallPrefabs roomWalls;                                       // 
+    public Color startColor;                                                // REF color start room stamp
+    public Color endColor;                                                  // REF color exit room stamp
+    public Color shopColor;                                                 // REF color shop room stamp
+    public Color gunRoomColor;                                              // REF color gun room stamp
+    private GameObject endRoom;                                             // REF room center exit
+    private GameObject shopRoom;                                            // REF room center shop
+    private GameObject gunRoom;                                             // REF room center gun chest
+    private List<GameObject> layoutRoomObjects = new List<GameObject>();    // REF list of all generated room layout stamps
+    private List<GameObject> generatedOutlines = new List<GameObject>();    // REF list of all generated parent rooms
+    public RoomWallPrefabs roomWalls;                                       // REF container class with all potential wall and door game objects
 
-    // Variables Raummitten
+    // Variables room centers
     [Header("Room Centers")]
-    public RoomCenter centerStart;                                          // REF Raummitte Start
-    public RoomCenter centerGunRoom;                                        // REF Raummitte Waffenraum
-    public RoomCenter centerShop;                                           // REF Raummitte Shop
-    public RoomCenter centerEnd;                                            // REF Raummitte Ende
-    public RoomCenter[] potentialCenters;                                   // REF Liste potentieller Raummitten
+    public RoomCenter centerStart;                                          // REF room center start
+    public RoomCenter centerGunRoom;                                        // REF room center gun chest
+    public RoomCenter centerShop;                                           // REF room center shop
+    public RoomCenter centerEnd;                                            // REF room center exit
+    public RoomCenter[] potentialCenters;                                   // REF array with all potential room center game objects
 
 
     // Start is called before the first frame update
     void Start()
     {
-        // Generate start room layout
-        Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation)
-            .GetComponent<SpriteRenderer>()
-            .color = startColor;
-
-        // Beliebige Richtung zum generieren auswählen
-        selectedDirection = (Direction)Random.Range(0, 4);
-        MoveGenerationPoint();
-
-
-
-        // Layout - Gewünschte Anzahl der Räume generieren
-        for (int i = 0; i < distanceToEnd; i++)
-        {
-            GameObject newRoom = Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation);
-
-            // Raum zur Liste hinzufügen
-            layoutRoomObjects.Add(newRoom);
-
-            // Falls letzter Raum, von liste enfernen
-            if (i + 1 == distanceToEnd)
-            {
-                newRoom.GetComponent<SpriteRenderer>().color = endColor;
-                layoutRoomObjects.RemoveAt(layoutRoomObjects.Count - 1);
-                endRoom = newRoom;
-            }
-
-
-            // beliebige Richtung auswählen, dorthin gehen, Raum generieren
-            selectedDirection = (Direction)Random.Range(0, 4);
-            MoveGenerationPoint();
-
-
-            // Falls es an der Position einen Raum gibt, in ausgewählte Richtung weitergehen
-            while (Physics2D.OverlapCircle(generatorPoint.position, 0.2f, whatIsRoom))
-            {
-                MoveGenerationPoint();
-            }
-        }
-
-
-
-        // Shoplayout generieren
-        if (includeShop)
-        {
-            int shopSelector = Random.Range(minDistanceToShop, maxDistanceToShop);
-            shopRoom = layoutRoomObjects[shopSelector];
-            layoutRoomObjects.RemoveAt(shopSelector);
-            shopRoom.GetComponent<SpriteRenderer>().color = shopColor;
-        }
-        
-        
-        
-        // Waffenraumlayout generieren
-        if (includeGunRoom)
-        {
-            int gunRoomSelector = Random.Range(minDistanceToGunRoom, maxDistanceToGunRoom);
-            gunRoom = layoutRoomObjects[gunRoomSelector];
-            layoutRoomObjects.RemoveAt(gunRoomSelector);
-            gunRoom.GetComponent<SpriteRenderer>().color = gunRoomColor;
-        }
-
-
-
-        // Generiere Startraumkontour
-        CreateRoomOutline(Vector3.zero);
-
-        // Generiere Zwischenraumkontouren
-        foreach (GameObject room in layoutRoomObjects)
-        {
-            CreateRoomOutline(room.transform.position);
-        }
-
-        // Generiere Endraumkonturen
-        CreateRoomOutline(endRoom.transform.position);
-
-        // Generiere Shopraumkontour
-        if (includeShop)
-        {
-            CreateRoomOutline(shopRoom.transform.position);
-        }
-
-        // Generiere Shopraumkontour
-        if (includeGunRoom)
-        {
-            CreateRoomOutline(gunRoom.transform.position);
-        }
-
-
-
-        // Raumkontourliste durchgehen und Raummitten erzeugen
+        GenerateLevelLayout();
+        CreateRoomOutlineLayout();
         CreateRoomCenters();
     }
 
@@ -150,7 +61,7 @@ public class LevelGenerator : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR
-        // DEV Neue Raumkonfiguration generieren
+        // DEV TOOL: GENERATE NEW ROOM CONFIGURATION
         if (Input.GetKey(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -161,11 +72,74 @@ public class LevelGenerator : MonoBehaviour
 
 
     //
-    //  METHODEN
+    //  METHODS
     //
 
-    // Switchfunktion Verschiebung des Generationspunkts
-    public void MoveGenerationPoint()
+    // Generate room stamp layout
+    private void GenerateLevelLayout()
+    {
+        // Generate start room stamp
+        Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation)
+            .GetComponent<SpriteRenderer>()
+            .color = startColor;
+
+        // Move generator point in random direction
+        selectedDirection = (Direction)Random.Range(0, 4);
+        MoveGeneratorPoint();
+
+
+        // Generate rest of the room stamps
+        for (int i = 0; i < distanceToEnd; i++)
+        {
+            GameObject newRoom = Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation);
+
+            // Add room to room layout list
+            layoutRoomObjects.Add(newRoom);
+
+            // Remove exit room from layout list, save it separatly
+            if (i + 1 == distanceToEnd)
+            {
+                newRoom.GetComponent<SpriteRenderer>().color = endColor;
+                layoutRoomObjects.RemoveAt(layoutRoomObjects.Count - 1);
+                endRoom = newRoom;
+            }
+
+
+            // Move generator point in random direction
+            selectedDirection = (Direction)Random.Range(0, 4);
+            MoveGeneratorPoint();
+
+
+            // If a stamp exists at location, move generator point again in random direction
+            while (Physics2D.OverlapCircle(generatorPoint.position, 0.2f, whatIsRoom))
+            {
+                MoveGeneratorPoint();
+            }
+        }
+
+        // Generate shop room stamp, remove it from layout list and save it separatly
+        if (includeShop)
+        {
+            int shopSelector = Random.Range(minDistanceToShop, maxDistanceToShop);
+            shopRoom = layoutRoomObjects[shopSelector];
+            layoutRoomObjects.RemoveAt(shopSelector);
+            shopRoom.GetComponent<SpriteRenderer>().color = shopColor;
+        }
+
+        // Generate gun room stamp, remove it from layout list and save it separatly
+        if (includeGunRoom)
+        {
+            int gunRoomSelector = Random.Range(minDistanceToGunRoom, maxDistanceToGunRoom);
+            gunRoom = layoutRoomObjects[gunRoomSelector];
+            layoutRoomObjects.RemoveAt(gunRoomSelector);
+            gunRoom.GetComponent<SpriteRenderer>().color = gunRoomColor;
+        }
+    }
+
+
+
+    // Move generator point
+    private void MoveGeneratorPoint()
     {
         switch (selectedDirection)
         {
@@ -188,10 +162,39 @@ public class LevelGenerator : MonoBehaviour
     }
 
 
-    // Funktion Raumkonturen generieren
+    private void CreateRoomOutlineLayout()
+    {
+        // Generate start parent room and its doors and walls
+        CreateRoomOutline(Vector3.zero);
+
+        // Generate rest of the parent room and its walls
+        foreach (GameObject room in layoutRoomObjects)
+        {
+            CreateRoomOutline(room.transform.position);
+        }
+
+        // Generate exit parent room and its doors and walls
+        CreateRoomOutline(endRoom.transform.position);
+
+        // Generate shop parent room and its doors and walls
+        if (includeShop)
+        {
+            CreateRoomOutline(shopRoom.transform.position);
+        }
+
+        // Generate gun parent room and its doors and walls
+        if (includeGunRoom)
+        {
+            CreateRoomOutline(gunRoom.transform.position);
+        }
+    }
+
+
+
+    // Generate parent room and its walls
     private void CreateRoomOutline(Vector3 roomPosition)
     {
-        // Überprüfen ob andere Räume abgrenzen
+        // Check if room stamp has adjacent neighbors
         bool roomAbove = Physics2D.OverlapCircle( roomPosition + new Vector3(0f, yOffset, 0f), 0.2f, whatIsRoom );
         bool roomBelow = Physics2D.OverlapCircle( roomPosition + new Vector3(0f, -yOffset, 0f), 0.2f, whatIsRoom );
         bool roomLeft = Physics2D.OverlapCircle( roomPosition + new Vector3(-xOffset, 0f, 0f), 0.2f, whatIsRoom );
@@ -200,7 +203,8 @@ public class LevelGenerator : MonoBehaviour
         GameObject newParentRoom = Instantiate(parentRoom, roomPosition, transform.rotation);
         generatedOutlines.Add(newParentRoom);
 
-        //
+
+        // Generate room wall top
         if (roomAbove)
         {
             Instantiate(roomWalls.doorUp, roomPosition, transform.rotation, newParentRoom.transform);
@@ -210,7 +214,8 @@ public class LevelGenerator : MonoBehaviour
             Instantiate(roomWalls.wallUp, roomPosition, transform.rotation, newParentRoom.transform);
         }
 
-        //
+
+        // Generate room wall bottom
         if (roomBelow)
         {
             Instantiate(roomWalls.doorDown, roomPosition, transform.rotation, newParentRoom.transform);
@@ -221,7 +226,7 @@ public class LevelGenerator : MonoBehaviour
         }
 
 
-        //
+        // Generate room wall left
         if (roomLeft)
         {
             Instantiate(roomWalls.doorLeft, roomPosition, transform.rotation, newParentRoom.transform);
@@ -231,7 +236,8 @@ public class LevelGenerator : MonoBehaviour
             Instantiate(roomWalls.wallLeft, roomPosition, transform.rotation, newParentRoom.transform);
         }
 
-        //
+
+        // Generate room wall right
         if (roomRight)
         {
             Instantiate(roomWalls.doorRight, roomPosition, transform.rotation, newParentRoom.transform);
@@ -244,34 +250,34 @@ public class LevelGenerator : MonoBehaviour
 
 
 
-    // Funktion Raummitten generieren
+    // Generate room centers
     private void CreateRoomCenters()
     {
         foreach (GameObject outline in generatedOutlines)
         {
             if (outline.transform.position == Vector3.zero)
             {
-                // Falls es die Startraumkoordinaten sind, Startraum erzeugen
+                // Generate start room center
                 Instantiate(centerStart, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
             }
             else if (outline.transform.position == endRoom.transform.position)
             {
-                // Falls es die Endraumkoordinaten sind, Endraum erzeugen
+                // Generate exit room center
                 Instantiate(centerEnd, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
             }
             else if (outline.transform.position == shopRoom.transform.position)
             {
-                // Falls es die Endraumkoordinaten sind, Shopraum erzeugen
+                // Generate shop room center
                 Instantiate(centerShop, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
             }
             else if (outline.transform.position == gunRoom.transform.position)
             {
-                // Falls es die Endraumkoordinaten sind, Shopraum erzeugen
+                // Generate gun room center
                 Instantiate(centerGunRoom, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
             }
             else
             {
-                // Sonst beliebige Raummitten der Zwischenräume erstellen
+                // Generate random standard room center
                 int randomRoomCenter = Random.Range(0, potentialCenters.Length);
                 Instantiate(potentialCenters[randomRoomCenter], outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
             }
@@ -280,7 +286,8 @@ public class LevelGenerator : MonoBehaviour
 }
 
 
-// REF Klasse aller möglichen Raumeingangstypen
+
+// Container class with all potential wall and door game objects
 [System.Serializable]
 public class RoomWallPrefabs
 {
