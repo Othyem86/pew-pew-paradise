@@ -6,7 +6,7 @@ public class BrokenPieces : MonoBehaviour
 {
     // Variables broken pieces movement
     public float moveSpeed = 3f;                // REF movement speed pieces
-    private Vector3 moveDirection;              // Richtung der Bewegung
+    private Vector3 moveDirection;              // Direction vector of the pieces
     public float deceleration = 5f;             // REF deceleration of pieces movement
 
     // Variables remove broken pieces
@@ -37,7 +37,7 @@ public class BrokenPieces : MonoBehaviour
     //  METHODS
     //
 
-    // Method move broken pieces
+    // Move broken pieces
     private void MoveBrokenPieces()
     {
         transform.position += moveDirection * Time.deltaTime;
@@ -48,7 +48,7 @@ public class BrokenPieces : MonoBehaviour
 
 
 
-    // Method remove pieces after lifetime comes to an end
+    // Remove pieces after lifetime comes to an end
     private void FadeOutBrokenPieces()
     {
         lifeTime -= Time.deltaTime;

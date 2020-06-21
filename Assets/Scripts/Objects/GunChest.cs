@@ -15,8 +15,8 @@ public class GunChest : MonoBehaviour
     public Transform spawnPoint;                    // REF generation point of the drop
     public GunPickup[] potentialGunDrops;           // REF array of all the possible drops
     public float scaleSpeed = 3f;                   // REF speend open animation
-    private bool canOpen;                           // if the player can open the chest
-    private bool isOpen;                            // if the player has opened the chest
+    private bool canOpen;                           // If the player can open the chest
+    private bool isOpen;                            // If the player has opened the chest
 
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class GunChest : MonoBehaviour
     // METHODS
     //
 
-    // Method open chest
+    // Open chest
     private void OpenChest()
     {
         if(canOpen && !isOpen)
@@ -58,7 +58,7 @@ public class GunChest : MonoBehaviour
 
 
 
-    // Method player near weapon chest
+    // Player near weapon chest
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player" && !isOpen)
@@ -70,7 +70,7 @@ public class GunChest : MonoBehaviour
 
 
 
-    // Method player not near weapon chest
+    // Player not near weapon chest
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")

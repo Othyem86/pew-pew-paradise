@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour
     //  METHODS
     //
 
-    // Method play game over music
+    // Play game over music
     public void PlayGameOver()
     {
         levelMusic.Stop();
@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    // Method play victory music
+    // Play victory music
     public void PlayLevelWin()
     {
         levelMusic.Stop();
@@ -45,7 +45,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    // Method play sound effect
+    // Play sound effect
     public void PlaySFX(int sfxToPlay)
     {
         sfx[sfxToPlay].Stop();

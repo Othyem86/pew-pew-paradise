@@ -7,7 +7,7 @@ public class ShopItem : MonoBehaviour
 {
     // Variables Shop
     public GameObject buyMessage;       // REF buy message
-    private bool inBuyZone;             // if player is in the buy area
+    private bool inBuyZone;             // If player is in the buy area
 
     // Variables Buy health related items
     [Header("Item parameters")]
@@ -22,7 +22,7 @@ public class ShopItem : MonoBehaviour
     public Gun[] potentialGuns;         // REF array of all possible weapons items on sale
     private Gun theGun;                 // the randomly generated weapon item on sale
     public SpriteRenderer gunSprite;    // Sprite of weapon item on sale
-    public Text infoText;               // price info of weapon item on sale
+    public Text infoText;               // Price info of weapon item on sale
 
 
     // Start is called before the first frame update
@@ -44,7 +44,7 @@ public class ShopItem : MonoBehaviour
     //  METHODS
     //
 
-    // Method display random weapon
+    // Display random weapon
     private void DisplayRandomWeapon()
     {
         if (isWeapon)
@@ -60,7 +60,7 @@ public class ShopItem : MonoBehaviour
 
 
 
-    // Method activate buy message when player leaves buy area
+    // Activate buy message when player leaves buy area
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -72,7 +72,7 @@ public class ShopItem : MonoBehaviour
 
 
 
-    // Method activate buy message when player leaves buy area
+    // Activate buy message when player leaves buy area
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -84,7 +84,7 @@ public class ShopItem : MonoBehaviour
 
 
 
-    // Method buy item
+    // Buy item
     private void BuyItem()
     {
         if (inBuyZone)

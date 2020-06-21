@@ -34,13 +34,13 @@ public class RoomCenter : MonoBehaviour
     //  METHODS
     //
 
-    // Method trigger open room doors when no more enemies in room
+    // Trigger open room doors when no more enemies in room
     private void TriggerOpenRoomDoors()
     {
-        // check if there are any enemies stil in the room
+        // Check if there are any enemies stil in the room
         if (enemies.Count > 0 && theRoom.roomActive && openWhenEnemiesCleared)
         {
-            // if an enemy is destroyed (null values in list), remove said index from the list
+            // If an enemy is destroyed (null values in list), remove said index from the list
             for (int i = 0; i < enemies.Count; i++)
             {
                 if (enemies[i] == null)
@@ -51,7 +51,7 @@ public class RoomCenter : MonoBehaviour
             }
 
 
-            // deactivate doors when no more enemies
+            // Deactivate doors when no more enemies
             if (enemies.Count == 0)
             {
                 theRoom.OpenDoors();

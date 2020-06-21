@@ -14,10 +14,10 @@ public class Room : MonoBehaviour
 
 
     //
-    //  METHODEN
+    //  METHODS
     //
 
-    // Method deactivate all doors
+    // Deactivate all doors
     public void OpenDoors()
     {
         closedWhenEntered = false;
@@ -29,14 +29,15 @@ public class Room : MonoBehaviour
     }
 
 
-    // Method activate room, move camera to active room
+
+    // Activate room, move camera to active room
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             CameraController.instance.ChangeCameraTarget(transform);
 
-            // activate room doors on player enter
+            // Activate room doors on player enter
             if (closedWhenEntered)
             {
                 foreach (GameObject door in doors)
@@ -47,13 +48,14 @@ public class Room : MonoBehaviour
 
             roomActive = true;
 
-            // deactivate room mask
+            // Deactivate room mask
             mapHider.SetActive(false);
         }
     }
 
 
-    // Method deactivate room on player exit
+
+    // Deactivate room on player exit
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")

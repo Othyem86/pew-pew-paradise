@@ -5,12 +5,12 @@ using UnityEngine;
 public class CharacterUnlockCage : MonoBehaviour
 {
     // Variables unlock cage
-    private bool canUnlock;                                 // if cage can be unlocked
+    private bool canUnlock;                                 // If cage can be unlocked
     public GameObject message;                              // REF cage unlock message
 
     // Variabeln Charakter auswählen
     public CharacterSelector[] characterSelectors;          // REF array of all possible unlockable characters
-    private CharacterSelector playerToUnlock;               // character to be randomly chosen
+    private CharacterSelector playerToUnlock;               // Character to be randomly chosen
     public SpriteRenderer cagedSR;                          // REF SpriteRenderer of the character to be randomly chosen
 
 
@@ -37,7 +37,7 @@ public class CharacterUnlockCage : MonoBehaviour
     //  METHODS
     //
 
-    // Method unlock cage
+    // Unlock cage
     private void UnlockCage()
     {
         if (canUnlock && Input.GetKeyDown(KeyCode.E))
@@ -50,7 +50,9 @@ public class CharacterUnlockCage : MonoBehaviour
         }
     }
 
-    // Method player near cage
+
+
+    // Player near cage
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -62,7 +64,7 @@ public class CharacterUnlockCage : MonoBehaviour
 
 
 
-    // Method player not near cage
+    // Player not near cage
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")

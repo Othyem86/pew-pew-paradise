@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterSelector : MonoBehaviour
 {
     // Variables choose characters
-    private bool canSelect;                             // if character is selectable
+    private bool canSelect;                             // If character is selectable
     public GameObject message;                          // REF choose character message
     public PlayerController playerToSpawn;              // REF character object that should pe spawned
     public bool shouldUnlock;                           // REF if the character is unlockable
@@ -46,7 +46,7 @@ public class CharacterSelector : MonoBehaviour
     // METHODS
     //
 
-    // Method change character
+    // Change character
     private void SwitchCharacter()
     {
         if (canSelect && Input.GetKeyDown(KeyCode.E))
@@ -72,7 +72,7 @@ public class CharacterSelector : MonoBehaviour
 
 
 
-    // Method if player near selectable character
+    // Player near selectable character
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -84,7 +84,7 @@ public class CharacterSelector : MonoBehaviour
 
 
 
-    // Method player not near selectable character
+    // Player not near selectable character
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")

@@ -34,7 +34,7 @@ public class Gun : MonoBehaviour
     // METHODS
     //
 
-    // Method shoot gun
+    // Shoot gun
     private void GunShoot()
     {
         // Shoot bullets each mouse click, or continue shooting them if mouse button is held down

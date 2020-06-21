@@ -34,7 +34,7 @@ public class EnemyController : MonoBehaviour
     [Header("Patrolling")]
     public bool shouldPatrol;               // REF if enemy should patrol
     public Transform[] patrolPoints;        // REF array of all patrol waypoints
-    private int currentPatrolPoint;         // next waypoint 
+    private int currentPatrolPoint;         // Next waypoint 
 
     // Variables enemy hitpoints
     [Header("Hitpoints")]
@@ -97,10 +97,10 @@ public class EnemyController : MonoBehaviour
 
 
     //
-    //  METHODs
+    //  METHODS
     //
 
-    // Method damage enemy
+    // Damage enemy
     public void DamageEnemy(int damage)
     {
         // Subtract damage from hitpoints and generate damage animation
@@ -135,7 +135,7 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Method Enemy chase, roam and patrol
+    // Enemy chase, roam and patrol
     private void EnemyMove()
     {
         if (shouldChasePlayer && Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer)
@@ -158,7 +158,7 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Method enemy roam
+    // Enemy roam
     private void EnemyWander()
     {
         // Move between pausing
@@ -188,7 +188,7 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Method patrol
+    // Enemy atrol
     private void EnemyPatrol()
     {
         moveDirection = patrolPoints[currentPatrolPoint].position - transform.position;
@@ -208,7 +208,7 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Method shoot
+    // Enemy shoot
     private void EnemyShoot()
     {
         // Shoot player if player in range
@@ -227,7 +227,7 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Method enemy animation
+    // Enemy animation
     private void AnimateEnemy()
     {
         // Animation-switch for moving and standing still

@@ -7,7 +7,7 @@ public class CharSelectManager : MonoBehaviour
     // Instancing the class
     public static CharSelectManager instance;
 
-    // Variables charactermanager
+    // Variables character manager
     public PlayerController activePlayer;               // REF the active player controller
     public CharacterSelector activeCharSelect;          // REF the active character selector
 

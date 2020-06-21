@@ -91,7 +91,7 @@ public class UIController : MonoBehaviour
     // METHODS
     //
 
-    // Method start fade to black
+    // Start fade to black
     public void StartFadeToBlack()
     {
         fadeToBlack = true;
@@ -100,7 +100,7 @@ public class UIController : MonoBehaviour
 
 
 
-    // Method fade in/out fadescreen
+    // Fade in/out fadescreen
     private void FadeScreen(float alpha)
     {
         fadeScreen.color = new Color
@@ -115,7 +115,7 @@ public class UIController : MonoBehaviour
 
 
 
-    // Method new game and set game speed to 1
+    // Start new game and set game speed to 1
     public void NewGame()
     {
         Time.timeScale = 1;
@@ -125,7 +125,7 @@ public class UIController : MonoBehaviour
 
 
 
-    // Method to main menu and set game speed to 1
+    // Go to main menu and set game speed to 1
     public void MainMenu() 
     {
         Time.timeScale = 1;
@@ -135,7 +135,7 @@ public class UIController : MonoBehaviour
 
 
 
-    // Method end pause
+    // End pause
     public void Resume()
     {
         LevelManager.instance.PauseUnpause();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelExit : MonoBehaviour
 {
-    // Method change scene if player enters area
+    // Change scene if player enters level exit area
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")

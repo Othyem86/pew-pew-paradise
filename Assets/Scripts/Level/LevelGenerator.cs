@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelGenerator : MonoBehaviour
 {
-    // Variabeln Levelparameter
+    // Variables Levelparameter
     [Header("Level Parameters")]
     public int distanceToEnd;                                               // REF Anzahl der Räume bis Ausgangraum
     public bool includeGunRoom;                                             // REF Ob es einen Waffenraum haben soll
@@ -15,7 +15,7 @@ public class LevelGenerator : MonoBehaviour
     public int minDistanceToShop;                                           // REF Mindestanzahl Räume bis Shopraum
     public int maxDistanceToShop;                                           // REF Mindestanzahl Räume bis Shopraum
 
-    // Variabeln Raumgenerierung
+    // Variables Raumgenerierung
     [Header("Room Generation")]
     public GameObject layoutRoom;                                           // REF Raumobjekt
     public Transform generatorPoint;                                        // REF Referenzpunkt für die Raumgenerierung
@@ -25,7 +25,7 @@ public class LevelGenerator : MonoBehaviour
     public float yOffset = 10f;                                             // REF Bewegung Generationspunk y-Achse
     public LayerMask whatIsRoom;                                            // REF Layer der iteriert werden soll
 
-    // Variabeln Raumverfolgung
+    // Variables Raumverfolgung
     [Header("Room Colors")]
     public Color startColor;                                                // REF Startraumfarbe
     public Color endColor;                                                  // REF Endraumfarbe
@@ -38,7 +38,7 @@ public class LevelGenerator : MonoBehaviour
     private List<GameObject> generatedOutlines = new List<GameObject>();    // REF Liste aller generierten Raumkontouren
     public RoomPrefabs rooms;                                               // REF alle Raumkonturtypen
 
-    // Variabeln Raummitten
+    // Variables Raummitten
     [Header("Room Centers")]
     public RoomCenter centerStart;                                          // REF Raummitte Start
     public RoomCenter centerGunRoom;                                        // REF Raummitte Waffenraum
@@ -50,7 +50,7 @@ public class LevelGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Startraum Generieren
+        // Generate start room
         Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation)
             .GetComponent<SpriteRenderer>()
             .color = startColor;

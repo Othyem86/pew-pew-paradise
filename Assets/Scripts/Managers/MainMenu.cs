@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
     //  METHODS
     //
 
-    // Method start game
+    // Start the game
     public void StartGame()
     {
         SceneManager.LoadScene(levelToLoad);
@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
 
 
 
-    // Method end program
+    // End the program
     public void ExitGame()
     {
         Application.Quit();
@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
 
 
 
-    // Method prompt player if he is sure
+    // Prompt player if he is sure he wants to delete PlayerPrefs
     public void DeleteSave()
     {
         deletePanel.SetActive(true);
@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour
 
 
 
-    // Method cancel delete command
+    // Cancel delete PlayerPrefs command
     public void CancelDelete()
     {
         deletePanel.SetActive(false);
@@ -49,7 +49,7 @@ public class MainMenu : MonoBehaviour
 
 
 
-    // Method delete character unlocks in PlayerPrefs
+    // Delete character unlocks in PlayerPrefs
     public void ConfirmDelete()
     {
         foreach(CharacterSelector theCharacter in charactersToDelete)

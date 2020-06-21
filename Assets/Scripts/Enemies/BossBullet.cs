@@ -6,7 +6,7 @@ public class BossBullet : MonoBehaviour
 {
     // Variabels boss bullet
     public float speed;             // REF boss bullet speed
-    private Vector3 direction;      // boss bullet direction
+    private Vector3 direction;      // Boss bullet direction
 
 
     // Start is called before the first frame update
@@ -19,7 +19,7 @@ public class BossBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // define the direction and the speed
+        // Define bullet direction and speed
         transform.position += direction * speed * Time.deltaTime;
 
         if (!BossController.instance.gameObject.activeInHierarchy)
@@ -34,7 +34,7 @@ public class BossBullet : MonoBehaviour
     //  METHODS
     //
 
-    // Method enemy bullet collision events
+    // Enemy bullet collision events
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -48,7 +48,7 @@ public class BossBullet : MonoBehaviour
 
 
 
-    // Method destroy enemy bullet when not visible on screen
+    // Destroy enemy bullet when not visible on screen
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

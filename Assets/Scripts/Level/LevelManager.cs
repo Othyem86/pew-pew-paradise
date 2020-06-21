@@ -33,14 +33,14 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // move player to starting point
+        // >ove player to starting point
         PlayerController.instance.transform.position = startPoint.position;
         PlayerController.instance.canMove = true;
 
-        // set currency amount according to values in character tracker
+        // Set currency amount according to values in character tracker
         currentCoins = CharacterTracker.instance.currentCoins;
 
-        // set game speed to 1
+        // Set game speed to 1
         Time.timeScale = 1;
 
         // UI Update
@@ -63,7 +63,7 @@ public class LevelManager : MonoBehaviour
     //  METHODS
     //
 
-    // Method Coroutine for changing the scene
+    // Coroutine for changing the scene
     public IEnumerator LevelEnd()
     {
         // turn off player movement before scene change
@@ -72,18 +72,18 @@ public class LevelManager : MonoBehaviour
         UIController.instance.StartFadeToBlack();
         yield return new WaitForSeconds(waitToLoad);
 
-        // save current hitpoints, max hitpoints and currency amount
+        // Save current hitpoints, max hitpoints and currency amount
         CharacterTracker.instance.currentCoins = currentCoins;
         CharacterTracker.instance.currentHealth = PlayerHealthController.instance.currentHealth;
         CharacterTracker.instance.maxHealth = PlayerHealthController.instance.maxHealth;
 
-        // change scene
+        // Change scene
         SceneManager.LoadScene(nextLevel);
     }
 
 
 
-    // Method pause game
+    // Pause game
     public void PauseUnpause()
     {
         if (!ispaused)
@@ -102,7 +102,7 @@ public class LevelManager : MonoBehaviour
 
 
 
-    // Method get coins
+    // Get coins
     public void GetCoins(int amount)
     {
         currentCoins += amount;
@@ -113,7 +113,7 @@ public class LevelManager : MonoBehaviour
     
     
 
-    // Method spend coins
+    // Spend coins
     public void SpendCoins(int amount)
     {
         currentCoins -= amount;

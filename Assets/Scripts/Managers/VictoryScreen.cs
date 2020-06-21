@@ -14,7 +14,7 @@ public class VictoryScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // set game speed to 1
+        // Set game speed to 1
         Time.timeScale = 1;
         Destroy(PlayerController.instance.gameObject);
     }
@@ -22,7 +22,7 @@ public class VictoryScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if countdown not zero, start or resume it
+        // If countdown not zero, start or resume it
         if (waitForAnyKey > 0)
         {
             waitForAnyKey -= Time.deltaTime;
@@ -33,7 +33,7 @@ public class VictoryScreen : MonoBehaviour
         }
         else 
         {
-            // return to main menu scene if any key is pressed
+            // Return to main menu scene if any key is pressed
             if (Input.anyKeyDown)
             {
                 SceneManager.LoadScene(mainMenuScene);

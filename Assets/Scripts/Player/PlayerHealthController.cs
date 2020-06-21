@@ -14,7 +14,7 @@ public class PlayerHealthController : MonoBehaviour
 
     // Variabeln Unverletzbarkeit
     public float damageInvinceDuration = 1f;    // REF duration of invincibility
-    private float invinceCount;                 // counter until invincibility's end
+    private float invinceCount;                 // Counter until invincibility's end
 
 
     // Before Start()
@@ -48,7 +48,7 @@ public class PlayerHealthController : MonoBehaviour
     //  METHODS
     //
 
-    // Method make player invincible and transparent
+    // Make player invincible and transparent
     private void MakePlayerInvincible()
     {
         if (invinceCount > 0)
@@ -64,7 +64,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Method damage and kill player
+    // Damage and kill player
     public void DamagePlayer()
     {
         // Inflict damage if not invincible
@@ -93,7 +93,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Method update hitpoints in the UI
+    // Update hitpoints in the UI
     private void updateHealthUI()
     {
         UIController.instance.healthSlider.value = currentHealth;
@@ -102,7 +102,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Method toggle player body sprite transparency
+    // Toggle player body sprite transparency
     private void SetBodyAlpha(float alphaValue)
     {
         PlayerController.instance.bodySR.color = new Color
@@ -116,7 +116,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Method make player invincible
+    // Make player invincible
     public void MakeInvincible(float length)
     {
         invinceCount = length;
@@ -125,7 +125,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Method heal player
+    // Heal player
     public void HealPlayer(int healAmount)
     {
         currentHealth += healAmount;
@@ -140,7 +140,7 @@ public class PlayerHealthController : MonoBehaviour
 
 
 
-    // Method extend player maximum hitpoints
+    // Extend player maximum hitpoints
     public void IncreaseMaxHealth(int amount)
     {
         maxHealth += amount;

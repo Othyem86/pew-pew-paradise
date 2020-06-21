@@ -11,14 +11,14 @@ public class CameraController : MonoBehaviour
     [Header("Camera Movement")]
     public float moveSpeed;         // REF Geschwindigkeit der Kamera
     public Transform target;        // REF Zielorientierung der Kamera
-    public bool isBossRoom;         // if level is a boss room
+    public bool isBossRoom;         // If level is a boss room
 
     // Variables map
     [Header("Map Camera")]
     public Camera mainCamera;       // REF main camera
     public Camera bigMapCamera;     // REF map camera
-    private bool bigMapActive;      // if map camera is active
-    private bool miniMapActive;     // if minimap is active
+    private bool bigMapActive;      // If map camera is active
+    private bool miniMapActive;     // If minimap is active
 
 
     public void Awake()
@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour
     //  METHODS
     //
 
-    // Method change camera target
+    // Change camera target
     public void ChangeCameraTarget(Transform newTarget)
     {
         target = newTarget;
@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    // Method move camera to target
+    // Move camera to target
     private void MoveCameraToTarget()
     {
         if (target != null)
@@ -74,7 +74,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    // Method toggle minimap
+    // Toggle minimap
     private void ToggleMiniMap()
     {
         if (Input.GetKeyDown(KeyCode.Tab) && !bigMapActive && !isBossRoom)
@@ -86,7 +86,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    // Method toggle big map camera
+    // Toggle big map camera
     private void ToggleBigMap()
     {
         if (Input.GetKeyDown(KeyCode.M) && !isBossRoom)
@@ -104,7 +104,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    // Method activate big map
+    // Activate big map
     public void ActivateBigMap()
     {
         if (!LevelManager.instance.ispaused)
@@ -114,14 +114,14 @@ public class CameraController : MonoBehaviour
             bigMapCamera.enabled = true;
             mainCamera.enabled = false;
 
-            // pause game and deactivat minimap
+            // Pause game and deactivat minimap
             PlayerController.instance.canMove = false;
             Time.timeScale = 0f;
 
-            // always deactivate minimap
+            // Always deactivate minimap
             UIController.instance.mapDisplay.SetActive(false);
 
-            // toggle map text
+            // Toggle map text
             UIController.instance.miniMapText.SetActive(false);
             UIController.instance.bigMapText.SetActive(true);
 
@@ -130,7 +130,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    // Method deactivate big map
+    // Deactivate big map
     public void DeactivateBigMap()
     {
         if (!LevelManager.instance.ispaused)
@@ -140,17 +140,17 @@ public class CameraController : MonoBehaviour
             bigMapCamera.enabled = false;
             mainCamera.enabled = true;
 
-            // Spiel fortsetzen
+            // Continue game
             PlayerController.instance.canMove = true;
             Time.timeScale = 1f;
 
-            // Minimap nur reaktivieren, wenn es vorher aktiv war
+            // Reactivate minimap only if it was active prior big map
             if (miniMapActive)
             {
                 UIController.instance.mapDisplay.SetActive(true);
             }
 
-            // Kartentexte schalten
+            // Toggle map texts
             UIController.instance.bigMapText.SetActive(false);
             UIController.instance.miniMapText.SetActive(true);
         }

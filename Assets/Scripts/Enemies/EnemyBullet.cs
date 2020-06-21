@@ -6,7 +6,7 @@ public class EnemyBullet : MonoBehaviour
 {
     // Variables enemy bullet
     public float speed;             // REF enemy bullet speed
-    private Vector3 direction;      // bullet direction vector
+    private Vector3 direction;      // Bullet direction vector
 
 
     // Start is called before the first frame update
@@ -20,7 +20,7 @@ public class EnemyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Richtung und Geschwindigkeit ohne RigidBody definieren
+        // Define bullet direction and speed
         transform.position += direction * speed * Time.deltaTime;
     }
 
@@ -30,7 +30,7 @@ public class EnemyBullet : MonoBehaviour
     //  METHODS
     //
 
-    // Method enemy bullet collision events
+    // Enemy bullet collision events
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -44,7 +44,7 @@ public class EnemyBullet : MonoBehaviour
 
 
 
-    // Method destroy enemy bullet when not visible on screen
+    // Destroy enemy bullet when not visible on screen
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

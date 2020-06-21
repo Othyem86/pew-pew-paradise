@@ -22,7 +22,7 @@ public class Breakables : MonoBehaviour
     //  METHODS
     //
     
-    // Methode collision with player or player bullet
+    // Collision with player or player bullet
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Destroy original object, generate between 1 and 6 broken pieces

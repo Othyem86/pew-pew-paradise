@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public bool canMove = true;                         // REF if player can move
     public float moveSpeed;                             // REF player move speed
-    private float activeMoveSpeed;                      // momentary player move speed
-    private Vector2 moveInput;                          // movement direction input
+    private float activeMoveSpeed;                      // Momentary player move speed
+    private Vector2 moveInput;                          // Movement direction input
     public Rigidbody2D theRB;                           // REF player rigid body
     public Transform gunArm;                            // REF coordinates gun arm
     public Animator anim;                               // REF animation
@@ -26,23 +26,23 @@ public class PlayerController : MonoBehaviour
     public float dashLength = 0.5f;                     // REF dash distance
     public float dashCoolDown = 1f;                     // REF dash cooldown
     public float dashInvincDuration = 0.5f;             // REF duration dash invincibility
-    private float dashCoolDownCounter;                  // counter until next dash is available
+    private float dashCoolDownCounter;                  // Counter until next dash is available
     [HideInInspector]
-    public float dashCounter;                           // counter until dash invincibility ends
+    public float dashCounter;                           // Counter until dash invincibility ends
 
     // Variabels weapons
     [Header("Weapons")]
     public List<Gun> availableGuns = new List<Gun>();   // REF list of all available weapons
     [HideInInspector]
-    public int currentGun;                              // index of the current active weapon
+    public int currentGun;                              // Index of the current active weapon
 
 
-    // before Start()
+    // Before Start()
     public void Awake()
     {
         instance = this;
 
-        // don't destroy player object on scene transition
+        // Don't destroy player object on scene transition
         DontDestroyOnLoad(gameObject);
     }
 
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // set standard movement speed
+        // Set standard movement speed
         activeMoveSpeed = moveSpeed;
 
         UpdateGunUI();
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     //  METHODS
     //
 
-    // Method move player
+    // Move player
     private void MovePlayer()
     {
         // Get user input and normalize the vectors
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // Method stop player
+    // Stop player
     private void StopPlayer()
     {
         // set player speed to zero
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // Method player mouse-aim
+    // Player mouse-aim
     private void PlayerAim()
     {
         // Get mouse screen coordinates, trasnform global player position as screen coordinates
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // Method player dash
+    // Player dash
     private void PlayerDash()
     {
         // Dash on spacebar
