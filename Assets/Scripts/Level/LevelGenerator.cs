@@ -253,33 +253,33 @@ public class LevelGenerator : MonoBehaviour
     // Generate room centers
     private void CreateRoomCenters()
     {
-        foreach (GameObject outline in generatedOutlines)
+        foreach (GameObject parentOutline in generatedOutlines)
         {
-            if (outline.transform.position == Vector3.zero)
+            if (parentOutline.transform.position == Vector3.zero)
             {
                 // Generate start room center
-                Instantiate(centerStart, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
+                Instantiate(centerStart, parentOutline.transform.position, transform.rotation).theRoom = parentOutline.GetComponent<Room>();
             }
-            else if (outline.transform.position == endRoom.transform.position)
+            else if (parentOutline.transform.position == endRoom.transform.position)
             {
                 // Generate exit room center
-                Instantiate(centerEnd, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
+                Instantiate(centerEnd, parentOutline.transform.position, transform.rotation).theRoom = parentOutline.GetComponent<Room>();
             }
-            else if (outline.transform.position == shopRoom.transform.position)
+            else if (parentOutline.transform.position == shopRoom.transform.position)
             {
                 // Generate shop room center
-                Instantiate(centerShop, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
+                Instantiate(centerShop, parentOutline.transform.position, transform.rotation).theRoom = parentOutline.GetComponent<Room>();
             }
-            else if (outline.transform.position == gunRoom.transform.position)
+            else if (parentOutline.transform.position == gunRoom.transform.position)
             {
                 // Generate gun room center
-                Instantiate(centerGunRoom, outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
+                Instantiate(centerGunRoom, parentOutline.transform.position, transform.rotation).theRoom = parentOutline.GetComponent<Room>();
             }
             else
             {
                 // Generate random standard room center
                 int randomRoomCenter = Random.Range(0, potentialCenters.Length);
-                Instantiate(potentialCenters[randomRoomCenter], outline.transform.position, transform.rotation).theRoom = outline.GetComponent<Room>();
+                Instantiate(potentialCenters[randomRoomCenter], parentOutline.transform.position, transform.rotation).theRoom = parentOutline.GetComponent<Room>();
             }
         }
     }
