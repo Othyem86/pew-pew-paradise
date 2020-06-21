@@ -83,6 +83,8 @@ MonoBehaviour:
   maxDistanceToShop: 6
   layoutRoom: {fileID: 1919034691639133825, guid: b8ad3d1627c58bc43aca1cb9a16e70f1,
     type: 3}
+  parentRoom: {fileID: 1272805626275447133, guid: dc72bdbf7fa6e11429ea63dfa225158c,
+    type: 3}
   generatorPoint: {fileID: 2835945768316007112}
   selectedDirection: 0
   xOffset: 18
@@ -94,36 +96,22 @@ MonoBehaviour:
   endColor: {r: 0.8962264, g: 0, b: 0, a: 1}
   shopColor: {r: 1, g: 0.9271912, b: 0, a: 1}
   gunRoomColor: {r: 0, g: 1, b: 0.63982916, a: 1}
-  rooms:
-    singleRight: {fileID: 7205630617135553045, guid: 23c2e9b2084735543a9df67b501ca8cc,
+  roomWalls:
+    doorUp: {fileID: 7440746099624036836, guid: 0656c1cdbecc1fa49be3767d0fb62a2a,
       type: 3}
-    singleUp: {fileID: 5391547314677478615, guid: be06beb29e764e847a0a1df3cac00c77,
+    doorDown: {fileID: 3776010618132565180, guid: 47d830a9fc1ae2a4eaff4f5e63478acf,
       type: 3}
-    singleLeft: {fileID: 2186328273118386529, guid: dafd10b26b95f7a45a1b86b8f609b5fa,
+    doorLeft: {fileID: 1895894840826459289, guid: fea7419ee71beb84592fabd3571dc9c0,
       type: 3}
-    singleDown: {fileID: 504263867720189494, guid: 1646a591f0ed6794c86c6c8f25f3545f,
+    doorRight: {fileID: 8552354345620862562, guid: dc6f9aba978795e4a8857bcfc175ccda,
       type: 3}
-    doubleLeftRight: {fileID: 6795896633225389619, guid: d5adaa961f51d2c4ab5082aa248a9661,
+    wallUp: {fileID: 6469932441916469440, guid: f69571592c55c6f46bee95136ad6515e,
       type: 3}
-    doubleUpDown: {fileID: 8225492345756616800, guid: 8018b2c7f5a6de64281e20db59e510a6,
+    wallDown: {fileID: 1184069577579758710, guid: 0f079aa874708a1498954dc04b8ecf3e,
       type: 3}
-    doubleUpRight: {fileID: 3621741313982853961, guid: 58531578053f77d4eb745f66acca42cc,
+    wallLeft: {fileID: 1107994534391393794, guid: 22d3cbfceacb65144a1c7d40dad218dd,
       type: 3}
-    doubleDownRight: {fileID: 5726592919655738809, guid: 5942a33db5510994db0c9425b0021855,
-      type: 3}
-    doubleDownLeft: {fileID: 1183906431053925388, guid: a50135ecca4762643b42bcbd9ef36c0f,
-      type: 3}
-    doubleLeftUp: {fileID: 1004870463508329701, guid: 20d15d3463f4d3249b0243ca904e77c7,
-      type: 3}
-    tripleUpRightDown: {fileID: 2890872711298030547, guid: 212b6b421feaf1e4c89c220e047c728c,
-      type: 3}
-    tripleRightDownLeft: {fileID: 3228007426704450566, guid: 4c408188eef3de84796f001d1593d423,
-      type: 3}
-    tripleDownLeftUp: {fileID: 5274316493348146895, guid: e3defd07d33c35d4eb6ca13b31792e7a,
-      type: 3}
-    tripleLeftUpRight: {fileID: 2742355248183306895, guid: 09978613fc381844db3ef447ca78da84,
-      type: 3}
-    fourWay: {fileID: 6605679426355001300, guid: eee5afc95bbd08940bfca620f7696214,
+    wallRight: {fileID: 2794534244852711390, guid: 7f90efe31d2a7bb498ed9516fa6f893e,
       type: 3}
   centerStart: {fileID: 1727840252393576077, guid: e5234405083106949ab04a9e7df36ccd,
     type: 3}

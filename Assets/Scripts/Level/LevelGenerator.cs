@@ -18,6 +18,7 @@ public class LevelGenerator : MonoBehaviour
     // Variables Raumgenerierung
     [Header("Room Generation")]
     public GameObject layoutRoom;                                           // REF Raumobjekt
+    public GameObject parentRoom;                                           //
     public Transform generatorPoint;                                        // REF Referenzpunkt für die Raumgenerierung
     public enum Direction { up, right, down, left };                        // REF Mögliche Richtungen Generationspunkt
     public Direction selectedDirection;                                     // REF Ausgewählte Richtung Generationspunkt
@@ -36,7 +37,7 @@ public class LevelGenerator : MonoBehaviour
     private GameObject gunRoom;                                             // REF Raumobjekt Waffenraum
     private List<GameObject> layoutRoomObjects = new List<GameObject>();    // REF Liste aller generierten Raum-mockups
     private List<GameObject> generatedOutlines = new List<GameObject>();    // REF Liste aller generierten Raumkontouren
-    public RoomPrefabs rooms;                                               // REF alle Raumkonturtypen
+    public RoomWallPrefabs roomWalls;                                       // 
 
     // Variables Raummitten
     [Header("Room Centers")]
@@ -50,7 +51,7 @@ public class LevelGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Generate start room
+        // Generate start room layout
         Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation)
             .GetComponent<SpriteRenderer>()
             .color = startColor;
@@ -196,49 +197,51 @@ public class LevelGenerator : MonoBehaviour
         bool roomLeft = Physics2D.OverlapCircle( roomPosition + new Vector3(-xOffset, 0f, 0f), 0.2f, whatIsRoom );
         bool roomRight = Physics2D.OverlapCircle( roomPosition + new Vector3(xOffset, 0f, 0f), 0.2f, whatIsRoom );
 
+        GameObject newParentRoom = Instantiate(parentRoom, roomPosition, transform.rotation);
+        generatedOutlines.Add(newParentRoom);
 
-        // Anzahl der Eingänge
-        int directionCount = 0;
-
-
-        // Eingänge zählen
-        if (roomAbove)  { directionCount++; }
-        if (roomBelow)  { directionCount++; }
-        if (roomLeft)   { directionCount++; }
-        if (roomRight)  { directionCount++; }
-        
-
-        // Generiere Raumkontouren und addiere sie zu einer Raumkontourliste
-        switch (directionCount)
+        //
+        if (roomAbove)
         {
-            case 1:
-                if (roomAbove) { generatedOutlines.Add( Instantiate(rooms.singleUp, roomPosition, transform.rotation) ); }
-                if (roomBelow) { generatedOutlines.Add( Instantiate(rooms.singleDown, roomPosition, transform.rotation) ); }
-                if (roomLeft) { generatedOutlines.Add( Instantiate(rooms.singleLeft, roomPosition, transform.rotation) ); }
-                if (roomRight) { generatedOutlines.Add( Instantiate(rooms.singleRight, roomPosition, transform.rotation) ); }
-                break;
+            Instantiate(roomWalls.doorUp, roomPosition, transform.rotation, newParentRoom.transform);
+        }
+        else
+        {
+            Instantiate(roomWalls.wallUp, roomPosition, transform.rotation, newParentRoom.transform);
+        }
 
-            case 2:
-                if (roomAbove && roomBelow) { generatedOutlines.Add(Instantiate(rooms.doubleUpDown, roomPosition, transform.rotation)); }
-                if (roomLeft && roomRight) { generatedOutlines.Add(Instantiate(rooms.doubleLeftRight, roomPosition, transform.rotation)); }
-                if (roomAbove && roomRight) { generatedOutlines.Add(Instantiate(rooms.doubleUpRight, roomPosition, transform.rotation)); }
-                if (roomBelow && roomRight) { generatedOutlines.Add(Instantiate(rooms.doubleDownRight, roomPosition, transform.rotation)); }
-                if (roomBelow && roomLeft) { generatedOutlines.Add(Instantiate(rooms.doubleDownLeft, roomPosition, transform.rotation)); }
-                if (roomAbove && roomLeft) { generatedOutlines.Add(Instantiate(rooms.doubleLeftUp, roomPosition, transform.rotation)); }
-                break;
+        //
+        if (roomBelow)
+        {
+            Instantiate(roomWalls.doorDown, roomPosition, transform.rotation, newParentRoom.transform);
+        }
+        else
+        {
+            Instantiate(roomWalls.wallDown, roomPosition, transform.rotation, newParentRoom.transform);
+        }
 
-            case 3:
-                if (!roomLeft) { generatedOutlines.Add(Instantiate(rooms.tripleUpRightDown, roomPosition, transform.rotation)); }
-                if (!roomAbove) { generatedOutlines.Add(Instantiate(rooms.tripleRightDownLeft, roomPosition, transform.rotation)); }
-                if (!roomRight) { generatedOutlines.Add(Instantiate(rooms.tripleDownLeftUp, roomPosition, transform.rotation)); }
-                if (!roomBelow) { generatedOutlines.Add(Instantiate(rooms.tripleLeftUpRight, roomPosition, transform.rotation)); }
-                break;
 
-            case 4:
-                generatedOutlines.Add(Instantiate(rooms.fourWay, roomPosition, transform.rotation));
-                break;
+        //
+        if (roomLeft)
+        {
+            Instantiate(roomWalls.doorLeft, roomPosition, transform.rotation, newParentRoom.transform);
+        }
+        else
+        {
+            Instantiate(roomWalls.wallLeft, roomPosition, transform.rotation, newParentRoom.transform);
+        }
+
+        //
+        if (roomRight)
+        {
+            Instantiate(roomWalls.doorRight, roomPosition, transform.rotation, newParentRoom.transform);
+        }
+        else
+        {
+            Instantiate(roomWalls.wallRight, roomPosition, transform.rotation, newParentRoom.transform);
         }
     }
+
 
 
     // Funktion Raummitten generieren
@@ -279,10 +282,8 @@ public class LevelGenerator : MonoBehaviour
 
 // REF Klasse aller möglichen Raumeingangstypen
 [System.Serializable]
-public class RoomPrefabs
+public class RoomWallPrefabs
 {
-    public GameObject singleRight, singleUp, singleLeft, singleDown,
-        doubleLeftRight, doubleUpDown, doubleUpRight, doubleDownRight,
-        doubleDownLeft, doubleLeftUp, tripleUpRightDown, tripleRightDownLeft,
-        tripleDownLeftUp, tripleLeftUpRight, fourWay;
+    public GameObject doorUp, doorDown, doorLeft, doorRight,
+        wallUp, wallDown, wallLeft, wallRight;
 }
