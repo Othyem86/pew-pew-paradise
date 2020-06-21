@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -208,6 +209,7 @@ public class LevelGenerator : MonoBehaviour
         if (roomAbove)
         {
             Instantiate(roomWalls.doorUp, roomPosition, transform.rotation, newParentRoom.transform);
+            Instantiate(roomWalls.doorHorizontal, roomPosition + new Vector3(0f, 4.5f, 0f), transform.rotation, newParentRoom.GetComponent<Room>().doors.transform);
         }
         else
         {
@@ -219,6 +221,7 @@ public class LevelGenerator : MonoBehaviour
         if (roomBelow)
         {
             Instantiate(roomWalls.doorDown, roomPosition, transform.rotation, newParentRoom.transform);
+            Instantiate(roomWalls.doorHorizontal, roomPosition + new Vector3(0f, -4.5f, 0f), transform.rotation, newParentRoom.GetComponent<Room>().doors.transform);
         }
         else
         {
@@ -230,6 +233,7 @@ public class LevelGenerator : MonoBehaviour
         if (roomLeft)
         {
             Instantiate(roomWalls.doorLeft, roomPosition, transform.rotation, newParentRoom.transform);
+            Instantiate(roomWalls.doorVertical, roomPosition + new Vector3(-8.5f, 0f, 0f), transform.rotation, newParentRoom.GetComponent<Room>().doors.transform);
         }
         else
         {
@@ -241,6 +245,7 @@ public class LevelGenerator : MonoBehaviour
         if (roomRight)
         {
             Instantiate(roomWalls.doorRight, roomPosition, transform.rotation, newParentRoom.transform);
+            Instantiate(roomWalls.doorVertical, roomPosition + new Vector3(8.5f, 0f, 0f), transform.rotation, newParentRoom.GetComponent<Room>().doors.transform);
         }
         else
         {
@@ -291,6 +296,6 @@ public class LevelGenerator : MonoBehaviour
 [System.Serializable]
 public class RoomWallPrefabs
 {
-    public GameObject doorUp, doorDown, doorLeft, doorRight,
-        wallUp, wallDown, wallLeft, wallRight;
+    public GameObject doorUp, doorDown, doorLeft, doorRight, wallUp, 
+        wallDown, wallLeft, wallRight, doorVertical, doorHorizontal;
 }

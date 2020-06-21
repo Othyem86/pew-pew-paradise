@@ -9,7 +9,7 @@ public class Room : MonoBehaviour
     [HideInInspector]
     public bool roomActive;                                     // REF if room is active
     public GameObject mapHider;                                 // REF mask for big map and minimap
-    public List<GameObject> doors;                              // REF array of all room doors
+    public GameObject doors;                                    // REF array of all room doors
 
 
 
@@ -21,11 +21,7 @@ public class Room : MonoBehaviour
     public void OpenDoors()
     {
         closedWhenEntered = false;
-
-        foreach (GameObject door in doors)
-        {
-            door.SetActive(false);
-        }
+        doors.SetActive(false);
     }
 
 
@@ -40,10 +36,7 @@ public class Room : MonoBehaviour
             // Activate room doors on player enter
             if (closedWhenEntered)
             {
-                foreach (GameObject door in doors)
-                {
-                    door.SetActive(true);
-                }
+                doors.SetActive(true);   
             }
 
             roomActive = true;

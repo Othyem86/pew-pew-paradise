@@ -113,6 +113,10 @@ MonoBehaviour:
       type: 3}
     wallRight: {fileID: 2794534244852711390, guid: 7f90efe31d2a7bb498ed9516fa6f893e,
       type: 3}
+    doorVertical: {fileID: 2344323580009882234, guid: da5c4ca7fb94086479a1057d1c9fc31f,
+      type: 3}
+    doorHorizontal: {fileID: 5073679409332477883, guid: 735838df84896534ab6cb918f2c79481,
+      type: 3}
   centerStart: {fileID: 1727840252393576077, guid: e5234405083106949ab04a9e7df36ccd,
     type: 3}
   centerGunRoom: {fileID: 1451829637251075784, guid: 5ce7bfc059f9e864f9acd295ca63ff8c,
