@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
+    // Instancing the class
     public static BossController instance;
 
-    public BossAction[] actions;
-    private int currentAction;
-    private float actionCounter;
-
+    // Variables movement and shooting
     private float shotCounter;
     private Vector2 moveDirection;
-
     public Rigidbody2D theRB;
 
+    // Variables 
     public int currentHealth;
-
     public GameObject deathEffect;
     public GameObject hitEffect;
     public GameObject levelExit;
 
+    // Variables Sequence manager
+    [Header("Boss Fight Sequences")]
     public BossSequence[] sequences;
     public int currentSequence;
+    private BossAction[] actions;
+    private int currentAction;
+    private float actionCounter;
 
+
+
+    // Before Start()
     private void Awake()
     {
         instance = this;
@@ -50,7 +55,7 @@ public class BossController : MonoBehaviour
         {
             actionCounter -= Time.deltaTime;
 
-            // handle movement
+            // Boss movement
             moveDirection = Vector2.zero;
 
             if (actions[currentAction].shouldMove)
@@ -70,7 +75,7 @@ public class BossController : MonoBehaviour
 
             theRB.velocity = moveDirection * actions[currentAction].moveSpeed;
 
-            // handle shooting
+            // Boss shooting
             if (actions[currentAction].shouldShoot)
             {
                 shotCounter -= Time.deltaTime;
@@ -99,6 +104,13 @@ public class BossController : MonoBehaviour
         }
     }
 
+
+
+    //
+    //  METHODS
+    //
+
+    // Damage boss
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
@@ -110,7 +122,7 @@ public class BossController : MonoBehaviour
 
             Instantiate(deathEffect, transform.position, transform.rotation);
 
-
+            // Spawn exit to the side of the player, if player sits on its spawn position
             if (Vector3.Distance(PlayerController.instance.transform.position, levelExit.transform.position) < 2f )
             {
                 levelExit.transform.position += new Vector3(4f, 0f, 0f);
@@ -137,6 +149,7 @@ public class BossController : MonoBehaviour
 
 
 
+// Bpss actions class
 [System.Serializable]
 public class BossAction
 {
@@ -160,6 +173,8 @@ public class BossAction
 
 
 
+
+// Boss sequences class
 [System.Serializable]
 public class BossSequence
 {
