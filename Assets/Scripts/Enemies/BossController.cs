@@ -8,23 +8,25 @@ public class BossController : MonoBehaviour
     public static BossController instance;
 
     // Variables movement and shooting
-    private float shotCounter;
-    private Vector2 moveDirection;
-    public Rigidbody2D theRB;
+    [Header("Shooting")]
+    private float shotCounter;              // Countdown until the next bullet
+    private Vector2 moveDirection;          // REF direction vector of boss
+    public Rigidbody2D theRB;               // REF rigid body of boss
 
-    // Variables 
-    public int currentHealth;
-    public GameObject deathEffect;
-    public GameObject hitEffect;
-    public GameObject levelExit;
+    // Variables boss miscellaneous
+    [Header("Miscellaneous")]
+    public int currentHealth;               // REF Boss current Health
+    public GameObject deathEffect;          // REF death effect of boss
+    public GameObject hitEffect;            // REF hit effect of boss
+    public GameObject levelExit;            // REF level exit
 
     // Variables Sequence manager
     [Header("Boss Fight Sequences")]
-    public BossSequence[] sequences;
-    public int currentSequence;
-    private BossAction[] actions;
-    private int currentAction;
-    private float actionCounter;
+    public BossSequence[] sequences;        // REF boss sequences
+    public int currentSequence;             // REF current boss sequence
+    private BossAction[] actions;           // REF boss action array
+    private int currentAction;              // REF current boss action
+    private float actionDuration;           // REF duration until next action
 
 
 
@@ -35,72 +37,31 @@ public class BossController : MonoBehaviour
     }
 
 
-
     // Start is called before the first frame update
     void Start()
     {
         actions = sequences[currentSequence].actions;
-        actionCounter = actions[currentAction].actionLength;
+        actionDuration = actions[currentAction].actionLength;
 
         UIController.instance.bossHealthBar.maxValue = currentHealth;
         UIController.instance.bossHealthBar.value = currentHealth;
     }
 
 
-
     // Update is called once per frame
     void Update()
     {
-        if (actionCounter > 0)
+        if (actionDuration > 0)
         {
-            actionCounter -= Time.deltaTime;
+            actionDuration -= Time.deltaTime;
 
-            // Boss movement
-            moveDirection = Vector2.zero;
-
-            if (actions[currentAction].shouldMove)
-            {
-                if(actions[currentAction].shouldChasePlayer)
-                {
-                    moveDirection = PlayerController.instance.transform.position - transform.position;
-                    moveDirection.Normalize();
-                }
-
-                if (actions[currentAction].shouldMoveToWaypoint && Vector3.Distance(transform.position, actions[currentAction].waypoint.position) > 0.5f )
-                {
-                    moveDirection = actions[currentAction].waypoint.position - transform.position;
-                    moveDirection.Normalize();
-                }
-            }
-
-            theRB.velocity = moveDirection * actions[currentAction].moveSpeed;
-
-            // Boss shooting
-            if (actions[currentAction].shouldShoot)
-            {
-                shotCounter -= Time.deltaTime;
-
-                if (shotCounter <= 0)
-                {
-                    shotCounter = actions[currentAction].timeBetweenShots;
-
-                    foreach(Transform point in actions[currentAction].shootingPoints)
-                    {
-                        Instantiate(actions[currentAction].itemToShoot, point.position, point.rotation);
-                    }
-                }
-            }
+            // TO DO: ShootAtPlayer();
+            BossMove();
+            BossShotVolley();
         }
         else
         {
-            currentAction++;
-
-            if (currentAction >= actions.Length)
-            {
-                currentAction = 0;
-            }
-
-            actionCounter = actions[currentAction].actionLength;
+            NextAction();
         }
     }
 
@@ -110,7 +71,57 @@ public class BossController : MonoBehaviour
     //  METHODS
     //
 
-    // Damage boss
+    // Boss volley
+    private void BossShotVolley()
+    {
+        if (actions[currentAction].shouldShoot)
+        {
+            shotCounter -= Time.deltaTime;
+
+            if (shotCounter <= 0)
+            {
+                shotCounter = actions[currentAction].timeBetweenShots;
+
+                // Shoot form each boss hardpoint
+                foreach (Transform point in actions[currentAction].shootingPoints)
+                {
+                    Instantiate(actions[currentAction].itemToShoot, point.position, point.rotation);
+                }
+            }
+        }
+    }
+
+
+
+    // Boss movement
+    private void BossMove()
+    {
+        moveDirection = Vector2.zero;
+
+        if (actions[currentAction].shouldMove)
+        {
+            // Chase player
+            if (actions[currentAction].shouldChasePlayer)
+            {
+                moveDirection = PlayerController.instance.transform.position - transform.position;
+                moveDirection.Normalize();
+            }
+
+            // Move next waypoint if boss should move to next waypoint, or in the near vecinity of current one
+            if (actions[currentAction].shouldMoveToWaypoint && Vector3.Distance(transform.position, actions[currentAction].waypoint.position) > 0.5f)
+            {
+                moveDirection = actions[currentAction].waypoint.position - transform.position;
+                moveDirection.Normalize();
+            }
+        }
+
+        // Boss movement speed
+        theRB.velocity = moveDirection * actions[currentAction].moveSpeed;
+    }
+
+
+
+    // Damage boss and move to next boss sequence if necessary
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
@@ -139,38 +150,51 @@ public class BossController : MonoBehaviour
                 currentSequence++;
                 actions = sequences[currentSequence].actions;
                 currentAction = 0;
-                actionCounter = actions[currentAction].actionLength;
+                actionDuration = actions[currentAction].actionLength;
             }
         }
 
         UIController.instance.bossHealthBar.value = currentHealth;
     }
+
+
+    // Change to next action
+    private void NextAction()
+    {
+        currentAction++;
+
+        if (currentAction >= actions.Length)
+        {
+            currentAction = 0;
+        }
+
+        actionDuration = actions[currentAction].actionLength;
+    }
 }
 
 
 
-// Bpss actions class
+// Boss actions class
 [System.Serializable]
 public class BossAction
 {
     [Header("Action")]
-    public float actionLength;
+    public float actionLength;              // REF boss action duration
 
     [Header("Movement")]
-    public bool shouldMove;
-    public bool shouldChasePlayer;
-    public bool shouldMoveToWaypoint;
-    public float moveSpeed;
-    public Transform waypoint;
+    public bool shouldMove;                 // REF if boss should move
+    public bool shouldChasePlayer;          // REF if boss should chase player
+    public bool shouldMoveToWaypoint;       // REF if boss should move to waypoint
+    public float moveSpeed;                 // REB boss movement speed
+    public Transform waypoint;              // REF waypoint boss should move to
 
-    [Header("Shooting")]
-    public bool shouldShoot;
-    public GameObject itemToShoot;
-    public float timeBetweenShots;
-    public Transform[] shootingPoints;
+    [Header("Shoot Volley")]
+    public bool shouldShoot;                // REF if boss should shoot
+    public GameObject itemToShoot;          // REF bullet boss should shoot
+    public float timeBetweenShots;          // REF duration until next volley
+    public Transform[] shootingPoints;      // REF array of boss bullet origins
 
 }
-
 
 
 
@@ -179,7 +203,6 @@ public class BossAction
 public class BossSequence
 {
     [Header("Sequence")]
-    public BossAction[] actions;
-
-    public int endSequenceHealth;
+    public BossAction[] actions;            // REF array of boss actions
+    public int endSequenceHealth;           // REF boss hitpoints value that triggers next sequence
 }
