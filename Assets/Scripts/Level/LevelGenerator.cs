@@ -289,13 +289,3 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 }
-
-
-
-// Container class with all potential wall and door game objects
-[System.Serializable]
-public class RoomWallPrefabs
-{
-    public GameObject doorUp, doorDown, doorLeft, doorRight, wallUp, 
-        wallDown, wallLeft, wallRight, doorVertical, doorHorizontal;
-}
