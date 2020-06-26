@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     // Variables Spielpause
     [Header("Pause / Unpause")]
     public bool ispaused;               // REF if the game is paused
+    public bool otherPause = false;             // REF if other systems are pausing the game
 
     // Variables currency system
     [Header("Money Tracker")]
@@ -51,7 +52,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!otherPause && Input.GetKeyDown(KeyCode.Escape))
         {
             PauseUnpause();
         }

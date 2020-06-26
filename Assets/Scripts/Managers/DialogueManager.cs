@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public Text nameText;
-    public Text dialogueText;
+    public Text nameText;                   //
+    public Text dialogueText;               //
+    public Animator animator;               //
+    private Queue<string> sentencesQueue;   //
 
-    public Animator animator;
-
-    private Queue<string> sentencesQueue;
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +17,14 @@ public class DialogueManager : MonoBehaviour
         sentencesQueue = new Queue<string>();
     }
 
+
+
+    // Open the dialogue window
     public void StartDialogue (Dialogue dialogue)
     {
+        LevelManager.instance.otherPause = true;
+        LevelManager.instance.ispaused = true;
+
         animator.SetBool("isOpen", true);
 
         nameText.text = dialogue.name;
@@ -35,6 +40,8 @@ public class DialogueManager : MonoBehaviour
     }
 
 
+
+    // Display the next dialogue sentence
     public void DisplayNextSentence()
     {
         if (sentencesQueue.Count == 0)
@@ -50,6 +57,8 @@ public class DialogueManager : MonoBehaviour
     }
 
 
+
+    // Display dialogue text slowly
     IEnumerator TypeSentence (string sentence)
     {
         dialogueText.text = "";
@@ -63,8 +72,14 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void EndDialogue()
+
+
+    // Close the dialogue window
+    public void EndDialogue()
     {
         animator.SetBool("isOpen", false);
+
+        LevelManager.instance.otherPause = false;
+        LevelManager.instance.ispaused = false;
     }
 }

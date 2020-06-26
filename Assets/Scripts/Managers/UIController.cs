@@ -54,7 +54,7 @@ public class UIController : MonoBehaviour
     {
         PlayerController.instance.UpdateGunUI();
 
-        // fade out black
+        // Fade out black
         fadeOutBlack = true;
         fadeToBlack = false;
     }
