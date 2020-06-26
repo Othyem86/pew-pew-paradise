@@ -296,7 +296,97 @@ PrefabInstance:
         type: 3}
       propertyPath: centerEnd
       value: 
-      objectReference: {fileID: 6464066783928739858, guid: d4175056f8b17684388b93dbf511f344,
+      objectReference: {fileID: 7487299102167339363, guid: 15e13c30a6bc6934787196f54636d5b8,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: roomWalls.doorHorizontal
+      value: 
+      objectReference: {fileID: 4470181506747714651, guid: bd50a5f3c1c91a04988100ec139b3451,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: roomWalls.doorVertical
+      value: 
+      objectReference: {fileID: 4974539806670871431, guid: 5d5b2322188f5834e82db084e67f3f6a,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: roomWalls.doorDown
+      value: 
+      objectReference: {fileID: 6413343637946268824, guid: 9bd8a76aa6b70cf40bb28fe737e31028,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: roomWalls.doorLeft
+      value: 
+      objectReference: {fileID: 7947947646783984072, guid: 512a51e327fd79942a80c214c3ee657f,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: roomWalls.doorRight
+      value: 
+      objectReference: {fileID: 7974730876247880848, guid: f0a9bc6d9bcb24d4a93afcb8fc2a30ed,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: roomWalls.doorUp
+      value: 
+      objectReference: {fileID: 3474813016560300347, guid: 0c9237030962d4e438758230947e459c,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: roomWalls.wallDown
+      value: 
+      objectReference: {fileID: 7625936247017673266, guid: ad4734e4b879c864880b62319c872ba0,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: roomWalls.wallLeft
+      value: 
+      objectReference: {fileID: 4931238958597794816, guid: e31334415f8949246b4af99556a93c9b,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: roomWalls.wallRight
+      value: 
+      objectReference: {fileID: 4826730543418106790, guid: 5833b2b9c3af8d3429a3a7723e4dd082,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: centerShop
+      value: 
+      objectReference: {fileID: 3919293516978872240, guid: 5791a53506c650f4ca9af754700f5f71,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: centerGunRoom
+      value: 
+      objectReference: {fileID: 3635258756366235780, guid: ae5956682039fa449a7259c134e10bea,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: centerStart
+      value: 
+      objectReference: {fileID: 1423848661015080058, guid: 8c8c2e40e9d4be34aa605a4457b2f2fc,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: potentialCenters.Array.data[1]
+      value: 
+      objectReference: {fileID: 4732808673462422690, guid: 09c9eded2697dd14ab5779d47157ca60,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: potentialCenters.Array.data[0]
+      value: 
+      objectReference: {fileID: 1423848661015080058, guid: 8c8c2e40e9d4be34aa605a4457b2f2fc,
+        type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: roomWalls.wallUp
+      value: 
+      objectReference: {fileID: 7523986142332509293, guid: f9d1901f74d802b4284fe7543d79b0ab,
         type: 3}
     - target: {fileID: 2835945769013121184, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
         type: 3}
