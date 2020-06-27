@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5194987634937160566}
   - component: {fileID: 5084078811472513818}
   m_Layer: 15
-  m_Name: Room Layout
+  m_Name: Room Layout - Stamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1602141735546293391, guid: 7fb594cfe63bc3b4bab3044fa7357f4d,
+  m_Sprite: {fileID: -2357482666832143148, guid: 7fb594cfe63bc3b4bab3044fa7357f4d,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
