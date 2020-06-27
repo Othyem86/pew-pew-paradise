@@ -1229,7 +1229,7 @@ MonoBehaviour:
   fadeScreen: {fileID: 2829977122699107891}
   fadeSpeed: 1.5
   deathScreen: {fileID: 2829977122738514832}
-  newGameScene: LevelTest
+  newGameScene: Character Select
   mainMenuScene: Title Menu
   pauseMenu: {fileID: 112681910}
   mapDisplay: {fileID: 1451722933}
