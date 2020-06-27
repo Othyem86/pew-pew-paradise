@@ -1202,6 +1202,7 @@ MonoBehaviour:
     - Hallo Emilinator!
     - Wie du siehst wurde unsere Gitllab repository gestohlen
     - Dahinter kann nur der bosewicht Randolf Gitler stehen
+    sfx: []
 --- !u!1 &6474031067412284015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,7 +1281,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '''Dr. Mirror'''
+  m_Text: '''Dr. Dan Mirror'''
 --- !u!114 &6474031067412283921
 MonoBehaviour:
   m_ObjectHideFlags: 0
