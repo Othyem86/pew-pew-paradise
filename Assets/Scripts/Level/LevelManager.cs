@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
     // Variables Spielpause
     [Header("Pause / Unpause")]
     public bool ispaused;               // REF if the game is paused
-    public bool otherPause = false;             // REF if other systems are pausing the game
+    public bool otherPause = false;     // REF if other systems are pausing the game
 
     // Variables currency system
     [Header("Money Tracker")]
@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // >ove player to starting point
+        // Move player to starting point
         PlayerController.instance.transform.position = startPoint.position;
         PlayerController.instance.canMove = true;
 

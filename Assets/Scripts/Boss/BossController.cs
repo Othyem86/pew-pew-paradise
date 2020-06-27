@@ -43,6 +43,7 @@ public class BossController : MonoBehaviour
         actions = sequences[currentSequence].actions;
         actionDuration = actions[currentAction].actionLength;
 
+        UIController.instance.bossHealthBar.gameObject.SetActive(true);
         UIController.instance.bossHealthBar.maxValue = currentHealth;
         UIController.instance.bossHealthBar.value = currentHealth;
     }

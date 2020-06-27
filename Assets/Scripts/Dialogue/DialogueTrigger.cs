@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    private bool canTalk;                   // If character is selectable
-    public GameObject message;              // REF choose character message
-    public DialogueManager manager;         // REF choose character message
-    private bool dialogueInProgress = false;        // If a dialog is currently in progress
+    // Variables dialogue paramenters
+    [Header("Dialogue Paramenters")]
+    public GameObject message;                          // REF choose character message
+    private DialogueController manager;                  // REF choose character message
+    private bool dialogueInProgress = false;            // If a dialog is currently in progress
+    private bool canTalk;                               // If character is selectable
 
-    public Dialogue dialogue;
+    // Variables dialogue content
+    [Header("Dialogue Content")]
+    public Dialogue dialogue;                           // REF seriazible object containing dialogue content
+
+
+    private void Start()
+    {
+        manager = DialogueController.instance;
+    }
+
 
     private void Update()
     {
