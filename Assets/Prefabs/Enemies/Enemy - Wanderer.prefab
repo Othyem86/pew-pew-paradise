@@ -176,8 +176,8 @@ MonoBehaviour:
   shouldRunAway: 0
   rangeToRunAway: 0
   shouldWander: 1
-  wanderLength: 0.75
-  pauseLength: 0.4
+  wanderLength: 0.6
+  pauseLength: 0.1
   shouldPatrol: 0
   patrolPoints: []
   health: 150
