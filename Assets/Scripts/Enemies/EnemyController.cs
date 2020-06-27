@@ -80,6 +80,7 @@ public class EnemyController : MonoBehaviour
             moveDirection = Vector3.zero;
             EnemyShoot();
             EnemyMove();
+            EnemyTurn();
 
             // Normalize enemy speed
             moveDirection.Normalize();
@@ -156,7 +157,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-
+   
 
     // Enemy roam
     private void EnemyWander()
@@ -188,7 +189,7 @@ public class EnemyController : MonoBehaviour
 
 
 
-    // Enemy atrol
+    // Enemy patrol
     private void EnemyPatrol()
     {
         moveDirection = patrolPoints[currentPatrolPoint].position - transform.position;
@@ -222,6 +223,21 @@ public class EnemyController : MonoBehaviour
                 Instantiate(bullet, firePoint.position, firePoint.rotation);
                 AudioManager.instance.PlaySFX(13);
             }
+        }
+    }
+
+
+
+    // Mirror enemy towards move direction
+    private void EnemyTurn()
+    {
+        if (moveDirection.x > 0)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else
+        {
+            transform.localScale = Vector3.one;
         }
     }
 
