@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Dialogue
 {
     [Header("Dialogue Content")]
+    public Sprite npcPortrait;                          // REF NPC portrait
     public string name;                                 // REF NPC name
     [TextArea(3, 10)]
     public string[] sentences;                          // REF array of all dialogue sentences textfields

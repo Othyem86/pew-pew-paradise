@@ -87,6 +87,12 @@ PrefabInstance:
       propertyPath: dialogue.sentences.Array.data[2]
       value: Du hast keine Chance
       objectReference: {fileID: 0}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.npcPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: d8bbcc3c133cadb4fb78c3cf8569d268,
+        type: 3}
     - target: {fileID: 7987648579845398006, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: m_Name

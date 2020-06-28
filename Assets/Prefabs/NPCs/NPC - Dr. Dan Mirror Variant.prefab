@@ -80,7 +80,7 @@ PrefabInstance:
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Hallo!
+      value: Hallo, lieber BFI Student.
       objectReference: {fileID: 0}
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
@@ -97,10 +97,16 @@ PrefabInstance:
       propertyPath: dialogue.gameObjectsToActivate.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.npcPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 5b4cf3febd9d9084584f0d95a11a0334,
+        type: 3}
     - target: {fileID: 7987648579845398006, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: m_Name
-      value: NPC - Dr. Dan Mirror
+      value: NPC - Dr. Dan Mirror Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e06b5b8eb7e04344494d69210940da47, type: 3}

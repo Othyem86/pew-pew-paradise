@@ -7,7 +7,7 @@ public class DialogueTrigger : MonoBehaviour
     // Variables dialogue paramenters
     [Header("Dialogue Paramenters")]
     public GameObject message;                          // REF choose character message
-    private DialogueController manager;                  // REF choose character message
+    private DialogueController manager;                 // The DialogueController that this class will trigger
     private bool dialogueInProgress = false;            // If a dialog is currently in progress
     private bool canTalk;                               // If character is selectable
 

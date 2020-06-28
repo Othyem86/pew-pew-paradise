@@ -1425,7 +1425,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2009a880a931f594fa7067df4371cb63, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e5a421dcaedc0a44484f14b2df4a30c3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.65
   m_Pitch: 1
@@ -1870,6 +1870,7 @@ MonoBehaviour:
   nextLevel: Victory
   startPoint: {fileID: 8341415817898616118}
   ispaused: 0
+  otherPause: 0
   currentCoins: 0
 --- !u!114 &8306869278687105843
 MonoBehaviour:

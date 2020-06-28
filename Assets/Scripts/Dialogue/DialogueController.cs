@@ -10,7 +10,8 @@ public class DialogueController : MonoBehaviour
 
     // Variables dialogue
     [Header("Dialogue Parameters")]
-    public Text nameText;                               // REF dialogue speaker name
+    public Image npcPortait;                            // REF dialogue speaker portrait image
+    public Text npcName;                                // REF dialogue speaker name
     public Text dialogueText;                           // REF dialogue text
     public Animator animator;                           // REF animator for dialogue window
     private Queue<string> sentencesQueue;               // REF queue for the dialogue sentences
@@ -48,7 +49,8 @@ public class DialogueController : MonoBehaviour
 
         animator.SetBool("isOpen", true);
 
-        nameText.text = dialogue.name;
+        npcPortait.sprite = dialogue.npcPortrait;
+        npcName.text = dialogue.name;
 
         sentencesQueue.Clear();
 

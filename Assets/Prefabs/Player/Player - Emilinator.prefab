@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1866281069}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 5723970626199589029}
   m_RootOrder: 4
@@ -142,7 +142,7 @@ MonoBehaviour:
   dashSpeed: 8
   dashLength: 0.5
   dashCoolDown: 1
-  dashInvincibility: 0.5
+  dashInvincDuration: 0.5
   dashCounter: 0
   availableGuns:
   - {fileID: 6945951432355226886}
