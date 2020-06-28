@@ -101,7 +101,7 @@ MonoBehaviour:
   firePoint: {fileID: 7403889150667649628}
   timeBetweenShots: 1
   weaponName: Magnum
-  gunUI: {fileID: -3940896912681915257, guid: f72804754a2106a4884d758772ef2a02, type: 3}
+  gunUI: {fileID: -51580551502718289, guid: 48d85d1ef51430e42b6aef57f02c863d, type: 3}
   itemCost: 25
   gunShopSprite: {fileID: -51580551502718289, guid: 48d85d1ef51430e42b6aef57f02c863d,
     type: 3}
