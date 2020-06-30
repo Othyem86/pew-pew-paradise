@@ -8608,6 +8608,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8975883054927188221, guid: 2702665b81a090048a19d42908370355,
         type: 3}
+      propertyPath: dialogue.voiceOvers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8975883054927188221, guid: 2702665b81a090048a19d42908370355,
+        type: 3}
       propertyPath: dialogue.gameObjectsToActivate.Array.data[0]
       value: 
       objectReference: {fileID: 1592707785}
@@ -8621,6 +8626,26 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 1096795652}
+    - target: {fileID: 8975883054927188221, guid: 2702665b81a090048a19d42908370355,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 43e906253ade7ea4eac7df060814d8c4, type: 3}
+    - target: {fileID: 8975883054927188221, guid: 2702665b81a090048a19d42908370355,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f899111509538dc4aa5c81b90a12b96b, type: 3}
+    - target: {fileID: 8975883054927188221, guid: 2702665b81a090048a19d42908370355,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2a48616eb3dfb1f4bb79258ad15d0324, type: 3}
+    - target: {fileID: 8975883054927188221, guid: 2702665b81a090048a19d42908370355,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: a817a0a089178d8428814f4ac9ab7e96, type: 3}
     - target: {fileID: 8975883054927188223, guid: 2702665b81a090048a19d42908370355,
         type: 3}
       propertyPath: m_Name
@@ -8710,6 +8735,16 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 77e63a5e0c3dcb748aa4d71100f0046b, type: 3}
+    - target: {fileID: 1247999352229482894, guid: aa95190790d574442ab1fab83efe3f2f,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1247999352229482894, guid: aa95190790d574442ab1fab83efe3f2f,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8341415817898616118, guid: aa95190790d574442ab1fab83efe3f2f,
         type: 3}
       propertyPath: m_LocalPosition.x

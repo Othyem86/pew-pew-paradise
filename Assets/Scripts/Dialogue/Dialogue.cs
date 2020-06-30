@@ -13,7 +13,8 @@ public class Dialogue
     public string[] sentences;                          // REF array of all dialogue sentences textfields
 
     [Header("Dialogue Voice Over")]
-    public AudioSource[] sfx;                           // REF array of all dialogue sound effects
+    public AudioSource voiceSource;                     // REF Audiosource for the voice clips
+    public AudioClip[] voiceOvers;                      // REF array of all dialogue voice clips
 
     [Header("Dialogue Events")]
     public bool eventsAfterDialogue;                    // REF if events should happen after dialogue ends;

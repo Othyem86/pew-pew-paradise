@@ -16,10 +16,15 @@ public class DialogueController : MonoBehaviour
     public Animator animator;                           // REF animator for dialogue window
     private Queue<string> sentencesQueue;               // REF queue for the dialogue sentences
 
+    // Variables voiceover
+    private AudioSource voiceSource;                    // REF voice source of the npc
+    private Queue<AudioClip> voiceOverQueue;            // REF queue for the dialogue clips
+
+
     [Header("Dialogue Events")]
-    private bool eventsAfterDialogue;                    // REF if events should happen after dialogue ends;
-    private GameObject[] gameObjectsToDeactivate;        // REF array of gameonbjects to deactivate after dialogue ends
-    private GameObject[] gameObjectsToActivate;          // REF array of gameonbjects to activate after dialogue ends
+    private bool eventsAfterDialogue;                   // REF if events should happen after dialogue ends;
+    private GameObject[] gameObjectsToDeactivate;       // REF array of gameonbjects to deactivate after dialogue ends
+    private GameObject[] gameObjectsToActivate;         // REF array of gameonbjects to activate after dialogue ends
 
 
     // Before Start()
@@ -33,6 +38,7 @@ public class DialogueController : MonoBehaviour
     void Start()
     {
         sentencesQueue = new Queue<string>();
+        voiceOverQueue = new Queue<AudioClip>();
     }
 
 
@@ -40,6 +46,9 @@ public class DialogueController : MonoBehaviour
     // Open the dialogue window
     public void StartDialogue (Dialogue dialogue)
     {
+        AudioManager.instance.levelMusic.Pause();
+
+        voiceSource = dialogue.voiceSource;
         eventsAfterDialogue = dialogue.eventsAfterDialogue;
         gameObjectsToDeactivate = dialogue.gameObjectsToDeactivate;
         gameObjectsToActivate = dialogue.gameObjectsToActivate;
@@ -53,11 +62,18 @@ public class DialogueController : MonoBehaviour
         npcName.text = dialogue.name;
 
         sentencesQueue.Clear();
+        voiceOverQueue.Clear();
 
         // Load all dialogue lines in the queue
         foreach (string sentence in dialogue.sentences)
         {
             sentencesQueue.Enqueue(sentence);
+        }
+
+        // Load all voiceOvers in the queue
+        foreach (AudioClip voiceOver in dialogue.voiceOvers)
+        {
+            voiceOverQueue.Enqueue(voiceOver);
         }
 
         DisplayNextSentence();
@@ -77,6 +93,13 @@ public class DialogueController : MonoBehaviour
         // Dequeue each dialogue line one by one
         string sentence = sentencesQueue.Dequeue();
         dialogueText.text = sentence;
+
+
+        // Dequeue each vpoce clips one by one and play
+        voiceSource.clip = voiceOverQueue.Dequeue();
+        voiceSource.Play();
+
+        // Type dialogue sentences slowly
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
@@ -92,7 +115,7 @@ public class DialogueController : MonoBehaviour
             dialogueText.text += letter;
 
             // Frames between each individual letters
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 15; i++)
             {
                 yield return null;
             }
@@ -122,5 +145,7 @@ public class DialogueController : MonoBehaviour
                 element.SetActive(true);
             }
         }
+
+        AudioManager.instance.levelMusic.Play();
     }
 }
