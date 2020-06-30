@@ -40,9 +40,9 @@ public class DialogueController : MonoBehaviour
     // Open the dialogue window
     public void StartDialogue (Dialogue dialogue)
     {
-        this.eventsAfterDialogue = dialogue.eventsAfterDialogue;
-        this.gameObjectsToDeactivate = dialogue.gameObjectsToDeactivate;
-        this.gameObjectsToActivate = dialogue.gameObjectsToActivate;
+        eventsAfterDialogue = dialogue.eventsAfterDialogue;
+        gameObjectsToDeactivate = dialogue.gameObjectsToDeactivate;
+        gameObjectsToActivate = dialogue.gameObjectsToActivate;
 
         LevelManager.instance.otherPause = true;
         LevelManager.instance.ispaused = true;
