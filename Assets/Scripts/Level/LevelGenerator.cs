@@ -80,12 +80,12 @@ public class LevelGenerator : MonoBehaviour
     private void GenerateLevelLayout()
     {
         // Generate start room stamp
-        Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation)
-            .GetComponent<SpriteRenderer>()
-            .color = startColor;
+        Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation).GetComponent<SpriteRenderer>().color = startColor;
+
 
         // Move generator point in random direction
         selectedDirection = (Direction)Random.Range(0, 4);
+
         MoveGeneratorPoint();
 
 
@@ -270,12 +270,12 @@ public class LevelGenerator : MonoBehaviour
                 // Generate exit room center
                 Instantiate(centerEnd, parentOutline.transform.position, transform.rotation).theRoom = parentOutline.GetComponent<Room>();
             }
-            else if (parentOutline.transform.position == shopRoom.transform.position)
+            else if (includeShop && parentOutline.transform.position == shopRoom.transform.position)
             {
                 // Generate shop room center
                 Instantiate(centerShop, parentOutline.transform.position, transform.rotation).theRoom = parentOutline.GetComponent<Room>();
             }
-            else if (parentOutline.transform.position == gunRoom.transform.position)
+            else if (includeGunRoom && parentOutline.transform.position == gunRoom.transform.position)
             {
                 // Generate gun room center
                 Instantiate(centerGunRoom, parentOutline.transform.position, transform.rotation).theRoom = parentOutline.GetComponent<Room>();
