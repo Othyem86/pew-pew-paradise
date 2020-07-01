@@ -132,7 +132,7 @@ public class BossController : MonoBehaviour
         {
             gameObject.SetActive(false);
 
-            Instantiate(deathEffect, transform.position, transform.rotation);
+            Instantiate(deathEffect, transform.position + new Vector3(0f, -0.5f, 0f), transform.rotation);
 
             // Spawn exit to the side of the player, if player sits on its spawn position
             if (Vector3.Distance(PlayerController.instance.transform.position, levelExit.transform.position) < 2f )
