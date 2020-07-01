@@ -591,6 +591,8 @@ MonoBehaviour:
   dialogue:
     npcPortrait: {fileID: 0}
     name: 
+    dialogueSpeed: 10
+    reduceMusicVolume: 0.15
     sentences: []
     voiceSource: {fileID: 774781322240981667}
     voiceOvers: []

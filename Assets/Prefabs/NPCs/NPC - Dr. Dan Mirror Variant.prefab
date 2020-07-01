@@ -65,12 +65,17 @@ PrefabInstance:
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: dialogue.sentences.Array.size
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: dialogue.gameObjectsToActivate.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.size
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
@@ -80,17 +85,20 @@ PrefabInstance:
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Hallo, lieber BFI Student.
+      value: Hallo!
       objectReference: {fileID: 0}
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: dialogue.sentences.Array.data[1]
-      value: Unsere Gitlab ist verschwunden!
+      value: 'Wir wurden verraten! Es war einer von uns -- Randolf Gitler, der Schurke.
+        Er hat uns sogar eine Nachricht hinterlassen:'
       objectReference: {fileID: 0}
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: dialogue.sentences.Array.data[2]
-      value: Randolf Gitler Steht dahinter!
+      value: "*ahem* \u201CIch, Randolf Gitler (und auf gar keinen Fall ein anderer
+        der euch alle reinlegen will), habe den Zugriff zu eurer Gitlab Datenbank
+        zerstort!"
       objectReference: {fileID: 0}
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
@@ -103,6 +111,71 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 5b4cf3febd9d9084584f0d95a11a0334,
         type: 3}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: "Ich habe mich virtualisieren lassen und bin jetzt auf dem Cyberweg
+        zur Datenbank um das ganze Wissen des BFIs zu stehlen. Stoppt mich wenn ihr
+        konnt. Ha-ha ! Ha-ha!\u201E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[4]
+      value: Eindeutig schuldig! Wir mussen ihn aufhalten! Nimm den Websocket-Portal
+        zur virtuellen Welt und verfolge ihn.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[5]
+      value: 'Aber Achtung! Keiner weiss welche Abwehrsysteme er hinterlassen hat.
+        Die anderen BFI Studenten die ihn verfolgten sind nicht zuruckgekommen und
+        werden schon seit Tagen vermisst. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[6]
+      value: Viel Gluck!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: eb62e1eaa2dec03448e78dacf4531bbf, type: 3}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: cff7b12f1dbf1a34f8bcc74b15f6526a, type: 3}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 62ffd9f09b99bd5449730360e6cbbf3d, type: 3}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 53c74d73ceb34c24daa58918392189bb, type: 3}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9826fc58dacee30418f87966a7cdb161, type: 3}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 00986e609039e234ea03589b0c9efc71, type: 3}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.voiceOvers.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d93e68cf28934c4caa3ea3eb547ba10, type: 3}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.dialogueSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7987648579845398006, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: m_Name

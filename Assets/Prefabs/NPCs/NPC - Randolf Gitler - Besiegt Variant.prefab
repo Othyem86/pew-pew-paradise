@@ -162,6 +162,16 @@ PrefabInstance:
       propertyPath: dialogue.voiceSource
       value: 
       objectReference: {fileID: 7159649057978023705}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.reduceMusicVolume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: dialogue.dialogueSpeed
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7987648579845398006, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: m_Name

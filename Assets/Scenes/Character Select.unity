@@ -4460,6 +4460,13 @@ PrefabInstance:
       propertyPath: dialogue.gameObjectsToActivate.Array.data[0]
       value: 
       objectReference: {fileID: 1416449797}
+    - target: {fileID: 2204795029606786286, guid: 5d11a4e7dffbf7c48ac1b566c581f2a6,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: "Ich habe mich virtualisieren lassen und bin jetzt auf dem Cyberweg
+        zur Datenbank um das ganze Wissen des BFIs zu stehlen. Stoppt mich wenn ihr
+        konnt. Ha-ha ! Ha-ha!\u201E"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d11a4e7dffbf7c48ac1b566c581f2a6, type: 3}
 --- !u!1001 &7751418892401707523

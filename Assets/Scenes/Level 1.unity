@@ -454,6 +454,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1337873559861927997, guid: 34964aa0d5fef2941bb850cd43030f82,
         type: 3}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: includeGunRoom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2835945769013121119, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
+        type: 3}
+      propertyPath: includeShop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2835945769013121184, guid: 972f1f1b41fc7ba44bc596ba7b18cbab,
         type: 3}
       propertyPath: m_Name

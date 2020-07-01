@@ -9,6 +9,8 @@ public class Dialogue
     [Header("Dialogue Content")]
     public Sprite npcPortrait;                          // REF NPC portrait
     public string name;                                 // REF NPC name
+    public int dialogueSpeed;                           // REF Dialogue speed
+    public float reduceMusicVolume;                     // REF music volume reduction while dialogue is active
     [TextArea(3, 10)]
     public string[] sentences;                          // REF array of all dialogue sentences textfields
 

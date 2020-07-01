@@ -14,12 +14,13 @@ public class DialogueController : MonoBehaviour
     public Text npcName;                                // REF dialogue speaker name
     public Text dialogueText;                           // REF dialogue text
     public Animator animator;                           // REF animator for dialogue window
+    private int dialogueSpeed;                          // Dialogue speed
+    private float reduceMusicVolume;                    // Volume reduction for music during dialogue
     private Queue<string> sentencesQueue;               // REF queue for the dialogue sentences
 
     // Variables voiceover
     private AudioSource voiceSource;                    // REF voice source of the npc
     private Queue<AudioClip> voiceOverQueue;            // REF queue for the dialogue clips
-
 
     [Header("Dialogue Events")]
     private bool eventsAfterDialogue;                   // REF if events should happen after dialogue ends;
@@ -46,12 +47,15 @@ public class DialogueController : MonoBehaviour
     // Open the dialogue window
     public void StartDialogue (Dialogue dialogue)
     {
-        AudioManager.instance.levelMusic.Pause();
-
+        // Get Parameters from the Dialogue object
+        reduceMusicVolume = dialogue.reduceMusicVolume;
+        dialogueSpeed = dialogue.dialogueSpeed;
         voiceSource = dialogue.voiceSource;
         eventsAfterDialogue = dialogue.eventsAfterDialogue;
         gameObjectsToDeactivate = dialogue.gameObjectsToDeactivate;
         gameObjectsToActivate = dialogue.gameObjectsToActivate;
+
+        AudioManager.instance.levelMusic.volume = reduceMusicVolume;
 
         LevelManager.instance.otherPause = true;
         LevelManager.instance.ispaused = true;
@@ -115,7 +119,7 @@ public class DialogueController : MonoBehaviour
             dialogueText.text += letter;
 
             // Frames between each individual letters
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < dialogueSpeed; i++)
             {
                 yield return null;
             }
@@ -146,6 +150,6 @@ public class DialogueController : MonoBehaviour
             }
         }
 
-        AudioManager.instance.levelMusic.Play();
+        AudioManager.instance.levelMusic.volume = 0.55f;
     }
 }
