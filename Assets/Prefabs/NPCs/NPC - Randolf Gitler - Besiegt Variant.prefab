@@ -249,7 +249,7 @@ MonoBehaviour:
   dialogue:
     npcPortrait: {fileID: 21300000, guid: d8bbcc3c133cadb4fb78c3cf8569d268, type: 3}
     name: Randolf Gitler
-    dialogueSpeed: 12
+    dialogueSpeed: 13
     reduceMusicVolume: 0.1
     sentences:
     - Warte! Warum tust du das? Ich wollte nur unsere Gitlab Datenbank beschutzen.
