@@ -62,7 +62,7 @@ public class LevelGenerator : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR
-        // DEV TOOL: GENERATE NEW ROOM CONFIGURATION
+        // DEV TOOL: GENERATE NEW ROOM CONFIGURATION IN EDITOR
         if (Input.GetKey(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

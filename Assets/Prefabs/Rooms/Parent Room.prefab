@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7177359427882456898}
   - component: {fileID: 623687611448593987}
-  - component: {fileID: 4243858770307711295}
+  - component: {fileID: 958249009048771494}
   m_Layer: 0
   m_Name: Parent Room
   m_TagString: Untagged
@@ -52,27 +52,32 @@ MonoBehaviour:
   roomActive: 0
   mapHider: {fileID: 4023334867440020460}
   doors: {fileID: 3476189400199256309}
---- !u!50 &4243858770307711295
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!61 &958249009048771494
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272805626275447133}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 16, y: 8}
+    newSize: {x: 16, y: 8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3}
+  m_EdgeRadius: 0
 --- !u!1 &2695574153234284070
 GameObject:
   m_ObjectHideFlags: 0
