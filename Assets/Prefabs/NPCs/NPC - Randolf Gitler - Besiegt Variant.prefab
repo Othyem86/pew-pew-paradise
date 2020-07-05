@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: {fileID: 6661377316142863272}
   dialogue:
-    npcPortrait: {fileID: 21300000, guid: d8bbcc3c133cadb4fb78c3cf8569d268, type: 3}
+    npcPortrait: {fileID: 21300000, guid: 4d574e3b27def314889c631a2d2c0c1d, type: 3}
     name: Randolf Gitler
     dialogueSpeed: 13
     reduceMusicVolume: 0.1
