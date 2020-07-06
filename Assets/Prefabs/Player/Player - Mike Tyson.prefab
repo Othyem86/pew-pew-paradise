@@ -224,7 +224,7 @@ MonoBehaviour:
   dashSpeed: 8
   dashLength: 0.5
   dashCoolDown: 1
-  dashInvincibility: 0.5
+  dashInvincDuration: 0.5
   dashCounter: 0
   availableGuns:
   - {fileID: 973039084865990383}
@@ -545,7 +545,7 @@ PrefabInstance:
     - target: {fileID: 4474633705656753656, guid: 50669ad8517e4d64c8d62d1ede0f7947,
         type: 3}
       propertyPath: m_Name
-      value: Revolver
+      value: Water Hose
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50669ad8517e4d64c8d62d1ede0f7947, type: 3}

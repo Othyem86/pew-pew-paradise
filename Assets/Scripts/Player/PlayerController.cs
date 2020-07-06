@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public int currentGun;                              // Index of the current active weapon
 
+    // Variables Player Mirror
+    [HideInInspector]
+    public Vector3 mousePos;                            // Mouse screen position
+    public Vector3 screenPoint;                         // Player screen position
+
 
     // Before Start()
     public void Awake()
@@ -106,8 +111,8 @@ public class PlayerController : MonoBehaviour
     private void PlayerAim()
     {
         // Get mouse screen coordinates, trasnform global player position as screen coordinates
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 screenPoint = CameraController.instance.mainCamera.WorldToScreenPoint(transform.localPosition);
+        mousePos = Input.mousePosition;
+        screenPoint = CameraController.instance.mainCamera.WorldToScreenPoint(transform.localPosition);
 
         // Mirror player and weapon left/right, towars mouse position
         if (mousePos.x < screenPoint.x)

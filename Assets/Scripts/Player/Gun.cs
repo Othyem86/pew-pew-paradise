@@ -10,6 +10,8 @@ public class Gun : MonoBehaviour
     public Transform firePoint;             // REF origin point of the bullet
     public float timeBetweenShots;          // REF rate of fire
     private float shotCounter;              // Countdown until the next bullet
+    public bool doubleMirror;               // REF if bullet should be doubly mirrored
+    public int soundSFX;                    // REF Bullet soundeffect
 
     // Variabels weapon type
     [Header("Weapon Type")]
@@ -46,9 +48,22 @@ public class Gun : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
             {
-                Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+                GameObject bullet = Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
                 shotCounter = timeBetweenShots;
-                AudioManager.instance.PlaySFX(12);
+                AudioManager.instance.PlaySFX(soundSFX);
+
+                // Mirror player and weapon left/right, towars mouse position
+                if (PlayerController.instance.mousePos.x < PlayerController.instance.screenPoint.x)
+                {
+                    if (doubleMirror)
+                    {
+                        bullet.transform.localScale = new Vector3(-1f, -1f, 1f);
+                    }
+                    else
+                    {
+                        bullet.transform.localScale = new Vector3(1f, -1f, 1f);
+                    }
+                }
             }
         }
     }
