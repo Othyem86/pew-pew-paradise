@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Macros;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour

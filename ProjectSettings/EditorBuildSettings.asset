@@ -24,6 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Boss Battle.unity
     guid: 5390c959af0045d469b12a17683baba0
   - enabled: 1
-    path: Assets/Scenes/Victory.unity
+    path: Assets/Scenes/End Credits.unity
     guid: 1183245fa66d5254a873a5ca0f70fbf2
   m_configObjects: {}

@@ -174,7 +174,7 @@ PrefabInstance:
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: dialogue.dialogueSpeed
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7987648579845398004, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
