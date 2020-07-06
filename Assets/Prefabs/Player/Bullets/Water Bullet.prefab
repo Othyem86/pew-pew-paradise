@@ -97,11 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca8954b582c977d4ba2a86e0b53037b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 6
   theRB: {fileID: 1135337556382816527}
   impactEffect: {fileID: 6569524038315810846, guid: 4f1bd53675d3c324ea9f8e9a4bfbda86,
     type: 3}
-  bulletDamage: 10
+  bulletDamage: 5
 --- !u!61 &1135337556382816524
 BoxCollider2D:
   m_ObjectHideFlags: 0

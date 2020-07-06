@@ -733,7 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theRB: {fileID: 909020040}
-  currentHealth: 200
+  currentHealth: 2000
   deathEffect: {fileID: 523940875704473676, guid: 1c3ad136b9ebfe94bbe8ccb19b5e9479,
     type: 3}
   hitEffect: {fileID: 813896671270779712, guid: e8a3895f1a6481149a62c249481dd3c8,
@@ -770,7 +770,7 @@ MonoBehaviour:
       - {fileID: 599757721}
       - {fileID: 668779137}
       - {fileID: 717399127}
-    endSequenceHealth: 100
+    endSequenceHealth: 1000
   - actions:
     - actionLength: 5
       shouldMove: 1
@@ -850,75 +850,6 @@ MonoBehaviour:
       - {fileID: 717399127}
     endSequenceHealth: 100
   currentSequence: 0
---- !u!1001 &909976913
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 17151736792723137, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_Name
-      value: Player - Bernie S.
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 13.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 17151736792723142, guid: 04ae69717952b64449b1c190ad9a4d49,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 04ae69717952b64449b1c190ad9a4d49, type: 3}
 --- !u!1 &967859959
 GameObject:
   m_ObjectHideFlags: 0

@@ -99,8 +99,9 @@ MonoBehaviour:
   bulletToFire: {fileID: 1135337556382816526, guid: d311ccc725f01194ea1929be3eb6575b,
     type: 3}
   firePoint: {fileID: 7403889150667649628}
-  timeBetweenShots: 0.04
+  timeBetweenShots: 0.03
   doubleMirror: 0
+  soundSFX: 14
   weaponName: H20-Schlauch
   gunUI: {fileID: -7426417008130601713, guid: 48d85d1ef51430e42b6aef57f02c863d, type: 3}
   itemCost: 25

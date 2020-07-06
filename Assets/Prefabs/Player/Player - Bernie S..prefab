@@ -191,7 +191,7 @@ Transform:
   m_LocalPosition: {x: -0.119, y: -0.093, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1087025103621218870}
+  - {fileID: 4387671036284841884}
   m_Father: {fileID: 17151736792723142}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 17151736792723140}
   - component: {fileID: 17151736792723146}
   m_Layer: 8
-  m_Name: Player - Bernie Sanders
+  m_Name: Player - Bernie S.
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,11 +255,13 @@ MonoBehaviour:
   dashSpeed: 8
   dashLength: 0.5
   dashCoolDown: 1
-  dashInvincibility: 0.5
+  dashInvincDuration: 0.5
   dashCounter: 0
   availableGuns:
-  - {fileID: 6116088405501991538}
+  - {fileID: 7426847127815690200}
   currentGun: 0
+  mousePos: {x: 0, y: 0, z: 0}
+  screenPoint: {x: 0, y: 0, z: 0}
 --- !u!58 &17151736792723141
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -480,86 +482,86 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &963577971715955263
+--- !u!1001 &9202180243319179699
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 17151735899823492}
     m_Modifications:
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4474633705656753656, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+    - target: {fileID: 9152212308083426270, guid: 27aa2e719163e9746a98bc7d68b676de,
         type: 3}
       propertyPath: m_Name
-      value: Revolver
+      value: Papierflieger
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 50669ad8517e4d64c8d62d1ede0f7947, type: 3}
---- !u!4 &1087025103621218870 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 27aa2e719163e9746a98bc7d68b676de, type: 3}
+--- !u!4 &4387671036284841884 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 165140727335172105, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+  m_CorrespondingSourceObject: {fileID: 4850541324231730735, guid: 27aa2e719163e9746a98bc7d68b676de,
     type: 3}
-  m_PrefabInstance: {fileID: 963577971715955263}
+  m_PrefabInstance: {fileID: 9202180243319179699}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6116088405501991538 stripped
+--- !u!114 &7426847127815690200 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6467141642700816461, guid: 50669ad8517e4d64c8d62d1ede0f7947,
+  m_CorrespondingSourceObject: {fileID: 1776036940538044011, guid: 27aa2e719163e9746a98bc7d68b676de,
     type: 3}
-  m_PrefabInstance: {fileID: 963577971715955263}
+  m_PrefabInstance: {fileID: 9202180243319179699}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

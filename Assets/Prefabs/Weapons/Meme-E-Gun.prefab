@@ -101,6 +101,7 @@ MonoBehaviour:
   firePoint: {fileID: 6818929146585465902}
   timeBetweenShots: 0.1
   doubleMirror: 0
+  soundSFX: 13
   weaponName: Meme-E-Gun
   gunUI: {fileID: 6549473840129656578, guid: 48d85d1ef51430e42b6aef57f02c863d, type: 3}
   itemCost: 40

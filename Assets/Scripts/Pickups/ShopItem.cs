@@ -54,7 +54,7 @@ public class ShopItem : MonoBehaviour
 
             gunSprite.sprite = theGun.gunShopSprite;
             itemCost = theGun.itemCost;
-            infoText.text = theGun.weaponName + "\n- " + theGun.itemCost + "x    - ";
+            infoText.text = theGun.weaponName + "\n- " + theGun.itemCost + " x bits -";
         }
     }
 

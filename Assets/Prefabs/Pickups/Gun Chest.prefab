@@ -233,6 +233,8 @@ MonoBehaviour:
   spawnPoint: {fileID: 5095793191914436894}
   potentialGunDrops:
   - {fileID: 4938735205376661613, guid: b7b46774f5fcb0f4ebc45b554c490efb, type: 3}
+  - {fileID: 3173905965616950365, guid: 1f9284cd913b5c14bb3eec3c896d9f1d, type: 3}
+  - {fileID: 9047626492399524558, guid: 33ac55aa69825094b97a93d0a1197d1d, type: 3}
   - {fileID: 9128956430224471249, guid: 1b2c7ef8972eca7429179fba311558fe, type: 3}
   - {fileID: 8017194432508957845, guid: c4c639b928bdbe143a4e44cadfb8037a, type: 3}
   scaleSpeed: 3
