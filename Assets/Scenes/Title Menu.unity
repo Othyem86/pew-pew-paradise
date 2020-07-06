@@ -941,7 +941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed381c911081a734c9ec1194434ac600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Character Select
+  levelToLoad: Disclaimer
   deletePanel: {fileID: 844272593}
   charactersToDelete:
   - {fileID: 2832197471998497714, guid: ed859a2b3107f3740b6576f572e6c453, type: 3}

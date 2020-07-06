@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class VictoryScreen : MonoBehaviour
+public class TransitionScreen : MonoBehaviour
 {
     // Variables victory screen
     public float waitForAnyKey = 2f;    // REF wait duration
     public GameObject anyKeyText;       // REF text 'press any key'
-    public string mainMenuScene;        // REF main menu scene
+    public string nextScene;            // REF main menu scene
+    public bool isEndScene;             // REF if it's the final scene
 
 
     // Start is called before the first frame update
@@ -16,7 +17,11 @@ public class VictoryScreen : MonoBehaviour
     {
         // Set game speed to 1
         Time.timeScale = 1;
-        Destroy(PlayerController.instance.gameObject);
+
+        if (isEndScene)
+        {
+            Destroy(PlayerController.instance.gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -33,10 +38,10 @@ public class VictoryScreen : MonoBehaviour
         }
         else 
         {
-            // Return to main menu scene if any key is pressed
+            // Return to next scene if any key is pressed
             if (Input.anyKeyDown)
             {
-                SceneManager.LoadScene(mainMenuScene);
+                SceneManager.LoadScene(nextScene);
             }
         }
     }
