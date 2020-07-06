@@ -129,7 +129,7 @@ MonoBehaviour:
   bulletToFire: {fileID: 2962169822624772477, guid: 9d26692124db1bc47ae7d67384d2b0a1,
     type: 3}
   firePoint: {fileID: 2380822369030689351}
-  timeBetweenShots: 0.8
+  timeBetweenShots: 1.2
   doubleMirror: 1
   soundSFX: 17
   weaponName: Java Spammer

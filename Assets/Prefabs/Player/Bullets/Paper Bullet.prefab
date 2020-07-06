@@ -101,7 +101,7 @@ MonoBehaviour:
   theRB: {fileID: 6391076891039485834}
   impactEffect: {fileID: 6569524038315810846, guid: 4f1bd53675d3c324ea9f8e9a4bfbda86,
     type: 3}
-  bulletDamage: 150
+  bulletDamage: 100
 --- !u!61 &49914853214656014
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   theRB: {fileID: 3199982998896377121}
   impactEffect: {fileID: 6569524038315810846, guid: 4f1bd53675d3c324ea9f8e9a4bfbda86,
     type: 3}
-  bulletDamage: 150
+  bulletDamage: 0
 --- !u!61 &3199982998896377122
 BoxCollider2D:
   m_ObjectHideFlags: 0

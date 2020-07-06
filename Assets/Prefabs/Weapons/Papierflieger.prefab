@@ -129,7 +129,7 @@ MonoBehaviour:
   bulletToFire: {fileID: 3199982998896377120, guid: cb25829160195cf48925c6d1a79064e4,
     type: 3}
   firePoint: {fileID: 2856903716777602170}
-  timeBetweenShots: 1
+  timeBetweenShots: 0.8
   doubleMirror: 0
   soundSFX: 8
   weaponName: Papierflieger

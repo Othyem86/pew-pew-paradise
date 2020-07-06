@@ -175,6 +175,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC - Randolf Gitler Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7987648579845398007, guid: e06b5b8eb7e04344494d69210940da47,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -479236782097018826, guid: a47294d8f066c634d90ee371916313ff,
+        type: 3}
     - target: {fileID: 7987648580297029834, guid: e06b5b8eb7e04344494d69210940da47,
         type: 3}
       propertyPath: m_Text

@@ -882,6 +882,11 @@ PrefabInstance:
       propertyPath: nextLevel
       value: Level 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1247999351701918129, guid: aa95190790d574442ab1fab83efe3f2f,
+        type: 3}
+      propertyPath: currentCoins
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1247999351701918131, guid: aa95190790d574442ab1fab83efe3f2f,
         type: 3}
       propertyPath: m_LocalPosition.x
