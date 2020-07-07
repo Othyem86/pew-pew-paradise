@@ -104,7 +104,7 @@ MonoBehaviour:
   soundSFX: 13
   weaponName: Meme-E-Gun
   gunUI: {fileID: 6549473840129656578, guid: 48d85d1ef51430e42b6aef57f02c863d, type: 3}
-  itemCost: 40
+  itemCost: 25
   gunShopSprite: {fileID: 6549473840129656578, guid: 48d85d1ef51430e42b6aef57f02c863d,
     type: 3}
 --- !u!1 &5657769477018156369

@@ -104,7 +104,7 @@ MonoBehaviour:
   soundSFX: 12
   weaponName: Pistole
   gunUI: {fileID: 6407226241554960098, guid: 48d85d1ef51430e42b6aef57f02c863d, type: 3}
-  itemCost: 10
+  itemCost: 5
   gunShopSprite: {fileID: 6407226241554960098, guid: 48d85d1ef51430e42b6aef57f02c863d,
     type: 3}
 --- !u!1 &7695172624806937556

@@ -134,6 +134,6 @@ MonoBehaviour:
   soundSFX: 8
   weaponName: Papierflieger
   gunUI: {fileID: -5081397497249240502, guid: 48d85d1ef51430e42b6aef57f02c863d, type: 3}
-  itemCost: 20
+  itemCost: 15
   gunShopSprite: {fileID: -5081397497249240502, guid: 48d85d1ef51430e42b6aef57f02c863d,
     type: 3}

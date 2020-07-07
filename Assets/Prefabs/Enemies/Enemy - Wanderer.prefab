@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0c4620957aa664c9ad923f0903f440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 3.5
   theRB: {fileID: 3608649079604802467}
   anim: {fileID: 3608649079604802464}
   shouldChasePlayer: 1

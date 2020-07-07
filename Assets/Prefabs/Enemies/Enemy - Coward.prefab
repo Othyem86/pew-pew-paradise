@@ -161,7 +161,7 @@ MonoBehaviour:
   shouldChasePlayer: 0
   rangeToChasePlayer: 0
   shouldRunAway: 1
-  rangeToRunAway: 7
+  rangeToRunAway: 5.5
   shouldWander: 1
   wanderLength: 0.4
   pauseLength: 0.1
@@ -178,7 +178,7 @@ MonoBehaviour:
   shouldShoot: 1
   bullet: {fileID: 9106056089895139322, guid: bb02213c19dca8a4a88e12682256582c, type: 3}
   firePoint: {fileID: 5852830093119560524}
-  fireRate: 1
+  fireRate: 0.8
   shootRange: 10
   enemyBody: {fileID: 4278254703587244960}
   shouldDropItem: 1

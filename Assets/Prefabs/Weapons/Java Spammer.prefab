@@ -134,6 +134,6 @@ MonoBehaviour:
   soundSFX: 17
   weaponName: Java Spammer
   gunUI: {fileID: -2384850958105000590, guid: 48d85d1ef51430e42b6aef57f02c863d, type: 3}
-  itemCost: 20
+  itemCost: 25
   gunShopSprite: {fileID: -2384850958105000590, guid: 48d85d1ef51430e42b6aef57f02c863d,
     type: 3}
