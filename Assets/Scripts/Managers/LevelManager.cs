@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!otherPause && Input.GetKeyDown(KeyCode.Escape))
+        if (!otherPause && Input.GetKeyDown(KeyCode.F1))
         {
             PauseUnpause();
         }
